@@ -1,61 +1,66 @@
 /* PP Right Grotesk */
 @font-face {
-    font-family: 'PP Right Grotesk';
-    src: url('/fonts/RightGrotesk-Medium.woff2') format('woff2'),
-         url('/fonts/RightGrotesk-Medium.woff') format('woff'),
-         url('/fonts/RightGrotesk-Medium.ttf') format('truetype'),
-         url('/fonts/RightGrotesk-Medium.otf') format('opentype'),
-         url('/fonts/RightGrotesk-Medium.svg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'PP Right Grotesk';
+  src:
+    url('/fonts/RightGrotesk-Medium.woff2') format('woff2'),
+    url('/fonts/RightGrotesk-Medium.woff') format('woff'),
+    url('/fonts/RightGrotesk-Medium.ttf') format('truetype'),
+    url('/fonts/RightGrotesk-Medium.otf') format('opentype'),
+    url('/fonts/RightGrotesk-Medium.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* Proxima Nova */
 @font-face {
-    font-family: 'Proxima Nova';
-    src: url('/fonts/proximanova-regular.woff2') format('woff2'),
-         url('/fonts/proximanova-regular.woff') format('woff'),
-         url('/fonts/proximanova-regular.ttf') format('truetype'),
-         url('/fonts/proximanova-regular.otf') format('opentype'),
-         url('/fonts/proximanova-regular.svg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Proxima Nova';
+  src:
+    url('/fonts/proximanova-regular.woff2') format('woff2'),
+    url('/fonts/proximanova-regular.woff') format('woff'),
+    url('/fonts/proximanova-regular.ttf') format('truetype'),
+    url('/fonts/proximanova-regular.otf') format('opentype'),
+    url('/fonts/proximanova-regular.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Proxima Nova';
-    src: url('/fonts/proximanova-bold.woff2') format('woff2'),
-         url('/fonts/proximanova-bold.woff') format('woff'),
-         url('/fonts/proximanova-bold.ttf') format('truetype'),
-         url('/fonts/proximanova-bold.otf') format('opentype'),
-         url('/fonts/proximanova-bold.svg') format('svg');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Proxima Nova';
+  src:
+    url('/fonts/proximanova-bold.woff2') format('woff2'),
+    url('/fonts/proximanova-bold.woff') format('woff'),
+    url('/fonts/proximanova-bold.ttf') format('truetype'),
+    url('/fonts/proximanova-bold.otf') format('opentype'),
+    url('/fonts/proximanova-bold.svg') format('svg');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Proxima Nova';
-    src: url('/fonts/proximanova-light.woff2') format('woff2'),
-         url('/fonts/proximanova-light.woff') format('woff'),
-         url('/fonts/proximanova-light.ttf') format('truetype'),
-         url('/fonts/proximanova-light.otf') format('opentype'),
-         url('/fonts/proximanova-light.svg') format('svg');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Proxima Nova';
+  src:
+    url('/fonts/proximanova-light.woff2') format('woff2'),
+    url('/fonts/proximanova-light.woff') format('woff'),
+    url('/fonts/proximanova-light.ttf') format('truetype'),
+    url('/fonts/proximanova-light.otf') format('opentype'),
+    url('/fonts/proximanova-light.svg') format('svg');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Proxima Nova';
-    src: url('/fonts/proximanova-medium.woff2') format('woff2'),
-         url('/fonts/proximanova-medium.woff') format('woff'),
-         url('/fonts/proximanova-medium.ttf') format('truetype'),
-         url('/fonts/proximanova-medium.otf') format('opentype'),
-         url('/fonts/proximanova-medium.svg') format('svg');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Proxima Nova';
+  src:
+    url('/fonts/proximanova-medium.woff2') format('woff2'),
+    url('/fonts/proximanova-medium.woff') format('woff'),
+    url('/fonts/proximanova-medium.ttf') format('truetype'),
+    url('/fonts/proximanova-medium.otf') format('opentype'),
+    url('/fonts/proximanova-medium.svg') format('svg');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }

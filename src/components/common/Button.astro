@@ -1,0 +1,77 @@
+---
+import { Icon } from 'astro-icon/components';
+import { twMerge } from 'tailwind-merge';
+
+interface Props {
+  text?: string;
+  icon?: string;
+  iconPosition?: 'left' | 'right';
+  iconClasses?: string;
+  variant: 'primary' | 'secondary' | 'accent' | 'headerNav' | 'underlined' | 'none';
+  type: 'button' | 'link';
+  buttonType?: 'button' | 'submit' | 'reset';
+  class?: string;
+  target?: string;
+  href?: string;
+  size?: 'small' | 'medium' | 'large';
+}
+
+const {
+  text,
+  icon,
+  iconPosition,
+  iconClasses,
+  variant = 'primary',
+  type = 'button',
+  buttonType = 'button',
+  class: className = '',
+  target = '',
+  href = '',
+  size = 'medium',
+  ...rest
+} = Astro.props as Props;
+
+const variants = {
+  primary: 'btn-primary',
+  secondary: 'btn-secondary',
+  accent: 'btn-accent',
+  link: 'cursor-pointer hover:text-primary',
+  headerNav: 'btn-primary bg-transparent text-primary hover:bg-primary hover:text-white border-none',
+  underlined: 'text-primary underline underline-offset-4 decoration-1',
+};
+
+const sizes = {
+  small: 'py-2',
+  medium: 'py-3',
+  large: '',
+}
+---
+
+{
+  type === 'button' ? (
+    <button type={buttonType} class={twMerge(variants[variant] || '', className, twMerge(sizes[size]))} {...rest}>
+      {icon && iconPosition === 'left' && (
+        <Icon name={icon} class={twMerge("w-5 h-5 mr-2.5 -ml-2.5 rtl:ml-2.5 rtl:-mr-2.5 inline-block", iconClasses)} />
+      )}
+      <Fragment set:html={text} />
+      {icon && iconPosition === 'right' && (
+        <Icon name={icon} class={twMerge("w-5 h-5 ml-2.5 -mr-2.5 rtl:mr-2.5 rtl:-ml-2.5 inline-block", iconClasses)} />
+      )}
+    </button>
+  ) : (
+    <a
+      class={twMerge(variants[variant] || '', className, twMerge(sizes[size]))}
+      {...(target ? { target: target, rel: 'noopener noreferrer' } : {})}
+      href={href ? href : '#'}
+      {...rest}
+    >
+      {icon && iconPosition === 'left' && (
+        <Icon name={icon} class={twMerge("w-5 h-5 mr-2.5 -ml-2.5 rtl:ml-2.5 rtl:-mr-2.5 inline-block", iconClasses)} />
+      )}
+      <Fragment set:html={text} />
+      {icon && iconPosition === 'right' && (
+        <Icon name={icon} class={twMerge("w-5 h-5 ml-2.5 -mr-2.5 rtl:mr-2.5 rtl:-ml-2.5 inline-block", iconClasses)} />
+      )}
+    </a>
+  )
+}

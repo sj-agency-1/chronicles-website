@@ -1,0 +1,28 @@
+---
+import { SkillType } from '~/utils/skills.ts';
+import Image from './Image.astro';
+
+interface Props {
+  type: SkillType;
+  size?: 'small' | 'regular' | 'large';
+}
+
+const { type, size = "regular" } = Astro.props as Props;
+
+const sizeMapping = {
+  small: 40,
+  regular: 70,
+  large: 446,
+};
+
+const imageSource = `~/assets/images/skills/${type}-icon.webp`;
+if (!imageSource) {
+  throw 'Invalid skill type for IconSkill component.';
+}
+
+// Sizes
+const width = sizeMapping[size];
+const height = width;
+---
+
+<Image src={imageSource} alt={`${type}-icon`} width={width} height={height} />

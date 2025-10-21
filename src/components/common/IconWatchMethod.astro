@@ -1,0 +1,33 @@
+---
+import Image from './Image.astro';
+
+export enum WatchMethod {
+  VK = 'vk',
+  YouTube = 'youtube',
+  RuTube = 'rutube',
+}
+
+interface Props {
+  type: WatchMethod;
+  size?: 'small' | 'regular' | 'large';
+}
+
+const { type, size = 'regular' } = Astro.props as Props;
+
+const sizeMapping = {
+  small: 40,
+  regular: 70,
+  large: 446,
+};
+
+const imageSource = `~/assets/images/utils/watch-method-${type}-icon.webp`;
+if (!imageSource) {
+  throw 'Invalid watch method for IconWatchMethod component.';
+}
+
+// Sizes
+const width = sizeMapping[size];
+const height = width;
+---
+
+<Image src={imageSource} alt={`watch-method-${type}-icon`} width={width} height={height} />

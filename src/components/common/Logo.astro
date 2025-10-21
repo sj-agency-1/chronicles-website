@@ -1,0 +1,43 @@
+---
+import { Icon } from 'astro-icon/components';
+import { twMerge } from 'tailwind-merge';
+
+interface Props {
+  variant?: 'light' | 'dark';
+}
+
+const { variant = 'light' } = Astro.props;
+
+const logoVariantsClasses = {
+  light: 'stroke-primary',
+  dark: 'stroke-white',
+}
+
+const textVariantsClasses = {
+  light: 'text-primary',
+  dark: 'text-white',
+}
+---
+
+<a href="/">
+  <div class={`logo-container logo-container-${variant} flex items-center gap-4`}>
+    <div>
+      <Icon name="logo" class={twMerge("w-10 h-10", logoVariantsClasses[variant])} />
+    </div>
+    <div>
+      <p class={twMerge("logo-title font-heading", textVariantsClasses[variant])}>ХРОНИКИ</p>
+      <p class={twMerge("logo-subtitle font-heading", textVariantsClasses[variant])}>БИЗНЕС-АНАЛИТИКА</p>
+    </div>
+  </div>
+</a>
+
+<style>
+  .logo-title {
+    font-size: 24px;
+    font-weight: 900;
+  }
+  .logo-subtitle {
+    font-size: 11px;
+    font-weight: 900;
+  }
+</style>

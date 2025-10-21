@@ -1,0 +1,144 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { Icon } from 'astro-icon/components';
+import Button from './Button.astro';
+
+interface Props extends HTMLAttributes<'input'> {
+  centerText?: string;
+  label?: string;
+  accept?: string;
+  maxSize?: number; // in bytes
+}
+
+const {
+  centerText,
+  label,
+  name,
+  id = name,
+  accept = '.pdf,.docx',
+  maxSize = 5 * 1024 * 1024, // 5MB in bytes
+  ...props
+} = Astro.props as Props;
+---
+
+<div class="flex flex-col gap-1 w-full">
+  {label && <label for={id}>{label}</label>}
+  <div
+    class="relative border border-[#D9D9D9] bg-transparent text-default focus-within:ring-2 focus-within:ring-[#D9D9D9] rounded-sm py-16 px-8"
+    id={`${id}-dropzone`}
+  >
+    <input
+      type="file"
+      {id}
+      {name}
+      {accept}
+      class="absolute inset-0 w-full h-full opacity-0 z-50 cursor-pointer"
+      data-max-size={maxSize}
+      {...props}
+    />
+    <div class="flex flex-col items-center justify-center text-center gap-2.5">
+      <p>{centerText}</p>
+      <Button
+        text="Загрузить файл"
+        variant="primary"
+        type="button"
+        buttonType="button"
+        icon="utils/attach-file"
+        iconPosition="right"
+      />
+    </div>
+    <div
+      class="hidden absolute inset-0 items-center justify-center bg-[var(--aw-color-bg-page)] px-4 z-[51]"
+      id={`${id}-file-info`}
+    >
+      <div class="flex items-center gap-2">
+        <Icon name="utils/file" class="w-5 h-5 text-gray-400" />
+        <span class="text-sm file-name"></span>
+      </div>
+      <button type="button" class="text-red-500 hover:text-red-700" id={`${id}-remove`} aria-label="Remove file">
+        <Icon name="utils/close" class="w-5 h-5" />
+      </button>
+    </div>
+    <div class="hidden absolute inset-0 items-center justify-center bg-red-50 px-4" id={`${id}-error`}>
+      <p class="text-sm text-red-500 error-message"></p>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ id, maxSize: props.maxSize, accept }}>
+  const dropzone = document.getElementById(`${id}-dropzone`);
+  const input = document.getElementById(id);
+  const fileInfo = document.getElementById(`${id}-file-info`);
+  const errorDiv = document.getElementById(`${id}-error`);
+  const removeBtn = document.getElementById(`${id}-remove`);
+
+  function showError(message) {
+    errorDiv.querySelector('.error-message').textContent = message;
+    errorDiv.style.display = 'flex';
+    fileInfo.style.display = 'none';
+  }
+
+  function clearError() {
+    errorDiv.style.display = 'none';
+  }
+
+  function handleFile(file) {
+    clearError();
+
+    // Check file type
+    const allowedTypes = accept.split(',');
+    const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+    if (!allowedTypes.includes(fileExtension)) {
+      showError('Неверный формат файла. Пожалуйста, прикрепите PDF или DOCX файл.');
+      input.value = '';
+      return;
+    }
+
+    // Check file size
+    if (file.size > maxSize) {
+      showError('Максимальный размер файла 5MB.');
+      input.value = '';
+      return;
+    }
+
+    // Show file info
+    fileInfo.querySelector('.file-name').textContent = file.name;
+    fileInfo.style.display = 'flex';
+  }
+
+  // Handle file selection
+  input.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      handleFile(file);
+    }
+  });
+
+  // Handle drag and drop
+  dropzone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropzone.classList.add('border-blue-500');
+  });
+
+  dropzone.addEventListener('dragleave', () => {
+    dropzone.classList.remove('border-blue-500');
+  });
+
+  dropzone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropzone.classList.remove('border-blue-500');
+
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      input.files = e.dataTransfer.files;
+      handleFile(file);
+    }
+  });
+
+  // Handle remove button click
+  removeBtn.addEventListener('click', () => {
+    input.value = '';
+    fileInfo.style.display = 'none';
+    clearError();
+  });
+</script>
