@@ -1,0 +1,36 @@
+---
+import { YouTube } from 'astro-embed';
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  id?: string;
+  link?: string;
+  title?: string;
+  provider?: 'YouTube' | 'none';
+}
+
+const { id, title, provider = 'none' } = Astro.props as Props;
+---
+
+<div>
+  {
+    provider === 'YouTube' && id && (
+      <YouTube id={id} title={title} />
+
+    )
+  }
+  {
+    provider === 'none' && (
+      <div class="w-full h-60 flex items-center justify-center bg-accent">
+        <Icon name="utils/play-video-button" class="text-black" />
+      </div>
+    )
+  }
+</div>
+
+<style is:inline>
+  lite-youtube {
+    margin: 0 auto;
+    max-width: 100%;
+  }
+</style>

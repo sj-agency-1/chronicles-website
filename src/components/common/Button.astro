@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components';
 import { twMerge } from 'tailwind-merge';
 
 interface Props {
+  id?: string;
   text?: string;
   icon?: string;
   iconPosition?: 'left' | 'right';
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const {
+  id,
   text,
   icon,
   iconPosition,
@@ -44,33 +46,33 @@ const sizes = {
   small: 'py-2',
   medium: 'py-3',
   large: '',
-}
+};
 ---
 
 {
   type === 'button' ? (
-    <button type={buttonType} class={twMerge(variants[variant] || '', className, twMerge(sizes[size]))} {...rest}>
+    <button {...(id ? {id} : {})} type={buttonType} class={twMerge(variants[variant] || '', className, twMerge(sizes[size]))} {...rest}>
       {icon && iconPosition === 'left' && (
-        <Icon name={icon} class={twMerge("w-5 h-5 mr-2.5 -ml-2.5 rtl:ml-2.5 rtl:-mr-2.5 inline-block", iconClasses)} />
+        <Icon name={icon} class={twMerge('w-5 h-5 mr-2.5 -ml-2.5 rtl:ml-2.5 rtl:-mr-2.5 inline-block', iconClasses)} />
       )}
       <Fragment set:html={text} />
       {icon && iconPosition === 'right' && (
-        <Icon name={icon} class={twMerge("w-5 h-5 ml-2.5 -mr-2.5 rtl:mr-2.5 rtl:-ml-2.5 inline-block", iconClasses)} />
+        <Icon name={icon} class={twMerge('w-5 h-5 ml-2.5 -mr-2.5 rtl:mr-2.5 rtl:-ml-2.5 inline-block', iconClasses)} />
       )}
     </button>
   ) : (
     <a
       class={twMerge(variants[variant] || '', className, twMerge(sizes[size]))}
-      {...(target ? { target: target, rel: 'noopener noreferrer' } : {})}
-      href={href ? href : '#'}
+      {...(href ? { href } : {})}
+      {...(href && target ? { target: target, rel: 'noopener noreferrer' } : {})}
       {...rest}
     >
       {icon && iconPosition === 'left' && (
-        <Icon name={icon} class={twMerge("w-5 h-5 mr-2.5 -ml-2.5 rtl:ml-2.5 rtl:-mr-2.5 inline-block", iconClasses)} />
+        <Icon name={icon} class={twMerge('w-5 h-5 mr-2.5 -ml-2.5 rtl:ml-2.5 rtl:-mr-2.5 inline-block', iconClasses)} />
       )}
       <Fragment set:html={text} />
       {icon && iconPosition === 'right' && (
-        <Icon name={icon} class={twMerge("w-5 h-5 ml-2.5 -mr-2.5 rtl:mr-2.5 rtl:-ml-2.5 inline-block", iconClasses)} />
+        <Icon name={icon} class={twMerge('w-5 h-5 ml-2.5 -mr-2.5 rtl:mr-2.5 rtl:-ml-2.5 inline-block', iconClasses)} />
       )}
     </a>
   )

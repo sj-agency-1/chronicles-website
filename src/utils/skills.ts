@@ -14,3 +14,25 @@ export enum SkillType {
 export interface Skill extends Post {
   type: SkillType;
 }
+
+export const getSkillTitle = (skill: SkillType): string => {
+  switch (skill) {
+    case SkillType.CrisisManagement:
+      return "Кризис-менеджмент";
+    case SkillType.BusinessAnalysis:
+      return "Бизнес-аналитика";
+    case SkillType.BusinessDevelopment:
+      return "Развитие бизнеса";
+    case SkillType.SalesManagement:
+      return "Управление продажами";
+    case SkillType.MarketingAndAdv:
+      return "Маркетинг и реклама";
+    case SkillType.InternetMarketing:
+      return "Интернет-маркетинг";
+    case SkillType.BusinessCommunicationAndMediation:
+      return "Бизнес-переговоры. Медиация";
+    case SkillType.FindInvestments:
+      return "Привлечение инвестиций";
+  }
+  return "Unknown";
+}
