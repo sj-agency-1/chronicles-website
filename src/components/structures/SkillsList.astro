@@ -1,0 +1,28 @@
+---
+import { twMerge } from 'tailwind-merge';
+import SkillsItem from './SkillsItem.astro';
+import { SkillType } from '~/utils/skills';
+
+interface Props {
+  class?: string;
+  showButton?: boolean;
+  size?: 'small' | 'regular' | 'large';
+}
+
+const {
+  class: className = '',
+  showButton,
+  size
+} = Astro.props as Props;
+---
+
+<ul class={twMerge(className)}>
+  {
+    // Iterate throug enum of SkillType and output it using SkillsItem
+    Object.values(SkillType).map((skill) => (
+      <li>
+        <SkillsItem skill={skill} showButton={showButton} size={size} />
+      </li>
+    ))
+  }
+</ul>

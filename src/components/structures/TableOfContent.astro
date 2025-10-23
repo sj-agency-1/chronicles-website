@@ -1,0 +1,121 @@
+---
+interface Item {
+  targetId: string;
+  chapterTitle?: string;
+  chapterDescription: string;
+}
+
+interface Props {
+  items: Array<Item>;
+}
+
+const { items } = Astro.props as Props;
+---
+
+<ul id="toc" class="flex flex-col gap-4" id="toc-list">
+  {
+    items.map((item, index) => (
+      <li
+        class="flex items-center justify-between cursor-pointer transition-all duration-300 ease-in-out hover:opacity-70"
+        data-target={item.targetId}
+        data-index={index}
+        role="button"
+        tabindex="0"
+        aria-controls={item.targetId}
+      >
+        <div class="flex-1">
+          <div class="text-sm text-gray-600">{item.chapterTitle}</div>
+          <div class="font-heading text-black font-bold text-base">{item.chapterDescription}</div>
+        </div>
+        <div class="dot w-4 h-4 bg-black opacity-0 transition-opacity duration-300 ease-in-out" />
+      </li>
+    ))
+  }
+</ul>
+
+<script>
+  // Define elements
+  const tocItems = document.querySelectorAll('#toc li');
+  const targetElements = Array.from(tocItems)
+    .map((item) => {
+      const targetId = item.getAttribute('data-target');
+      if (!targetId) return null;
+      return document.getElementById(targetId);
+    })
+    .filter(Boolean);
+
+  // Function to set active TOC item
+  function setActiveTocItem(index: number) {
+    tocItems.forEach((item, i) => {
+      const indicator = item.querySelector('.dot');
+      if (!indicator) return;
+
+      if (i === index) {
+        indicator.classList.remove('opacity-0');
+        indicator.classList.add('opacity-100');
+      } else {
+        indicator.classList.remove('opacity-100');
+        indicator.classList.add('opacity-0');
+      }
+    });
+  }
+
+  // Function to determine which section is in view
+  function findActiveSection() {
+    const scrollPosition = window.scrollY;
+    const buffer = 100; // Buffer zone to make the detection more user-friendly
+
+    // Find the section that is currently in view
+    for (let i = 0; i < targetElements.length; i++) {
+      const element = targetElements[i];
+      if (!element) continue;
+
+      const rect = element.getBoundingClientRect();
+      const offset = rect.top + scrollPosition;
+
+      // If we're at the last element, we want to activate it when scrolling to the bottom
+      if (
+        i === targetElements.length - 1 &&
+        window.innerHeight + scrollPosition >= document.documentElement.scrollHeight - buffer
+      ) {
+        setActiveTocItem(i);
+        return;
+      }
+
+      // Check if this section is in view (accounting for the buffer)
+      const nextElement = targetElements[i + 1];
+      const nextOffset = nextElement ? nextElement.getBoundingClientRect().top + scrollPosition - buffer : Infinity;
+
+      if (scrollPosition >= offset - buffer && (i === targetElements.length - 1 || scrollPosition < nextOffset)) {
+        setActiveTocItem(i);
+        return;
+      }
+    }
+  }
+
+  // Event listener for scroll
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        findActiveSection();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Initialize first active section
+  findActiveSection();
+
+  // Add click handlers to TOC items
+  tocItems.forEach((item, index) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetElement = targetElements[index];
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>

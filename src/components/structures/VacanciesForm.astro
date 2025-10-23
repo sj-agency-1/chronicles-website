@@ -1,0 +1,125 @@
+---
+import Input from '~/components/common/Input.astro';
+import Select from '~/components/common/Select.astro';
+import Textarea from '~/components/common/Textarea.astro';
+import FileUpload from '~/components/common/FileUpload.astro';
+import Button from '../common/Button.astro';
+
+const vacancies = [
+  'Финансовый аудитор',
+  'Юрист по корпоративному праву',
+  'Юрист по защите интеллектуальных прав',
+  'Патентный проверенный',
+  'Онлайн ассистент (консультант)',
+];
+
+let vacancySubmitUrl = "https://n8n.georgeparkdev.com/webhook-test/submit-vacancy-request";
+if (import.meta.env.PROD) {
+  vacancySubmitUrl = "https://n8n.georgeparkdev.com/webhook/submit-vacancy-request";
+}
+---
+
+<form id="vacancies-form" method="post" action={vacancySubmitUrl} class="grid grid-cols-2 gap-4">
+  <Input name="vacancies-form__name" label="Ваше ФИО" placeholder="Введите ваше ФИО" required />
+  <Input name="vacancies-form__whatsapp" label="Номер WhatsApp" placeholder="+7XXXXXXXXXX" type="tel" pattern="^\+\d+$" required />
+  <Input name="vacancies-form__email" label="Email" placeholder="Введите ваш Email" type="email" required />
+  <Select
+    name="vacancies-form__vacancy"
+    label="Вакансия"
+    placeholder="Выберите вакансию из списка"
+    options={vacancies}
+    required
+  />
+  <Textarea name="vacancies-form__about" label="Немного о себе" placeholder="Напишите что-нибудь о себе" />
+  <FileUpload
+    name="vacancies-form__resume"
+    centerText="Загрузите ваше резюме"
+    accept=".pdf,.docx"
+    maxSize={5 * 1024 * 1024}
+  />
+  <div class="col-span-2">
+    <div id="vacancies-form__form-status" class="mb-4 hidden rounded p-4"></div>
+  </div>
+  <Button
+    id="vacancies-form__submit-button"
+    class="max-w-fit"
+    text="Отправить"
+    variant="primary"
+    size="small"
+    type="button"
+    buttonType="submit"
+  />
+</form>
+
+<script>
+  const form = document.getElementById('vacancies-form') as HTMLFormElement;
+  const submitButton = document.getElementById('vacancies-form__submit-button') as HTMLButtonElement;
+  const formStatus = document.getElementById('vacancies-form__form-status') as HTMLDivElement;
+
+  function showMessage(message: string, isError: boolean = false) {
+    formStatus.textContent = message;
+    formStatus.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
+    if (isError) {
+      formStatus.classList.add('bg-red-100');
+      formStatus.classList.add('text-red-700');
+    } else {
+      formStatus.classList.add('bg-green-100');
+      formStatus.classList.add('text-green-700');
+    }
+  }
+
+  function validateForm(): boolean {
+    // Get all required fields
+    const requiredFields = form.querySelectorAll('[required]') as NodeListOf<HTMLInputElement | HTMLSelectElement>;
+    let isValid = true;
+
+    // Check each required field
+    requiredFields.forEach(field => {
+      if (!field.value.trim()) {
+        isValid = false;
+        field.classList.add('border-red-500');
+      } else {
+        field.classList.remove('border-red-500');
+      }
+    });
+
+    return isValid;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Validate form
+    if (!validateForm()) {
+      return;
+    }
+
+    try {
+      // Disable submit button
+      submitButton.disabled = true;
+      submitButton.textContent = 'Отправка...';
+
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      // Show success message
+      showMessage('Ваша заявка успешно отправлена!');
+      form.reset();
+    } catch (error: unknown) {
+      // Show error message
+      console.error('Form submission error:', error);
+      showMessage('Произошла ошибка при отправке формы. Пожалуйста, попробуйте снова.', true);
+    } finally {
+      // Re-enable submit button
+      submitButton.disabled = false;
+      submitButton.textContent = 'Отправить';
+    }
+  });
+</script>

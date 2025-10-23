@@ -1,0 +1,40 @@
+---
+import { SkillType, getSkillTitle } from '~/utils/skills.ts';
+import IconSkill from '../common/IconSkill.astro';
+import Button from '~/components/common/Button.astro';
+
+interface Props {
+  skill: SkillType;
+  showButton?: boolean;
+  size?: 'small' | 'regular' | 'large';
+}
+
+const { skill, showButton = true, size } = Astro.props as Props;
+
+const getSkillLink = (skill: SkillType) => `/skills/${skill}`;
+---
+
+<a href={getSkillLink(skill)} rel="noopener noreferrer">
+  <div class="flex justify-between gap-4 items-center group relative">
+    <div class="flex justify-between gap-4 items-center group relative">
+      <IconSkill type={skill} size={size} />
+      <div class="font-heading font-bold text-black">{getSkillTitle(skill)}</div>
+    </div>
+    {
+      showButton && (
+        <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <Button
+            text=""
+            variant="primary"
+            size="small"
+            type="button"
+            icon="utils/arrow-right"
+            iconPosition="right"
+            iconClasses="w-2 h-2 text-white m-0"
+            class="p-2"
+          />
+        </div>
+      )
+    }
+  </div>
+</a>

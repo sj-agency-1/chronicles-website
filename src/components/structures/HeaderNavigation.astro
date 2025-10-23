@@ -1,0 +1,40 @@
+---
+import Button from '~/components/common/Button.astro';
+
+import { trimSlash } from '~/utils/permalinks';
+
+interface Link {
+  text: string;
+  href: string;
+}
+
+interface Props {
+  links?: Array<Link>;
+}
+
+const { links = [] } = Astro.props as Props;
+
+const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+---
+
+<nav id="header-nav">
+  <ul class="flex">
+    {
+      links.map((link) => (
+        <li class="flex items-center">
+          <Button
+            text={link.text}
+            variant={link.href === currentPath ? 'primary' : 'headerNav'}
+            size="small"
+            type="link"
+            href={link.href}
+          />
+          {
+            // Check the link is not last link
+            link !== links[links.length - 1] ? <div class="bg-[#--aw-color-disabled] h-full" style="width: 1px;" /> : null
+          }
+        </li>
+      ))
+    }
+  </ul>
+</nav>

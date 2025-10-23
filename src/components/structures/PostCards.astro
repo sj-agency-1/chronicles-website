@@ -1,0 +1,27 @@
+---
+import { twMerge } from 'tailwind-merge';
+import { type PostCardProps as PostData } from './PostCard.astro';
+import PostCard from './PostCard.astro';
+
+interface Props {
+  class?: string;
+  data?: Array<PostData>;
+}
+
+const { class: className = '', data = [] } = Astro.props as Props;
+---
+
+<ul class={twMerge('flex flex-col gap-4', className)}>
+  {
+    data.map((item) => (
+      <PostCard
+        id={item.id}
+        href={item.href}
+        imageSrc={item.imageSrc}
+        label={item.label}
+        title={item.title}
+        direction={item.direction}
+      />
+    ))
+  }
+</ul>

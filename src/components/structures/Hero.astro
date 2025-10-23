@@ -1,0 +1,293 @@
+---
+import { findImage } from '~/utils/images';
+import type { ImageMetadata } from 'astro';
+
+interface HeroItem {
+  title: string;
+  description?: string;
+  bgImage?: string;
+}
+
+interface Props {
+  id?: string;
+  items: Array<HeroItem>;
+}
+
+const { id, items } = Astro.props;
+const hasMultipleItems = items.length > 1;
+
+// Image loading with error handling
+const loadImages = async (items: HeroItem[]) => {
+  const imagePromises = items
+    .map(item => item.bgImage)
+    .filter((src): src is string => typeof src === 'string')
+    .map(async (src) => {
+      try {
+        return await findImage(src);
+      } catch (error) {
+        console.warn(`Failed to load image: ${src}`, error);
+        return null;
+      }
+    });
+
+  return await Promise.all(imagePromises);
+};
+
+const images = await loadImages(items);
+
+// Helper function to get image URL
+const getImageUrl = (image: string | ImageMetadata | null): string => {
+  if (!image) return '';
+  return typeof image === 'string' ? image : image.src;
+};
+---
+
+<hero-component
+  class="hero-carousel block relative w-full h-96 overflow-hidden"
+  id={id}
+  data-carousel-items={JSON.stringify(items)}>
+
+  <!-- Carousel Slides -->
+  <div class="slides-container relative w-full h-full">
+    {items.map((item, index) => {
+      const image = images[index];
+      const imageUrl = getImageUrl(image!);
+      const bgStyle = imageUrl
+        ? `background-image: url('${imageUrl}'); background-size: cover; background-position: center;`
+        : '';
+
+      return (
+        <div
+          class={`slide absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${
+            index === 0 ? 'opacity-100' : 'opacity-0'
+          }`}
+          data-slide
+          data-slide-index={index}
+          style={bgStyle}
+        >
+          <!-- Dark Overlay -->
+          <div class="slide-overlay absolute inset-0 bg-black opacity-60"></div>
+
+          <!-- Content -->
+          <div class="slide-content relative z-10 container mx-auto h-full flex items-center">
+            <div class="content-grid flex flex-col md:flex-row w-full gap-1 justify-start items-start">
+              <div class="title-container w-full md:w-1/2">
+                <h2 class="text-secondary uppercase font-heading font-bold text-3xl md:text-4xl lg:text-8xl">
+                  {item.title}
+                </h2>
+              </div>
+              {item.description && (
+                <div class="description-container w-full md:w-1/4">
+                  <p class="text-white text-xs md:text-base lg:text-lg">
+                    {item.description}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  <!-- Navigation -->
+  {hasMultipleItems && (
+    <div class="carousel-nav absolute bottom-10 right-10 flex space-x-2 z-20">
+      <button
+        type="button"
+        class="carousel-nav-btn carousel-prev w-10 h-8 bg-transparent border border-white flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 transition-colors"
+        aria-label="Previous slide"
+      >
+        <svg class="nav-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="carousel-nav-btn carousel-next w-10 h-8 bg-transparent border border-white flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 transition-colors"
+        aria-label="Next slide"
+      >
+        <svg class="nav-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  )}
+</hero-component>
+
+<script>
+  class HeroComponent extends HTMLElement {
+    currentIndex: number;
+    autoSlideInterval: number | null;
+    touchStartX: number;
+    touchEndX: number;
+    slides: NodeListOf<HTMLElement> | null;
+    prevBtn: HTMLButtonElement | null;
+    nextBtn: HTMLButtonElement | null;
+
+    // Store bound event handlers for proper cleanup
+    private boundHandlePrevClick: () => void;
+    private boundHandleNextClick: () => void;
+    private boundStopAutoSlide: () => void;
+    private boundStartAutoSlide: () => void;
+    private boundHandleTouchStart: (event: TouchEvent) => void;
+    private boundHandleTouchEnd: (event: TouchEvent) => void;
+    private boundCleanup: () => void;
+
+    constructor() {
+      super();
+      this.currentIndex = 0;
+      this.autoSlideInterval = null;
+      this.touchStartX = 0;
+      this.touchEndX = 0;
+      this.slides = null;
+      this.prevBtn = null;
+      this.nextBtn = null;
+
+      // Bind event handlers
+      this.boundHandlePrevClick = this.handlePrevClick.bind(this);
+      this.boundHandleNextClick = this.handleNextClick.bind(this);
+      this.boundStopAutoSlide = this.stopAutoSlide.bind(this);
+      this.boundStartAutoSlide = this.startAutoSlide.bind(this);
+      this.boundHandleTouchStart = this.handleTouchStart.bind(this);
+      this.boundHandleTouchEnd = this.handleTouchEnd.bind(this);
+      this.boundCleanup = this.cleanup.bind(this);
+    }
+
+    connectedCallback() {
+      this.initializeCarousel();
+    }
+
+    disconnectedCallback() {
+      this.cleanup();
+    }
+
+    initializeCarousel() {
+      this.slides = this.querySelectorAll('[data-slide]');
+
+      if (this.slides.length <= 1) return;
+
+      this.prevBtn = this.querySelector('.carousel-prev');
+      this.nextBtn = this.querySelector('.carousel-next');
+
+      this.bindEvents();
+      this.startAutoSlide();
+    }
+
+    bindEvents() {
+      // Navigation events
+      if (this.prevBtn) {
+        this.prevBtn.addEventListener('click', this.boundHandlePrevClick);
+      }
+
+      if (this.nextBtn) {
+        this.nextBtn.addEventListener('click', this.boundHandleNextClick);
+      }
+
+      // Mouse events
+      this.addEventListener('mouseenter', this.boundStopAutoSlide);
+      this.addEventListener('mouseleave', this.boundStartAutoSlide);
+
+      // Touch events
+      this.addEventListener('touchstart', this.boundHandleTouchStart);
+      this.addEventListener('touchend', this.boundHandleTouchEnd);
+
+      // Cleanup on page unload
+      window.addEventListener('beforeunload', this.boundCleanup);
+    }
+
+    handlePrevClick() {
+      this.stopAutoSlide();
+      this.prevSlide();
+      this.startAutoSlide();
+    }
+
+    handleNextClick() {
+      this.stopAutoSlide();
+      this.nextSlide();
+      this.startAutoSlide();
+    }
+
+    handleTouchStart(event: TouchEvent) {
+      this.touchStartX = event.changedTouches[0].screenX;
+    }
+
+    handleTouchEnd(event: TouchEvent) {
+      this.touchEndX = event.changedTouches[0].screenX;
+      this.handleSwipe();
+    }
+
+    handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = this.touchStartX - this.touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        this.stopAutoSlide();
+        if (diff > 0) {
+          this.nextSlide();
+        } else {
+          this.prevSlide();
+        }
+        this.startAutoSlide();
+      }
+    }
+
+    showSlide(index: number) {
+      if (!this.slides) return;
+
+      // Handle index boundaries with modulo for infinite loop
+      const slideCount = this.slides.length;
+      const normalizedIndex = ((index % slideCount) + slideCount) % slideCount;
+
+      this.slides.forEach((slide) => {
+        slide.classList.remove('opacity-100');
+        slide.classList.add('opacity-0');
+      });
+
+      this.slides[normalizedIndex].classList.remove('opacity-0');
+      this.slides[normalizedIndex].classList.add('opacity-100');
+      this.currentIndex = normalizedIndex;
+    }
+
+    nextSlide() {
+      this.showSlide(this.currentIndex + 1);
+    }
+
+    prevSlide() {
+      this.showSlide(this.currentIndex - 1);
+    }
+
+    startAutoSlide() {
+      this.stopAutoSlide(); // Clear existing interval first
+      this.autoSlideInterval = window.setInterval(() => this.nextSlide(), 5000);
+    }
+
+    stopAutoSlide() {
+      if (this.autoSlideInterval) {
+        clearInterval(this.autoSlideInterval);
+        this.autoSlideInterval = null;
+      }
+    }
+
+    cleanup() {
+      this.stopAutoSlide();
+
+      // Remove event listeners
+      if (this.prevBtn) {
+        this.prevBtn.removeEventListener('click', this.boundHandlePrevClick);
+      }
+      if (this.nextBtn) {
+        this.nextBtn.removeEventListener('click', this.boundHandleNextClick);
+      }
+
+      this.removeEventListener('mouseenter', this.boundStopAutoSlide);
+      this.removeEventListener('mouseleave', this.boundStartAutoSlide);
+      this.removeEventListener('touchstart', this.boundHandleTouchStart);
+      this.removeEventListener('touchend', this.boundHandleTouchEnd);
+
+      window.removeEventListener('beforeunload', this.boundCleanup);
+    }
+  }
+
+  customElements.define('hero-component', HeroComponent);
+</script>

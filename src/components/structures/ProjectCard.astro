@@ -1,0 +1,48 @@
+---
+import Image from '~/components/common/Image.astro';
+import Button from '../common/Button.astro';
+
+export interface ProjectCardProps {
+  id: string;
+  href: string;
+  imageSrc?: string;
+  title: string;
+  excerpt: string;
+}
+
+const {
+  id,
+  href,
+  imageSrc = 'https://dummyjson.com/image/410x260?text=Dummy+Image',
+  title,
+  excerpt,
+} = Astro.props as ProjectCardProps;
+---
+
+<a
+  href={href}
+  rel="noopener noreferrer"
+  class="group flex flex-col gap-4 w-full h-full rounded-lg"
+  id={`project-card-${id}`}
+>
+  <div class="w-full aspect-video">
+    <Image
+      src={imageSrc}
+      alt={title}
+      class="w-full h-full object-cover"
+    />
+  </div>
+  <div class="flex flex-col gap-3 p-4 flex-grow">
+    <h3 class="font-heading font-bold text-black text-lg">{title}</h3>
+    <p class="text-default">{excerpt}</p>
+    <Button
+      class="text-left"
+      text="Подробнее"
+      variant="underlined"
+      type="button"
+      icon="utils/arrow-right"
+      iconPosition="right"
+      iconClasses="w-2 h-2 text-primary"
+    />
+  </div>
+</a>

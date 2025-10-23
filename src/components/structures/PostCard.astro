@@ -1,0 +1,46 @@
+---
+import Image from '~/components/common/Image.astro';
+import Button from '../common/Button.astro';
+
+export interface PostCardProps {
+  id: string;
+  href: string;
+  imageSrc?: string;
+  label?: string;
+  title: string;
+  direction?: 'left' | 'right';
+}
+
+const {
+  id,
+  href,
+  imageSrc = 'https://dummyjson.com/image/410x260?text=Dummy+Image',
+  label,
+  title,
+  direction = 'right',
+} = Astro.props as PostCardProps;
+---
+
+<a
+  href={href}
+  rel="noopener noreferrer"
+  class={`flex ${direction === 'right' ? 'flex-row' : 'flex-row-reverse'} justify-between items-center gap-4`}
+  id={`post-card-${id}`}
+>
+  <div class="max-w-md">
+    <Image src={imageSrc} alt={title} />
+  </div>
+  <div class="flex flex-col gap-3">
+    <p>{label}</p>
+    <h3 class="font-heading font-bold text-black uppercase text-lg">{title}</h3>
+    <Button
+      class="text-left"
+      text="Подробнее"
+      variant="underlined"
+      type="button"
+      icon="utils/arrow-right"
+      iconPosition="right"
+      iconClasses="w-2 h-2 text-primary"
+    />
+  </div>
+</a>
