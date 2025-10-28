@@ -1,0 +1,43 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import type { MetaData as MetaDataType } from '~/types';
+
+import Header from "~/components/blocks/Header.astro";
+import Footer from "~/components/blocks/Footer.astro";
+import Sidebar from "~/components/blocks/Sidebar.astro";
+import Hero from "~/components/structures/Hero.astro";
+import BreadCrumbs from "~/components/structures/BreadCrumbs.astro";
+import Container from "~/components/common/Container.astro";
+
+import { type TocItem } from "~/components/structures/TableOfContent.astro";
+import { type HeroItem } from "~/components/structures/Hero.astro";
+import { type BreadCrumbLink } from '~/components/structures/BreadCrumbs.astro';
+
+interface Props {
+  tocItems?: Array<TocItem>;
+  heroItems?: Array<HeroItem>;
+  breadCrumbLinks?: Array<BreadCrumbLink>;
+  metadata?: MetaDataType;
+}
+
+const { tocItems, heroItems, breadCrumbLinks, metadata } = Astro.props as Props;
+---
+
+<BaseLayout {...Astro.props} {metadata}>
+  <Header />
+  <Container>
+    {heroItems && heroItems.length > 0 && <Hero items={heroItems} />}
+  </Container>
+  <Container class="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-5 mb-16">
+    <div class="sticky top-24 self-start hidden lg:block">
+      <Sidebar tocItems={tocItems} />
+    </div>
+    <main class="md:col-span-3 min-h-96">
+      <BreadCrumbs links={breadCrumbLinks} />
+      <div class="flex flex-col gap-14">
+        <slot />
+      </div>
+    </main>
+  </Container>
+  <Footer />
+</BaseLayout>

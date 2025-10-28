@@ -4,6 +4,7 @@ import type { MetaData } from '~/types';
 
 export type Config = {
   site?: SiteConfig;
+  socials?: SocialsConfig;
   metadata?: MetaDataConfig;
   i18n?: I18NConfig;
   apps?: {
@@ -20,6 +21,17 @@ export interface SiteConfig {
   trailingSlash?: boolean;
   googleSiteVerificationId?: string;
 }
+
+export interface SocialsConfig {
+  tiktok?: string;
+  youtube?: string;
+  vk?: string;
+  ok?: string;
+  facebook?: string;
+  x?: string;
+  instagram?: string;
+}
+
 export interface MetaDataConfig extends Omit<MetaData, 'title'> {
   title?: {
     default: string;
@@ -95,6 +107,20 @@ const getSite = (config: Config) => {
   };
 
   return merge({}, _default, config?.site ?? {}) as SiteConfig;
+};
+
+const getSocials = (config: Config) => {
+  const _default = {
+    tiktok: '',
+    youtube: '',
+    vk: '',
+    ok: '',
+    facebook: '',
+    x: '',
+    instagram: '',
+  };
+
+  return merge({}, _default, config?.socials ?? {}) as SocialsConfig;
 };
 
 const getMetadata = (config: Config) => {
@@ -195,6 +221,7 @@ const getAnalytics = (config: Config) => {
 
 export default (config: Config) => ({
   SITE: getSite(config),
+  SOCIALS: getSocials(config),
   I18N: getI18N(config),
   METADATA: getMetadata(config),
   APP_BLOG: getAppBlog(config),

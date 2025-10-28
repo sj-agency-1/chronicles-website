@@ -1,380 +1,130 @@
 ---
+import Content from '~/components/common/Content.astro';
+import PageLayout from '~/layouts/PageLayout.astro';
+
+import Posts from '~/components/blocks/Posts.astro';
+import Projects from '~/components/blocks/Projects.astro';
+import Ad from '~/components/structures/Ad.astro';
+import NeedConsultationCard from '~/components/structures/NeedConsultationCard.astro';
+// import VideoWidget from '~/components/blocks/VideoWidget.astro';
+
 const metadata = {
-  title: 'Test Page',
+  title: 'Главная',
   ignoreTitleTemplate: true,
 };
-
-// Common components
-import TestLayout from '~/layouts/TestLayout.astro';
-import Button from '~/components/common/Button.astro';
-import Logo from '~/components/common/Logo.astro';
-import IconSkill from '~/components/common/IconSkill.astro';
-import { SkillType } from '~/utils/skills.ts';
-import { WatchMethod } from '~/components/common/IconWatchMethod.astro';
-import IconWatchMethod from '~/components/common/IconWatchMethod.astro';
-import Input from '~/components/common/Input.astro';
-import Select from '~/components/common/Select.astro';
-import Textarea from '~/components/common/Textarea.astro';
-import FileUpload from '~/components/common/FileUpload.astro';
-
-// Structures components 1
-import HeaderNavigation from '~/components/structures/HeaderNavigation.astro';
-import Breadcrumbs from '~/components/structures/BreadCrumbs.astro';
-import SkillsList from '~/components/structures/SkillsList.astro';
-import NeedConsultationCard from '~/components/structures/NeedConsultationCard.astro';
-import TableOfContent from '~/components/structures/TableOfContent.astro';
-import WatchMethodsList from '~/components/structures/WatchMethodsList.astro';
-
-// Structures components 2
-import PostCard from '~/components/structures/PostCard.astro';
-import PostCards from '~/components/structures/PostCards.astro';
-import ProjectCard from '~/components/structures/ProjectCard.astro';
-import ProjectCards from '~/components/structures/ProjectCards.astro';
-
-// Structures components 3
-import VacanciesForm from '~/components/structures/VacanciesForm.astro';
-import VideoPlayer from '~/components/common/VideoPlayer.astro';
-import Hero from '~/components/structures/Hero.astro';
+const tocItems = [{ targetId: 'welcome', chapterTitle: 'Глава 1', chapterDescription: 'Добро пожаловать' }];
+const breadCrumbLinks = [{ text: 'Главная', href: '/' }];
 ---
 
-<TestLayout metadata={metadata}>
-  <div class="test-common-components hidden">
-    <div class="py-4 px-8 my-8" style="border: 1px solid black;">
-      <h1>Buttons</h1>
-      <Button text="Авторизация" variant="primary" type="link" icon="utils/user" iconPosition="right" href="#" />
-      <div class="my-4"></div>
-      <div class="flex gap-4">
-        <Button text="Главная" variant="primary" size="small" type="link" href="#" />
-        <Button text="Мои услуги" variant="headerNav" size="small" type="link" href="#" />
-        <Button
-          text="Записаться"
-          variant="primary"
-          size="small"
-          type="link"
-          href="#"
-          icon="utils/arrow-right"
-          iconPosition="right"
-          iconClasses="w-2 h-2"
-        />
-      </div>
-      <div class="my-4"></div>
-      <Button
-        text="Подробнее"
-        variant="underlined"
-        type="link"
-        href="#"
-        icon="utils/arrow-right"
-        iconPosition="right"
-        iconClasses="w-2 h-2 text-primary"
-      />
-      <div class="my-2">
-        <Button
-          text=""
-          variant="primary"
-          size="small"
-          type="link"
-          href="#"
-          icon="utils/arrow-right"
-          iconPosition="right"
-          iconClasses="w-2 h-2 m-0"
-        />
-      </div>
-    </div>
-    <div class="py-4 px-8 my-8" style="border: 1px solid black;">
-      <h1>Logos</h1>
-      <div style="background: black;" class="py-4 px-3">
-        <Logo variant="dark" />
-      </div>
-      <div style="background: rgb(255, 255, 255);" class="py-4 px-3">
-        <Logo variant="light" />
-      </div>
-    </div>
-    <div class="py-4 px-8 my-8" style="border: 1px solid black;">
-      <h1>Icons</h1>
-      <div>
-        <h2>Skills</h2>
-        <div class="flex gap-2 items-center">
-          <IconSkill type={SkillType.CrisisManagement} />
-          <IconSkill type={SkillType.BusinessAnalysis} />
-          <IconSkill type={SkillType.BusinessDevelopment} />
-          <IconSkill type={SkillType.SalesManagement} />
-          <IconSkill type={SkillType.MarketingAndAdv} />
-          <IconSkill type={SkillType.InternetMarketing} />
-          <IconSkill type={SkillType.BusinessCommunicationAndMediation} />
-          <IconSkill type={SkillType.FindInvestments} />
-        </div>
-        <h2>Watch methods</h2>
-        <div class="flex gap-2 items-center">
-          <IconWatchMethod type={WatchMethod.YouTube} />
-          <IconWatchMethod type={WatchMethod.VK} />
-          <IconWatchMethod type={WatchMethod.RuTube} />
-        </div>
-      </div>
-    </div>
-    <div class="py-4 px-8 my-8" style="border: 1px solid black;">
-      <h1>Forms components</h1>
-      <div>
-        <h2>Inputs</h2>
-        <div class="flex gap-2 items-center">
-          <Input placeholder="Введите ваше ФИО" label="Ваше ФИО" id="enter-your-name" />
-          <Input placeholder="Введите ваш email" label="Email" id="enter-your-email" type="email" />
-          <Input placeholder="Введите номер WhatsApp" label="Номер WhatsApp" id="enter-your-whatsapp" type="tel" />
-        </div>
-        <h2>Select</h2>
-        <div class="flex gap-2 items-center">
-          <Select
-            id="enter-your-chosen-vacancy"
-            label="Выберите вакансию из списка"
-            value="Финансовый аудитор"
-            options={['Финансовый аудитор', 'Вакансия 1', 'Вакансия 2', 'Вакансия 3']}
-          />
-        </div>
-        <h2>Text areas</h2>
-        <div class="flex gap-2 items-center">
-          <Textarea placeholder="Напишите что-нибудь о себе" label="Немного о себе" id="enter-information-about-you" />
-        </div>
-        <h2>Upload file</h2>
-        <div class="flex gap-2 items-center">
-          <FileUpload
-            id="upload-your-resume"
-            centerText="Загрузите ваше резюме"
-            name="resume"
-            accept=".pdf,.docx"
-            maxSize={5 * 1024 * 1024}
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="test-structure-components-1 hidden">
-    <div class="my-6 flex justify-center">
-      <HeaderNavigation
-        links={[
-          {
-            text: 'Главная',
-            href: '/',
-          },
-          {
-            text: 'Обо мне',
-            href: '/about',
-          },
-          {
-            text: 'Мои навыки',
-            href: '/skills',
-          },
-          {
-            text: 'Мои усулуги',
-            href: '/services',
-          },
-          {
-            text: 'Познавательно',
-            href: '/posts',
-          },
-          {
-            text: 'Фотогалерея',
-            href: '/gallery',
-          },
-          {
-            text: 'Контакты',
-            href: '/contacts',
-          },
-        ]}
-      />
-    </div>
-    <div class="my-6 flex justify-center">
-      <Breadcrumbs
-        links={[
-          {
-            text: 'Another Page',
-            href: '/another',
-          },
-          {
-            text: 'Главная',
-            href: '/',
-          },
-        ]}
-      />
-    </div>
-    <div class="my-6 flex justify-center">
-      <SkillsList />
-    </div>
-    <div class="my-6 flex justify-center">
-      <NeedConsultationCard />
-    </div>
-    <div class="my-6 flex justify-center relative">
-      <div class="sticky top-4 h-fit w-72">
-        <TableOfContent
-          items={[
-            {
-              targetId: 'heading-1',
-              chapterTitle: 'Глава 1',
-              chapterDescription: 'Добро пожаловать',
-            },
-            {
-              targetId: 'heading-2',
-              chapterTitle: 'Глава 2',
-              chapterDescription: 'Что Вы найдёте в «Хрониках Бизнес-Следопыта»?',
-            },
-            {
-              targetId: 'heading-3',
-              chapterTitle: 'Глава 3',
-              chapterDescription: 'Почему Вам стоит прочитать «Хроники Бизнес-Следопыта»?',
-            },
-          ]}
-        />
-      </div>
-      <div class="w-60 ml-20">
-        <h2 id="heading-1">Глава 1</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque adipisci dignissimos ad vel voluptates?
-          Assumenda, laboriosam ratione at dolor eligendi a. Esse quasi autem, id eius, voluptatum rem minima atque
-          consequatur quidem qui aut illo nemo, in itaque earum. Consequuntur sit voluptatum iste voluptates minima
-          corrupti, recusandae aliquid ut a? Fugit quidem nostrum harum mollitia aspernatur quam neque quisquam cumque.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam eaque ipsam repudiandae maiores, officiis
-          eum quidem enim fugit neque eos in aperiam consequuntur, blanditiis nulla iste corrupti esse ex veniam
-          impedit? Ipsam doloribus sapiente, minus cum dolor quaerat doloremque? Numquam nisi commodi beatae, quasi
-          expedita nihil incidunt sapiente omnis minima iusto. Magnam expedita iste animi velit, unde quos atque id ea
-          eos maxime necessitatibus amet cum? Quidem voluptatum cumque maxime illo adipisci, assumenda molestias sint
-          eveniet reprehenderit consequuntur dolores, nesciunt dolorum. Qui nihil quo voluptatem, corporis laboriosam
-          veritatis repudiandae non.
-        </p>
-        <br />
-        <h2 id="heading-2">Глава 2</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque adipisci dignissimos ad vel voluptates?
-          Assumenda, laboriosam ratione at dolor eligendi a. Esse quasi autem, id eius, voluptatum rem minima atque
-          consequatur quidem qui aut illo nemo, in itaque earum. Consequuntur sit voluptatum iste voluptates minima
-          corrupti, recusandae aliquid ut a? Fugit quidem nostrum harum mollitia aspernatur quam neque quisquam cumque.
-        </p>
-        <br />
-        <h2 id="heading-3">Глава 3</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque adipisci dignissimos ad vel voluptates?
-          Assumenda, laboriosam ratione at dolor eligendi a. Esse quasi autem, id eius, voluptatum rem minima atque
-          consequatur quidem qui aut illo nemo, in itaque earum. Consequuntur sit voluptatum iste voluptates minima
-          corrupti, recusandae aliquid ut a? Fugit quidem nostrum harum mollitia aspernatur quam neque quisquam cumque.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, alias accusantium. Error soluta eum
-          reiciendis rerum harum corporis cumque, eos vitae assumenda fugit natus unde? Alias vero cumque quaerat autem
-          a hic, similique asperiores doloribus placeat aspernatur vitae, nesciunt ipsa nemo pariatur dolores
-          repudiandae impedit esse, atque quidem harum. Deserunt, necessitatibus unde ullam voluptatibus obcaecati
-          delectus accusantium reprehenderit quibusdam assumenda esse. Tempore neque voluptate id beatae, quaerat
-          laboriosam temporibus voluptatibus nobis minima culpa fugiat distinctio quo hic quia. Voluptates, aspernatur.
-        </p>
-      </div>
-    </div>
-    <div class="my-6 flex justify-center relative">
-      <WatchMethodsList vkLink="https://google.com" youtubeLink="https://google.com" rutubeLink="https://google.com" />
-    </div>
-  </div>
-  <div class="test-structure-components-2">
-    <div class="my-6 flex justify-center">
-      <div class="hidden">
-        <h1>Posts</h1>
-        <div class="my-16 h-1 w-full bg-black"></div>
-        <PostCard
-          id="123"
-          href="https://google.com"
-          label="Анонс"
-          title="Личный бренд – вот Ваш бизнес-актив, или почему просто «вести блог» недостаточно. Как построить «бизнес «Личный Бренд» с нуля», который будет приносить деньги, а не пожирать Ваше время. Практическое руководство"
-        />
-        <div class="my-16 h-1 w-full bg-black"></div>
-        <PostCards
-          data={[
-            {
-              id: '123',
-              imageSrc: '~/assets/images/posts/personal-brand.webp',
-              href: 'https://google.com',
-              label: 'Анонс',
-              title:
-                'Личный бренд – вот Ваш бизнес-актив, или почему просто «вести блог» недостаточно. Как построить «бизнес «Личный Бренд» с нуля», который будет приносить деньги, а не пожирать Ваше время. Практическое руководство',
-              direction: 'right',
-            },
-            {
-              id: '123',
-              imageSrc: '~/assets/images/posts/personal-brand.webp',
-              href: 'https://google.com',
-              label: 'Анонс',
-              title:
-                'Личный бренд – вот Ваш бизнес-актив, или почему просто «вести блог» недостаточно. Как построить «бизнес «Личный Бренд» с нуля», который будет приносить деньги, а не пожирать Ваше время. Практическое руководство',
-              direction: 'left',
-            },
-          ]}
-        />
-        <div class="my-16 h-1 w-full bg-black"></div>
-      </div>
-      <div class="hidden">
-        <h1>Projects</h1>
-        <div class="my-16 h-1 w-full bg-black"></div>
-        <ProjectCard
-          id="123"
-          href="https://google.com"
-          title="Архитектор Личных Брендов"
-          excerpt="Это проект, который поможет Вам создать свой Личный Бренд, просчитать бизнес-модель и монетизацию. С помощью этого проекта Вы сможете провести аудит и аналитику, создать своё позиционирование и уникальные преимущества, профессионально и грамотно упаковать ваш Личный бренд, рассчитать финансовую воронку. Узнайте подробнее обо всём в бесплатном гайде «Как разработать эффективную бизнес-модель для монетизации Личного Бренда»"
-        />
-        <div class="my-16 h-1 w-full bg-black"></div>
-        <ProjectCards
-          layout={{
-            columns: 3,
-            rows: 1,
-            spans: [{ col: 2 }, { col: 1 }],
-          }}
-          data={[
-            {
-              id: '123',
-              href: 'https://google.com',
-              imageSrc: '~/assets/images/projects/architect-of-personal-brands.webp',
-              title: 'Архитектор Личных Брендов',
-              excerpt:
-                'Это проект, который поможет Вам создать свой Личный Бренд, просчитать бизнес-модель и монетизацию. С помощью этого проекта Вы сможете провести аудит и аналитику, создать своё позиционирование и уникальные преимущества, профессионально и грамотно упаковать ваш Личный бренд, рассчитать финансовую воронку. Узнайте подробнее обо всём в бесплатном гайде «Как разработать эффективную бизнес-модель для монетизации Личного Бренда»',
-            },
-            {
-              id: '123',
-              href: 'https://google.com',
-              imageSrc: '~/assets/images/projects/architect-of-personal-brands.webp',
-              title: 'Архитектор Личных Брендов',
-              excerpt:
-                'Это проект, который поможет Вам создать свой Личный Бренд, просчитать бизнес-модель и монетизацию. С помощью этого проекта Вы сможете провести аудит и аналитику, создать своё позиционирование и уникальные преимущества, профессионально и грамотно упаковать ваш Личный бренд, рассчитать финансовую воронку. Узнайте подробнее обо всём в бесплатном гайде «Как разработать эффективную бизнес-модель для монетизации Личного Бренда»',
-            },
-          ]}
-        />
-        <div class="my-16 h-1 w-full bg-black"></div>
-      </div>
-    </div>
-  </div>
-  <div class="test-structure-components-3">
-    <div class="my-6 flex justify-center">
-      <div class="hidden">
-        <h1>Vacancy form</h1>
-        <VacanciesForm />
-      </div>
-      <div class="hidden w-80">
-        <h1>Video player</h1>
-        <VideoPlayer id="FwOoC0QdeG4" provider="YouTube" title="Elephants!!!" />
-      </div>
-      <div class="w-full">
-        <h1>Hero 123</h1>
-        <Hero
-          id="hero-carousel-home"
-          items={[
-            {
-              title: 'Громкий заголовок',
-              description:
-                'Какой то дополнительный текст в несколько строк Какой то дополнительный текст в несколько строк Какой то дополнительный текст в несколько строк',
-              bgImage: '~/assets/images/hero-1.webp',
-            },
-            {
-              title: 'Громкий 2',
-              description:
-                'Какой то дополнительный текст в несколько строк Какой то дополнительный текст в несколько строк Какой то дополнительный текст в несколько строк',
-              bgImage: '~/assets/images/hero-1.webp',
-            },
-          ]}
-        />
-      </div>
-    </div>
-  </div>
-</TestLayout>
+<PageLayout
+  {tocItems}
+  {breadCrumbLinks}
+  {metadata}
+  heroItems={[
+    {
+      title: 'Громкий заголовок',
+      description:
+        'Какой то дополнительный текст в несколько строк Какой то дополнительный текст в несколько строк Какой то дополнительный текст в несколько строк.',
+      bgImage: '~/assets/images/hero-1.webp',
+    },
+    {
+      title: 'Громкий заголовок 2',
+      description:
+        'Какой то дополнительный текст в несколько строк Какой то дополнительный текст в несколько строк Какой то дополнительный текст в несколько строк. 2',
+      bgImage: '~/assets/images/hero-1.webp',
+    },
+  ]}
+>
+  <Content>
+    <h1>Хроники Бизнес-Следопыта. Пролог.</h1>
+    <p>
+      Большой бизнес имеет парадный фасад и своё настоящее закулисье. Там, где пахнет не дорогим парфюмом, а молоком,
+      жжёным кофе и дымом «сгоревших» ошибок. Именно в закулисье принимаются судьбоносные решения, кипят страсти и
+      рождаются истории, о которых не напишут в учебниках.
+    </p>
+    <h2 id="welcome">Добро пожаловать на мой сайт «Хроники Бизнес-Следопыта».</h2>
+    <p>
+      Кто такой бизнес-следопыт? Почему бизнес-следопыт? Что это вообще такое? Вот вопросы, которые возникают у моих
+      читателей, когда они впервые знакомятся с моим проектом. Этот термин – моя авторская формула профессии, ключ к
+      пониманию моей философии. Это не консалтинг в его узком и скучном понимании. В мире, где консалтинг раздроблен на
+      профильные специализации, я предлагаю взгляд полного цикла. Бизнес-следопыт – это НЕ «ещё один консультант». Это
+      специалист-синтезатор, который «с лупой» в руках идёт по следам проблем и возможностей, изучая организм компании
+      целиком: от финансовой анатомии и юридических нервных окончаний до маркетингового кровообращения и культурного
+      ДНК. Это искусство расследования: этакий «Шерлок Холмс» только в бизнесе, для которого нет мелочей, а есть улики.
+      Мой профессиональный путь протяжённостью в 28 лет – это карта реальных, а не учебных сражений. Я был по обе
+      стороны баррикад: как фаундер строительной компании с госконтрактами и биржевой брокер, как кризис-менеджер,
+      реанимировавший тонущий молочный комбинат, и как архитектор сложных M&A-сделок. Я невольно оказывался участником
+      корпоративных войн и «выплывал» с долей в бизнесе, выстраивал системы продаж с нуля и научился «дышать под водой»
+      в периоды кризисов, когда остальные искали спасательные круги. На страницах «Хроник» Вы не найдёте имён, названий
+      компаний, фондов или банков. Дело не в скромности. Дело в уважении. Уважении к NDA, которые я подписываю, к людям,
+      с которыми мне выпала честь работать, и к правилам игры большого мира. Бизнес – это закрытый клуб, где высшая
+      валюта – это discretion, умение хранить тайны. Я – тот, кому доверяют ключи от backstage, и я дорожу этим
+      доверием.
+    </p>
+  </Content>
+
+  <Posts
+    title="Познавательно"
+    data={[
+      {
+        id: '123',
+        imageSrc: '~/assets/images/posts/personal-brand.webp',
+        href: 'https://google.com',
+        label: 'Анонс',
+        title:
+          'Личный бренд – вот Ваш бизнес-актив, или почему просто «вести блог» недостаточно. Как построить «бизнес «Личный Бренд» с нуля», который будет приносить деньги, а не пожирать Ваше время. Практическое руководство',
+        direction: 'right',
+      },
+      {
+        id: '123',
+        imageSrc: '~/assets/images/posts/personal-brand.webp',
+        href: 'https://google.com',
+        label: 'Анонс',
+        title:
+          'Личный бренд – вот Ваш бизнес-актив, или почему просто «вести блог» недостаточно. Как построить «бизнес «Личный Бренд» с нуля», который будет приносить деньги, а не пожирать Ваше время. Практическое руководство',
+        direction: 'left',
+      },
+    ]}
+  />
+  <Projects
+    title="Мои проекты"
+    layout={{
+      columns: 3,
+      rows: 1,
+      spans: [{ col: 2 }, { col: 1 }],
+    }}
+    data={[
+      {
+        id: '123',
+        href: 'https://google.com',
+        imageSrc: '~/assets/images/projects/architect-of-personal-brands.webp',
+        title: 'Архитектор Личных Брендов',
+        excerpt:
+          'Это проект, который поможет Вам создать свой Личный Бренд, просчитать бизнес-модель и монетизацию. С помощью этого проекта Вы сможете провести аудит и аналитику, создать своё позиционирование и уникальные преимущества, профессионально и грамотно упаковать ваш Личный бренд, рассчитать финансовую воронку. Узнайте подробнее обо всём в бесплатном гайде «Как разработать эффективную бизнес-модель для монетизации Личного Бренда»',
+      },
+      {
+        id: '123',
+        href: 'https://google.com',
+        imageSrc: '~/assets/images/projects/architect-of-personal-brands.webp',
+        title: 'Архитектор Личных Брендов',
+        excerpt:
+          'Это проект, который поможет Вам создать свой Личный Бренд, просчитать бизнес-модель и монетизацию. С помощью этого проекта Вы сможете провести аудит и аналитику, создать своё позиционирование и уникальные преимущества, профессионально и грамотно упаковать ваш Личный бренд, рассчитать финансовую воронку. Узнайте подробнее обо всём в бесплатном гайде «Как разработать эффективную бизнес-модель для монетизации Личного Бренда»',
+      },
+    ]}
+  />
+  <Ad />
+  <NeedConsultationCard class="md:hidden max-w-full" />
+
+  <!-- <VideoWidget
+    videoPlayer={{
+      id: 'FwOoC0QdeG4',
+      provider: 'YouTube',
+      title: 'Elephants being elephants',
+    }}
+    watchMethodsList={{
+      vkLink: 'https://google.com',
+      youtubeLink: 'https://google.com',
+      rutubeLink: 'https://google.com',
+    }}
+  /> -->
+</PageLayout>

@@ -1,0 +1,29 @@
+---
+import Container from '~/components/common/Container.astro';
+import CleanLayout from '~/layouts/CleanLayout.astro';
+import SkillsList from '~/components/structures/SkillsList.astro';
+
+const metadata = {
+  title: 'Мои навыки',
+  ignoreTitleTemplate: true,
+};
+const breadCrumbLinks = [
+  { text: 'Главная', href: '/' },
+  { text: 'Навыки', href: '/skills' },
+];
+---
+
+<CleanLayout
+  {breadCrumbLinks}
+  {metadata}
+  heroItems={[
+    {
+      title: 'Мои навыки',
+      bgImage: '~/assets/images/pages/skills.webp',
+    },
+  ]}
+>
+  <Container>
+    <SkillsList showButton={false} size="large" class="grid grid-cols-3 gap-8" />
+  </Container>
+</CleanLayout>

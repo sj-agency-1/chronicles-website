@@ -36,3 +36,5 @@ export const getSkillTitle = (skill: SkillType): string => {
   }
   return "Unknown";
 }
+
+export const getSkillLink = (skill: SkillType): string => `/skills/${skill}`;

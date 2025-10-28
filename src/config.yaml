@@ -6,6 +6,15 @@ site:
 
   googleSiteVerificationId:
 
+socials:
+  tiktok: 'https://www.tiktok.com/@arthelokyo'
+  youtube: 'https://www.youtube.com/@arthelokyo'
+  vk: 'https://vk.com/arthelokyo'
+  ok: 'https://ok.ru/profile/151932261944'
+  facebook: 'https://www.facebook.com/arthelokyo'
+  x: 'https://x.com/arthelokyo'
+  instagram: 'https://www.instagram.com/arthelokyo/'
+
 # Default SEO metadata
 metadata:
   title:
