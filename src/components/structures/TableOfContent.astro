@@ -1,12 +1,12 @@
 ---
-interface Item {
+export interface TocItem {
   targetId: string;
   chapterTitle?: string;
   chapterDescription: string;
 }
 
 interface Props {
-  items: Array<Item>;
+  items: Array<TocItem>;
 }
 
 const { items } = Astro.props as Props;

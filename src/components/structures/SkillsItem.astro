@@ -1,5 +1,5 @@
 ---
-import { SkillType, getSkillTitle } from '~/utils/skills.ts';
+import { SkillType, getSkillTitle, getSkillLink } from '~/utils/skills.ts';
 import IconSkill from '../common/IconSkill.astro';
 import Button from '~/components/common/Button.astro';
 
@@ -10,8 +10,6 @@ interface Props {
 }
 
 const { skill, showButton = true, size } = Astro.props as Props;
-
-const getSkillLink = (skill: SkillType) => `/skills/${skill}`;
 ---
 
 <a href={getSkillLink(skill)} rel="noopener noreferrer">

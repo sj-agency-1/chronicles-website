@@ -1,0 +1,57 @@
+---
+import { SOCIALS } from 'astrowind:config';
+import { Icon } from 'astro-icon/components';
+
+export enum Socials {
+  TIKTOK = 'tiktok',
+  YOUTUBE = 'youtube',
+  VK = 'vk',
+  OK = 'ok',
+  FACEBOOK = 'facebook',
+  X = 'x',
+  INSTAGRAM = 'instagram',
+}
+
+interface Props {
+  type: Socials;
+}
+
+const { type } = Astro.props as Props;
+
+const iconsMapper = {
+  tiktok: 'socials/tiktok',
+  youtube: 'socials/youtube',
+  vk: 'socials/vk',
+  ok: 'socials/ok',
+  facebook: 'socials/facebook',
+  x: 'socials/x',
+  instagram: 'socials/instagram',
+};
+
+const icon = iconsMapper[type];
+const url = SOCIALS[type];
+
+if (!url) {
+  throw new Error(`Social URL for type "${type}" is not defined in the config.`);
+}
+if (!icon) {
+  throw new Error(`Icon for social type "${type}" is not defined.`);
+}
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="footer-social-icon inline-block w-8 h-8 border border-white bg-transparent hover:bg-white transition-colors duration-200"
+>
+  <span class="flex justify-center items-center h-full">
+    <Icon name={icon} class="text-white transition-colors duration-200" />
+  </span>
+</a>
+
+<style>
+  .footer-social-icon:hover svg {
+    color: black;
+  }
+</style>

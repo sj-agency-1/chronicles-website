@@ -2,17 +2,17 @@
 import { YouTube } from 'astro-embed';
 import { Icon } from 'astro-icon/components';
 
-interface Props {
+export interface VideoPlayerProps {
   id?: string;
   link?: string;
   title?: string;
   provider?: 'YouTube' | 'none';
 }
 
-const { id, title, provider = 'none' } = Astro.props as Props;
+const { id, title, provider = 'none' } = Astro.props as VideoPlayerProps;
 ---
 
-<div>
+<div class="w-full">
   {
     provider === 'YouTube' && id && (
       <YouTube id={id} title={title} />

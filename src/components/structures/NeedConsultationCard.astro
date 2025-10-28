@@ -1,8 +1,17 @@
 ---
+import { twMerge } from "tailwind-merge";
 import Button from "../common/Button.astro"
+
+interface Props {
+  class?: string;
+}
+
+const {
+  class: className = '',
+} = Astro.props as Props;
 ---
 
-<div class="w-full max-w-80 flex flex-col items-center border border-[--aw-color-disabled] bg-transparent py-5 gap-4">
+<div class={twMerge("w-full max-w-80 flex flex-col items-center border border-[--aw-color-disabled] bg-transparent py-5 gap-4", className)}>
   <div class="text-black uppercase font-bold">Нужна консультация?</div>
   <Button
     text="Записаться"

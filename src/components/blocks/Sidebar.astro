@@ -1,0 +1,31 @@
+---
+import TableOfContent from '../structures/TableOfContent.astro';
+import { type TocItem } from '../structures/TableOfContent.astro';
+import SkillsList from '../structures/SkillsList.astro';
+import NeedConsultationCard from '../structures/NeedConsultationCard.astro';
+
+interface Props {
+  tocItems?: Array<TocItem>;
+}
+
+const { tocItems} = Astro.props as Props;
+---
+
+<div class="flex flex-col gap-5">
+  <div class="flex flex-col gap-5 border-r border-r-accent pr-1">
+    {tocItems && tocItems.length > 0 && (
+      <div>
+        <h2 class="font-heading text-xl text-primary font-bold mb-4">Содержание</h2>
+        <TableOfContent items={tocItems} />
+      </div>
+    )}
+    <div class="w-full h-px bg-accent" />
+    <div>
+      <h2 class="font-heading text-xl text-primary font-bold mb-4">Мои навыки</h2>
+      <SkillsList />
+    </div>
+  </div>
+  <div class="hidden md:block">
+    <NeedConsultationCard />
+  </div>
+</div>

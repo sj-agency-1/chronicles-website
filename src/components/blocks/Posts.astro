@@ -1,0 +1,29 @@
+---
+import PostCards from "../structures/PostCards.astro";
+import Button from "../common/Button.astro";
+import { type PostCardProps as PostData } from '~/components/structures/PostCard.astro';
+
+interface Props {
+  title: string;
+  data?: Array<PostData>;
+  class?: string;
+}
+
+const { class: className = '', data = [], title } = Astro.props as Props;
+---
+
+<div>
+  <div class="flex items-center justify-between mb-6">
+    <span class="text-xl font-bold text-primary">{title}</span>
+    <Button
+      href="/posts"
+      type="link"
+      variant="underlined"
+      text="Смотреть все"
+      icon="utils/arrow-right"
+      iconPosition="right"
+      iconClasses="w-2 h-2 text-primary"
+    />
+  </div>
+  <PostCards class={className} data={data} />
+</div>

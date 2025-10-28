@@ -1,0 +1,40 @@
+---
+import { findImage } from '~/utils/images';
+import type { ImageMetadata } from 'astro';
+import { twMerge } from 'tailwind-merge';
+
+interface Props {
+  class?: string;
+  href?: string;
+  bgImage?: string;
+}
+
+const { class: className = '', href, bgImage } = Astro.props as Props;
+
+const image = await findImage(bgImage);
+
+// Helper function to get image URL
+const getImageUrl = (image: string | ImageMetadata | null): string => {
+  if (!image) return '';
+  return typeof image === 'string' ? image : image.src;
+};
+
+const imageUrl = getImageUrl(image!);
+const bgStyle = imageUrl
+  ? `background-image: url('${imageUrl}'); background-size: cover; background-position: center;`
+  : '';
+---
+
+<div class={twMerge(className)}>
+  {
+    href ? (
+      <a href={href} target="_blank"><div style={bgStyle} /></a>
+    ) : (
+      <a href="#">
+        <div class="bg-accent px-2 py-4 h-40">
+          <span class="bg-[#B7AA9A] p-2">Ad</span>
+        </div>
+      </a>
+    )
+  }
+</div>

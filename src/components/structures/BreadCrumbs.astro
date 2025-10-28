@@ -3,13 +3,13 @@ import Button from '~/components/common/Button.astro';
 
 import { trimSlash } from '~/utils/permalinks';
 
-interface Link {
+export interface BreadCrumbLink {
   text: string;
   href: string;
 }
 
 interface Props {
-  links?: Array<Link>;
+  links?: Array<BreadCrumbLink>;
 }
 
 const { links = [] } = Astro.props as Props;

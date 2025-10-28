@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import WatchMethodsItem from './WatchMethodsItem.astro';
 import { WatchMethod } from '../common/IconWatchMethod.astro';
 
-interface Props {
+export interface WatchMethodsListProps {
   class?: string;
   vkLink?: string;
   youtubeLink?: string;
@@ -15,10 +15,10 @@ const {
   vkLink,
   youtubeLink,
   rutubeLink,
-} = Astro.props as Props;
+} = Astro.props as WatchMethodsListProps;
 ---
 
-<ul class={twMerge(className)}>
+<ul class={twMerge("w-full", className)}>
   {vkLink && <li><WatchMethodsItem link={vkLink} watchMethod={WatchMethod.VK} /></li>}
   {youtubeLink && <li><WatchMethodsItem link={youtubeLink} watchMethod={WatchMethod.YouTube} /></li>}
   {rutubeLink && <li><WatchMethodsItem link={rutubeLink} watchMethod={WatchMethod.RuTube} /></li>}

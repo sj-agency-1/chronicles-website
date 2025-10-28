@@ -1,9 +1,8 @@
 ---
-import { SkillType } from '~/utils/skills.ts';
 import Image from './Image.astro';
 
 interface Props {
-  type: SkillType;
+  type: 'telegram' | 'whatsapp' | 'email';
   size?: 'small' | 'regular' | 'large';
 }
 
@@ -15,7 +14,7 @@ const sizeMapping = {
   large: 180,
 };
 
-const imageSource = `~/assets/images/skills/${type}-icon.webp`;
+const imageSource = `~/assets/images/contacts/${type}.webp`;
 if (!imageSource) {
   throw 'Invalid skill type for IconSkill component.';
 }

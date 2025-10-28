@@ -1,0 +1,150 @@
+---
+import Logo from '../common/Logo.astro';
+import FooterSocials from '../structures/FooterSocials.astro';
+import { SkillType, getSkillTitle, getSkillLink } from '~/utils/skills';
+
+interface Link {
+  href: string;
+  text: string;
+}
+
+const contentPolicy: Link = {
+  href: '/content-policy',
+  text: 'Политике использования контента',
+};
+const sitemap: Link = {
+  href: '/sitemap',
+  text: 'Карта сайта',
+};
+
+const footerCenterLinks: Array<Link> = [
+  {
+    href: '/',
+    text: 'Главная',
+  },
+  {
+    href: '/about',
+    text: 'Обо мне',
+  },
+  {
+    href: '/skills',
+    text: 'Мои навыки',
+  },
+  {
+    href: '/services',
+    text: 'Мои услуги',
+  },
+  {
+    href: '/gallery',
+    text: 'Фотогалерея',
+  },
+  {
+    href: '/contacts',
+    text: 'Контакты',
+  },
+  {
+    href: '/posts',
+    text: 'Познавательно',
+  },
+  {
+    href: '/donate',
+    text: 'Донат',
+  },
+  {
+    href: '/terms-of-use',
+    text: 'Пользовательское соглашение',
+  },
+  {
+    href: '/privacy-policy',
+    text: 'Политика конфиденциальности',
+  },
+];
+
+const footerRightLinks: Array<Link> = [
+  {
+    href: getSkillLink(SkillType.CrisisManagement),
+    text: getSkillTitle(SkillType.CrisisManagement),
+  },
+  {
+    href: getSkillLink(SkillType.BusinessAnalysis),
+    text: getSkillTitle(SkillType.BusinessAnalysis),
+  },
+  {
+    href: getSkillLink(SkillType.MarketingAndAdv),
+    text: 'Маркетинг',
+  },
+  {
+    href: getSkillLink(SkillType.InternetMarketing),
+    text: 'Digita-Маркетинг',
+  },
+  {
+    href: getSkillLink(SkillType.BusinessDevelopment),
+    text: getSkillTitle(SkillType.BusinessDevelopment),
+  },
+  {
+    href: getSkillLink(SkillType.SalesManagement),
+    text: getSkillTitle(SkillType.SalesManagement),
+  },
+  {
+    href: getSkillLink(SkillType.FindInvestments),
+    text: getSkillTitle(SkillType.FindInvestments),
+  },
+  {
+    href: getSkillLink(SkillType.BusinessCommunicationAndMediation),
+    text: 'Медиация',
+  },
+  {
+    href: getSkillLink(SkillType.BusinessCommunicationAndMediation), // TODO: note that the same as previous item
+    text: 'Бизнес-психология',
+  },
+  {
+    href: '/projects/architector-of-personal-brands',
+    text: 'Личный бренд',
+  },
+];
+---
+
+<footer class="bg-primary">
+  <div class="container mx-auto py-9">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="flex flex-col gap-10 justify-center items-center text-center md:items-start md:text-left">
+        <Logo variant="dark" />
+        <FooterSocials />
+        <p class="text-white text-sm">&copy; Автор Сергей Вячеславович П., Бизнес-Следопыт</p>
+        <p class="text-white text-[10px]">
+          Все материалы на сайте защищены авторским правом. Копирование и использование контента без письменного
+          разрешения автора строго запрещено. Подробнее в <a href={contentPolicy.href} rel="noopener noreferrer"
+            >{contentPolicy.text}</a
+          >
+        </p>
+        <p class="text-white text-[10px]"><a href={sitemap.href} rel="noopener noreferrer">{sitemap.text}</a></p>
+      </div>
+      <div>
+        <ul class="flex flex-col gap-5 justify-center items-center text-center md:items-start md:text-left">
+          {
+            footerCenterLinks.map((link) => (
+              <li>
+                <a href={link.href} rel="noopener noreferrer" class="text-white hover:underline">
+                  {link.text}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div>
+        <ul class="flex flex-col gap-5 justify-center items-center text-center md:items-start md:text-left">
+          {
+            footerRightLinks.map((link) => (
+              <li>
+                <a href={link.href} rel="noopener noreferrer" class="text-white hover:underline">
+                  {link.text}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

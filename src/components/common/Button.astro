@@ -8,7 +8,7 @@ interface Props {
   icon?: string;
   iconPosition?: 'left' | 'right';
   iconClasses?: string;
-  variant: 'primary' | 'secondary' | 'accent' | 'headerNav' | 'underlined' | 'none';
+  variant: 'primary' | 'secondary' | 'accent' | 'headerNav' | 'underlined' | 'outlined' | 'none';
   type: 'button' | 'link';
   buttonType?: 'button' | 'submit' | 'reset';
   class?: string;
@@ -34,18 +34,21 @@ const {
 } = Astro.props as Props;
 
 const variants = {
-  primary: 'btn-primary',
-  secondary: 'btn-secondary',
-  accent: 'btn-accent',
-  link: 'cursor-pointer hover:text-primary',
-  headerNav: 'btn-primary bg-transparent text-primary hover:bg-primary hover:text-white border-none',
-  underlined: 'text-primary underline underline-offset-4 decoration-1',
+  primary: 'btn-primary inline-flex items-center px-4',
+  secondary: 'btn-secondary inline-flex items-center px-4',
+  accent: 'btn-accent inline-flex items-center px-4',
+  link: 'cursor-pointer hover:text-primary inline-flex items-center',
+  headerNav: 'btn-primary bg-transparent text-primary hover:bg-primary hover:text-white border-none inline-flex items-center px-4',
+  underlined: 'text-primary underline underline-offset-4 decoration-1 inline-flex items-center',
+  outlined: 'btn-outlined text-primary border border-primary hover:bg-primary hover:text-white px-4 inline-flex items-center',
+  none: '',
 };
+
 
 const sizes = {
   small: 'py-2',
   medium: 'py-3',
-  large: '',
+  large: 'py-4',
 };
 ---
 
@@ -53,11 +56,11 @@ const sizes = {
   type === 'button' ? (
     <button {...(id ? {id} : {})} type={buttonType} class={twMerge(variants[variant] || '', className, twMerge(sizes[size]))} {...rest}>
       {icon && iconPosition === 'left' && (
-        <Icon name={icon} class={twMerge('w-5 h-5 mr-2.5 -ml-2.5 rtl:ml-2.5 rtl:-mr-2.5 inline-block', iconClasses)} />
+        <Icon name={icon} class={twMerge('w-5 h-5 mr-2.5 pointer-events-none inline-block', iconClasses)} />
       )}
       <Fragment set:html={text} />
       {icon && iconPosition === 'right' && (
-        <Icon name={icon} class={twMerge('w-5 h-5 ml-2.5 -mr-2.5 rtl:mr-2.5 rtl:-ml-2.5 inline-block', iconClasses)} />
+        <Icon name={icon} class={twMerge('w-5 h-5 ml-2.5 pointer-events-none inline-block', iconClasses)} />
       )}
     </button>
   ) : (
@@ -68,11 +71,11 @@ const sizes = {
       {...rest}
     >
       {icon && iconPosition === 'left' && (
-        <Icon name={icon} class={twMerge('w-5 h-5 mr-2.5 -ml-2.5 rtl:ml-2.5 rtl:-mr-2.5 inline-block', iconClasses)} />
+        <Icon name={icon} class={twMerge('w-5 h-5 mr-2.5 pointer-events-none inline-block', iconClasses)} />
       )}
       <Fragment set:html={text} />
       {icon && iconPosition === 'right' && (
-        <Icon name={icon} class={twMerge('w-5 h-5 ml-2.5 -mr-2.5 rtl:mr-2.5 rtl:-ml-2.5 inline-block', iconClasses)} />
+        <Icon name={icon} class={twMerge('w-5 h-5 ml-2.5 pointer-events-none inline-block', iconClasses)} />
       )}
     </a>
   )

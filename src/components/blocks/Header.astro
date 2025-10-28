@@ -1,5 +1,195 @@
 ---
-
+import Container from '../common/Container.astro';
+import Logo from '../common/Logo.astro';
+import HeaderNavigation from '../structures/HeaderNavigation.astro';
+import Button from '../common/Button.astro';
+import { Icon } from 'astro-icon/components';
 ---
 
-<header></header>
+<header class="sticky top-0 z-50">
+  <Container class="flex items-center justify-between z-50 border-b border-disabled py-5">
+    <Logo variant="light" />
+    <HeaderNavigation
+      class="hidden xl:block"
+      links={[
+        { text: 'Главная', href: '/' },
+        { text: 'Обо мне', href: '/about' },
+        { text: 'Мои навыки', href: '/skills' },
+        { text: 'Мои услуги', href: '/services' },
+        { text: 'Познавательно', href: '/posts' },
+        { text: 'Фотогалерея', href: '/gallery' },
+        { text: 'Контакты', href: '/contacts' },
+      ]}
+    />
+    <Button
+      text="Авторизация"
+      variant="primary"
+      type="link"
+      icon="utils/user"
+      iconPosition="right"
+      href="#"
+      class="hidden xl:block"
+    />
+
+    <div class="flex items-stretch justify-between gap-3 xl:hidden">
+      <Button
+        variant="primary"
+        type="link"
+        icon="utils/user"
+        iconPosition="right"
+        iconClasses="m-0"
+        href="#"
+        size="small"
+      />
+      <Button
+        id="header-hamburger"
+        variant="outlined"
+        type="button"
+        buttonType="button"
+        icon="utils/hamburger"
+        iconPosition="right"
+        iconClasses="m-0"
+        size="small"
+      />
+      <!-- Hidden close icon to insert it into button -->
+      <div class="hidden">
+        <Icon id="header-close-icon" name="utils/close" />
+      </div>
+    </div>
+  </Container>
+
+  <!-- Mobile menu -->
+  <div
+    id="header-mobile-menu"
+    class="xl:hidden absolute top-full left-0 w-full shadow-lg transform transition-all duration-300 ease-in-out translate-y-[-100%] opacity-0"
+  >
+    <HeaderNavigation
+      class="header-mobile-nav relative hidden"
+      links={[
+        { text: 'Главная', href: '/' },
+        { text: 'Обо мне', href: '/about' },
+        { text: 'Мои навыки', href: '/skills' },
+        { text: 'Мои услуги', href: '/services' },
+        { text: 'Познавательно', href: '/posts' },
+        { text: 'Фотогалерея', href: '/gallery' },
+        { text: 'Контакты', href: '/contacts' },
+      ]}
+    />
+  </div>
+</header>
+<!-- Overlay -->
+<div
+  id="page-overlay"
+  class="xl:hidden fixed inset-0 bg-black/40 bg-opacity-50 backdrop-blur-sm hidden"
+>
+</div>
+
+<style is:global>
+  body {
+    overflow-x: hidden;
+  }
+
+  header {
+    background: var(--aw-color-bg-page);
+  }
+
+  .header-mobile-nav ul {
+    flex-direction: column;
+    gap: 12px;
+    background: var(--aw-color-bg-page);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    padding: 24px 0;
+  }
+  .header-mobile-nav ul li {
+    justify-content: center;
+  }
+</style>
+
+<script>
+  // Define variables
+  let isMenuOpen = false;
+  let mobileMenu: HTMLElement | null,
+    mobileMenuNavigation: HTMLElement | null,
+    overlay: HTMLElement | null,
+    hamburgerButton: HTMLElement | null,
+    closeIcon: HTMLElement | null;
+  let hamburgerIconSvg: SVGElement | null, closeIconSvg: SVGElement | null;
+
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    mobileMenu = document.getElementById('header-mobile-menu');
+    mobileMenuNavigation = mobileMenu
+      ? mobileMenu.querySelector('.header-mobile-nav')
+      : null;
+    overlay = document.getElementById('page-overlay');
+    hamburgerButton = document.getElementById('header-hamburger');
+    closeIcon = document.getElementById('header-close-icon');
+
+    hamburgerIconSvg = hamburgerButton ? hamburgerButton.querySelector('svg') : null;
+    closeIconSvg = closeIcon ? closeIcon.querySelector('svg') : null;
+
+    // Add click event to hamburger button
+    if (hamburgerButton) {
+      hamburgerButton.addEventListener('click', toggleMenu);
+    }
+
+    // Add click event to overlay to close menu
+    if (overlay) {
+      overlay.addEventListener('click', closeMenu);
+    }
+  });
+
+  const toggleMenu = () => {
+    isMenuOpen = !isMenuOpen;
+    updateMenuState();
+  };
+
+  const closeMenu = () => {
+    isMenuOpen = false;
+    updateMenuState();
+  };
+
+  const updateMenuState = () => {
+    if (mobileMenu && overlay && hamburgerButton && closeIcon) {
+      if (isMenuOpen) {
+        // Open menu
+        mobileMenu.classList.remove('-translate-y-full', 'opacity-0');
+        mobileMenu.classList.add('translate-y-0', 'opacity-100');
+        mobileMenuNavigation?.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+
+        document.body.style.overflow = 'hidden';
+        closeIcon.classList.remove('hidden');
+
+        // Insert close icon into hamburger button
+        if (hamburgerIconSvg && closeIconSvg) {
+          hamburgerButton.replaceChild(closeIconSvg.cloneNode(true), hamburgerIconSvg);
+        }
+      } else {
+        // Close menu
+        mobileMenu.classList.remove('translate-y-0', 'opacity-100');
+        mobileMenu.classList.add('-translate-y-full', 'opacity-0');
+        mobileMenuNavigation?.classList.add('hidden');
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+        closeIcon.classList.add('hidden');
+
+        // Insert hamburger icon back into button
+        if (hamburgerIconSvg && closeIconSvg) {
+          hamburgerButton.replaceChild(hamburgerIconSvg.cloneNode(true), closeIconSvg);
+        }
+      }
+    }
+  };
+
+  // Close menu on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMenu();
+    }
+  });
+</script>

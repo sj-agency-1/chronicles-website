@@ -1,0 +1,27 @@
+---
+import { twMerge } from 'tailwind-merge';
+
+import VideoPlayer from '../common/VideoPlayer.astro';
+import { type VideoPlayerProps } from '../common/VideoPlayer.astro';
+
+import WatchMethodsList from '../structures/WatchMethodsList.astro';
+import { type WatchMethodsListProps } from '../structures/WatchMethodsList.astro';
+
+interface Props {
+  class?: string;
+  videoPlayer?: VideoPlayerProps;
+  watchMethodsList?: WatchMethodsListProps;
+}
+
+const { class: className = '', videoPlayer, watchMethodsList } = Astro.props as Props;
+---
+
+<div class={twMerge('flex flex-col md:flex-row gap-5 w-full items-stretch', className)}>
+  <div class="basis-full md:basis-1/2 flex-grow min-w-0">
+    <VideoPlayer {...videoPlayer} />
+  </div>
+
+  <div class="basis-full md:basis-1/2 flex-grow min-w-0 flex items-center">
+    <WatchMethodsList {...watchMethodsList} />
+  </div>
+</div>
