@@ -18,6 +18,10 @@ const breadCrumbLinks = [{ text: 'Главная', href: '/' }];
 // Load posts
 import { findLatestPosts } from '~/utils/blog';
 const posts = await findLatestPosts({ count: 2 });
+
+// Load projects
+import { findLatestProjects } from '~/utils/project';
+const projects = await findLatestProjects({count: 2});
 ---
 
 <PageLayout
@@ -87,24 +91,16 @@ const posts = await findLatestPosts({ count: 2 });
       rows: 1,
       spans: [{ col: 2 }, { col: 1 }],
     }}
-    data={[
-      {
-        id: '123',
-        href: 'https://google.com',
-        imageSrc: '~/assets/images/projects/architect-of-personal-brands.webp',
-        title: 'Архитектор Личных Брендов',
-        excerpt:
-          'Это проект, который поможет Вам создать свой Личный Бренд, просчитать бизнес-модель и монетизацию. С помощью этого проекта Вы сможете провести аудит и аналитику, создать своё позиционирование и уникальные преимущества, профессионально и грамотно упаковать ваш Личный бренд, рассчитать финансовую воронку. Узнайте подробнее обо всём в бесплатном гайде «Как разработать эффективную бизнес-модель для монетизации Личного Бренда»',
-      },
-      {
-        id: '123',
-        href: 'https://google.com',
-        imageSrc: '~/assets/images/projects/architect-of-personal-brands.webp',
-        title: 'Архитектор Личных Брендов',
-        excerpt:
-          'Это проект, который поможет Вам создать свой Личный Бренд, просчитать бизнес-модель и монетизацию. С помощью этого проекта Вы сможете провести аудит и аналитику, создать своё позиционирование и уникальные преимущества, профессионально и грамотно упаковать ваш Личный бренд, рассчитать финансовую воронку. Узнайте подробнее обо всём в бесплатном гайде «Как разработать эффективную бизнес-модель для монетизации Личного Бренда»',
-      },
-    ]}
+    data={
+      projects.map((project) => {
+        return {
+          id: project.id,
+          imageSrc: project.image,
+          href: project.permalink,
+          title: project.title,
+          excerpt: project.excerpt ?? "",
+        };
+      })}
   />
   <Ad />
   <NeedConsultationCard class="md:hidden max-w-full" />

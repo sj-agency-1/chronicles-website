@@ -9,6 +9,7 @@ export type Config = {
   i18n?: I18NConfig;
   apps?: {
     blog?: AppBlogConfig;
+    project?: AppProjectConfig;
   };
   ui?: unknown;
   analytics?: unknown;
@@ -49,6 +50,44 @@ export interface AppBlogConfig {
   isRelatedPostsEnabled: boolean;
   relatedPostsCount: number;
   post: {
+    isEnabled: boolean;
+    permalink: string;
+    robots: {
+      index: boolean;
+      follow: boolean;
+    };
+  };
+  list: {
+    isEnabled: boolean;
+    pathname: string;
+    robots: {
+      index: boolean;
+      follow: boolean;
+    };
+  };
+  category: {
+    isEnabled: boolean;
+    pathname: string;
+    robots: {
+      index: boolean;
+      follow: boolean;
+    };
+  };
+  tag: {
+    isEnabled: boolean;
+    pathname: string;
+    robots: {
+      index: boolean;
+      follow: boolean;
+    };
+  };
+}
+export interface AppProjectConfig {
+  isEnabled: boolean;
+  projectsPerPage: number;
+  isRelatedProjectsEnabled: boolean;
+  relatedProjectsCount: number;
+  project: {
     isEnabled: boolean;
     permalink: string;
     robots: {
@@ -198,6 +237,49 @@ const getAppBlog = (config: Config) => {
   return merge({}, _default, config?.apps?.blog ?? {}) as AppBlogConfig;
 };
 
+const getAppProject = (config: Config) => {
+  const _default = {
+    isEnabled: false,
+    projectsPerPage: 6,
+    isRelatedProjectsEnabled: false,
+    relatedProjectsCount: 4,
+    project: {
+      isEnabled: true,
+      permalink: '/project/%slug%',
+      robots: {
+        index: true,
+        follow: true,
+      },
+    },
+    list: {
+      isEnabled: true,
+      pathname: 'project',
+      robots: {
+        index: true,
+        follow: true,
+      },
+    },
+    category: {
+      isEnabled: true,
+      pathname: 'category',
+      robots: {
+        index: true,
+        follow: true,
+      },
+    },
+    tag: {
+      isEnabled: true,
+      pathname: 'tag',
+      robots: {
+        index: false,
+        follow: true,
+      },
+    },
+  };
+
+  return merge({}, _default, config?.apps?.project ?? {}) as AppProjectConfig;
+};
+
 const getUI = (config: Config) => {
   const _default = {
     theme: 'system',
@@ -225,6 +307,7 @@ export default (config: Config) => ({
   I18N: getI18N(config),
   METADATA: getMetadata(config),
   APP_BLOG: getAppBlog(config),
+  APP_PROJECT: getAppProject(config),
   UI: getUI(config),
   ANALYTICS: getAnalytics(config),
 });

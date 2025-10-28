@@ -1,4 +1,5 @@
 ---
+import { PROJECT_BASE } from '~/utils/permalinks';
 import ProjectCards from '../structures/ProjectCards.astro';
 import Button from '../common/Button.astro';
 import { type ProjectCardProps as ProjectData } from '~/components/structures/ProjectCard.astro';
@@ -21,7 +22,7 @@ const { class: className = '', data = [], title, layout } = Astro.props as Props
   <div class="flex items-center justify-between mb-6">
     <span class="text-xl font-bold text-primary">{title}</span>
     <Button
-      href="/projects"
+      href={PROJECT_BASE}
       type="link"
       variant="underlined"
       text="Смотреть все"
