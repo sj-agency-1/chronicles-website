@@ -1,224 +1,241 @@
 ---
-// import CallToAction from '~/components/widgets/CallToAction.astro';
-// import Content from '~/components/widgets/Content.astro';
-// import Features2 from '~/components/widgets/Features2.astro';
-// import Hero from '~/components/widgets/Hero.astro';
-// import Testimonials from '~/components/widgets/Testimonials.astro';
-import Layout from '~/layouts/BaseLayout.astro';
+import Content from '~/components/common/Content.astro';
+import Accordion from '~/components/structures/Accordion.astro';
+import PageLayout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Services',
+  title: 'Главная',
+  ignoreTitleTemplate: true,
 };
+const tocItems = [{ targetId: 'welcome', chapterTitle: 'Глава 1', chapterDescription: 'Добро пожаловать' }];
+const breadCrumbLinks = [{ text: 'Главная', href: '/' }];
 ---
 
-<Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+<PageLayout
+  {tocItems}
+  {breadCrumbLinks}
+  {metadata}
+  heroItems={[
+    {
+      title: 'Мои Услуги',
+      bgImage: '~/assets/images/pages/my-services.webp',
+    },
+  ]}
+>
+  <Content>
+    <h1>Стратегический бизнес-консалтинг от Бизнес-Следопыта</h1>
+    <p>
+      В условиях высокой волатильности рынка точечные улучшения недостаточны для прорывного роста. Требуется глубокое
+      переосмысление бизнес-модели, операционной деятельности и стратегических ориентиров. Мои услуги нацелены на
+      решение комплексных задач, где ставка — это устойчивость, масштабируемость и капитализация вашего бизнеса
+    </p>
+    <p>
+      <b>Принципы сотрудничества:</b>
+    </p>
+    <p>
+      Все услуги оказываются на условиях 100% предоплаты. Я оставляю за собой право отказаться от оказания услуги в
+      одностороннем порядке в случае несоответствия проекта моей экспертизе или ресурсам. В такой ситуации Заказчику
+      возвращается полная сумма оплаты без начисления каких-либо неустоек
+    </p>
+    <Accordion
+      isOpen={false}
+      title="1. ЭКСПРЕСС-ДИАГНОСТИКА И СТРАТЕГИЧЕСКИЕ СЕССИИ / КОНСУЛЬТАЦИИ"
+      excerpt="Формат для принятия ключевых решений «здесь и сейчас». Глубокая предварительная аналитика ваших материалов позволяет в сжатые сроки провести сессию, сфокусированную исключительно на решении вашей задачи"
+    >
+      <Accordion title="1.1. Стратегическая онлайн-сессия">
+        <h4>Формат</h4>
+        <p>Углубленная онлайн-консультация продолжительностью до 120 минут</p>
+        <h4>Стоимость</h4>
+        <p>200 USD</p>
+        <h4>Процесс</h4>
+        <ul>
+          <li>
+            <b>Оплата и предоставление данных:</b> После оплаты вы получаете детальный бриф и предоставляете необходимую
+            информацию (отчетность, аудиторские заключения, презентации и т.д.).
+          </li>
+          <li><b>Погружение:</b> В течение 3-5 рабочих дней я провожу анализ предоставленных материалов.</li>
+          <li><b>Сессия:</b> Проводим голосовой созвон на выбранной платформе (Zoom, Teams, Telegram и пр.).</li>
+          <li>
+            <b>Итоговый документ:</b> В течение 3-5 дней после сессии вы получаете Meeting Report — структурированный отчет
+            с анализом, выводами и конкретными рекомендациями.
+          </li>
+        </ul>
+        <b>*Правовое поле:</b> Отношения регулируются договором-офертой.
+      </Accordion>
+      <Accordion title="1.2. Индивидуальная стратегическая сессия">
+        <h4>Формат</h4>
+        <p>Личная встреча продолжительностью до 4 часов</p>
+        <h4>Стоимость</h4>
+        <p>1 000 USD</p>
+        <h4>Процесс</h4>
+        <ul>
+          <li>
+            <b>Согласование и договор:</b> Согласовываем дату, время и место встречи (в стране и городе моего пребывания).
+            Заключаем договор, обмениваясь подписанными сканами.
+          </li>
+          <li>
+            <b>Оплата и погружение:</b> После оплаты вы предоставляете заполненный бриф и документы. Я провожу предварительный
+            анализ в течение 3-5 дней.
+          </li>
+          <li><b>Сессия:</b> Проводим интенсивную рабочую встречу.</li>
+          <li>
+            <b>Итоговый документ:</b> В течение 3-5 дней вы получаете Comprehensive Strategy Memo — развернутый отчет с дорожной
+            картой первоочередных действий.
+          </li>
+        </ul>
+        <b>*Правовое поле:</b> Заключается полноценный договор оказания услуг.
+      </Accordion>
+      <Accordion title="1.3. Сессия с экспертной выездной поддержкой">
+        <h4>Формат</h4>
+        <p>
+          Личная встреча с выездом в вашу локацию. Минимальная продолжительность проекта — 2 суток с учетом перелета
+        </p>
+        <h4>Стоимость</h4>
+        <p>2 000 USD / сутки + райдер (авиаперелет бизнес-класс, размещение в отеле категории 5*)</p>
+        <h4>Процесс</h4>
+        <ul>
+          <li>
+            <b>Согласование условий:</b> Согласовываем даты, место, программу визита и условия райдера.
+          </li>
+          <li><b>Договор:</b> Заключаем договор, обмениваясь подписанными сканами.</li>
+          <li>
+            <b>Оплата и погружение:</b> После оплаты вы предоставляете пакет документов для моего глубокого погружения.
+          </li>
+          <li><b>Работа на месте:</b> Провожу встречи, инспекции, стратегические сессии с вашей командой.</li>
+          <li>
+            <b>Итоговый документ:</b> В течение 3-5 дней после визита вы получаете Executive Mission Report — детальный отчет
+            с выводами и персональными рекомендациями.
+          </li>
+        </ul>
+        <b>*Правовое поле:</b> Заключается полноценный договор оказания услуг.
+      </Accordion>
+    </Accordion>
 
-  <!-- <Hero
-    tagline="Services"
-    title="Elevate your projects with our stunning templates"
-    subtitle="Explore our meticulously crafted templates tailored to various industries and purposes. From captivating presentations to functional website designs, we offer the tools you need to succeed."
-    actions={[{ variant: 'primary', target: '_blank', text: 'Start exploring', href: '/' }]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'AstroWind Hero Image',
-    }}
-  /> -->
+    <Accordion
+      isOpen={false}
+      title="2. КОМПЛЕКСНЫЙ ОТРАСЛЕВОЙ АУДИТ"
+      excerpt="Не система слепа, а у вас нет независимого взгляда со стороны. Мои аудиторские услуги — это не проверка «галочек», а сканирование бизнеса на предмет скрытых рисков и нереализованных возможностей"
+    >
+      <h4>Базовые форматы проведения аудита:</h4>
+      <Accordion title="Дистанционный аудит:">
+        <p>
+          Стоимость от 1 000 USD. Срок выполнения — до 14 рабочих дней. Включает итоговый отчет и опциональную
+          онлайн-консультацию по его результатам. Регулируется договором-офертой.
+        </p>
+      </Accordion>
+      <Accordion title="Выездной аудит на объект:">
+        <p>
+          Стоимость от 3 000 USD + райдер. Продолжительность — до 3 суток с учетом перелета. Регулируется полноценным
+          договором оказания услуг.
+        </p>
+      </Accordion>
 
-  <!-- Features2 Widget ************** -->
+      <h4>Специализация аудиторских проверок:</h4>
+      <Accordion title="Производственный аудит:">
+        <p>
+          Анализ производственных процессов, оборудования, себестоимости и технологий. Цель: оптимизация издержек и
+          повышение производительности.
+        </p>
+      </Accordion>
+      <Accordion title="Операционный аудит:">
+        <p>
+          Диагностика бизнес-процессов, внутренних регламентов и документооборота. Цель: повышение операционной
+          эффективности и снижение транзакционных затрат.
+        </p>
+      </Accordion>
+      <Accordion title="Маркетинговый аудит:">
+        <p>
+          Глубокое исследование рынка, ниши, позиционирования и маркетинговой стратегии. Цель: выявление слабых мест,
+          определение точек роста и повышение ROI маркетинга.
+        </p>
+      </Accordion>
+      <Accordion title="Рекламный и Digital-аудит:">
+        <p>
+          Анализ рекламных кампаний, воронок, KPI и креативных материалов. Цель: идентификация неэффективных каналов,
+          уточнение портрета ЦА и повышение конверсии.
+        </p>
+      </Accordion>
+      <Accordion title="Коммерческий аудит:">
+        <p>
+          Оценка CRM-системы, воронки продаж, скриптов, показателей отдела продаж. Цель: рост доходности, выручки и
+          оптимизация коммерческих процессов.
+        </p>
+      </Accordion>
+      <Accordion title="Логистический аудит:">
+        <p>
+          Аудит полного цикла: закупки, складская логистика, транспортировка, управление цепочками поставок. Цель:
+          сокращение логистических издержек и повышение оборачиваемости.
+        </p>
+      </Accordion>
+      <Accordion title="HR-аудит:">
+        <p>
+          Анализ систем управления персоналом, мотивации, KPI и кадрового документооборота. Цель: повышение
+          продуктивности персонала и снижение текучки кадров.
+        </p>
+      </Accordion>
+      <Accordion title="IT-аудит:">
+        <p>
+          Оценка IT-инфраструктуры, систем, кибербезопасности, лицензий и пользовательского опыта (UI/UX). Цель:
+          обеспечение устойчивости, безопасности и эффективности IT-среды.
+        </p>
+      </Accordion>
+      <Accordion title="Финансовый аудит:">
+        <p>
+          Проверка финансовой отчетности, бухгалтерского учета и движения денежных средств. Цель: подтверждение
+          достоверности отчетности, выявление финансовых утечек и оптимизация денежных потоков.
+        </p>
+      </Accordion>
+      <Accordion title="Юридический аудит:">
+        <p>
+          Анализ договоров, уставных документов, корпоративной структуры и судебных рисков. Цель: оценка правовой
+          чистоты бизнеса и минимизация юридических рисков.
+        </p>
+      </Accordion>
+      <Accordion title="Инвестиционный аудит (Due Diligence Lite):">
+        <p>
+          Комплексная оценка финансов, юридических рисков и бизнес-потенциала компании. Цель: предоставление инвестору
+          или покупателю независимой экспертной оценки активов.
+        </p>
+      </Accordion>
+    </Accordion>
 
-  <!-- <Features2
-    title="Explore our diverse templates"
-    subtitle="Discover our selection below to streamline and elevate your projects."
-    columns={3}
-    items={[
-      {
-        title: 'Educational',
-        description:
-          'By harmonizing instructional design and visual appeal, templates streamline content creation for varied materials, expediting development and cultivating engaging educational spaces.',
-        icon: 'tabler:school',
-      },
-      {
-        title: 'Interior Design',
-        description:
-          'Crafting functional, visually appealing spaces for residential and commercial use. Templates emphasize layout, colors, and furniture setups, offering a versatile toolkit for your design vision.',
-        icon: 'tabler:home-star',
-      },
-      {
-        title: 'Photography',
-        description: `Empowering photographers, our templates facilitate captivating storytelling. With a keen focus on layout, galleries, and typography, they cater to both professionals and enthusiasts.`,
-        icon: 'tabler:photo',
-      },
-      {
-        title: 'E-commerce',
-        description:
-          'Developing engaging online stores, our E-commerce templates ensure a dynamic presence to effectively showcase products. Ideal for startups or revamps.',
-        icon: 'tabler:shopping-cart',
-      },
-      {
-        title: 'Blog',
-        description:
-          'With attention to typography, these templates empower effective content presentation for writers at any stage, ensuring visually engaging and user-friendly blogs.',
-        icon: 'tabler:article',
-      },
-      {
-        title: 'Business',
-        description:
-          'Providing polished options for effective visual communication, these templates empower both startups and established companies for a professional brand presence.',
-        icon: 'tabler:building-store',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Offering pre-designed elements for a consistent brand identity, including logos and marketing materials. Ideal for new ventures or revamps.',
-        icon: 'tabler:arrow-big-up-lines',
-      },
-      {
-        title: 'Medical',
-        description: `From presentations to patient forms, these tools enhance communication effectiveness for healthcare professionals. Ideal for medical practices and research pursuits.`,
-        icon: 'tabler:vaccine',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'With attention to detail, customization, and contemporary design, they empower designers to showcase ideas cohesively. Ideal for all levels of designers.',
-        icon: 'tabler:tie',
-      },
-    ]}
-  /> -->
+    <Accordion
+      isOpen={false}
+      title="3. ПРОЕКТЫ АНТИКРИЗИСНОГО УПРАВЛЕНИЯ (CRISIS MANAGEMENT)"
+      excerpt="Когда время на принятие решений ограничено, а цена ошибки катастрофически высока, требуется не консультант, а руководитель специального назначения"
+    >
+      <h4>Формат</h4>
+      <p>Гибридный (удаленное управление с периодическими выездными командировками)</p>
+      <h4>Стоимость</h4>
+      <p>от 8 000 USD / месяц + райдер. Минимальный срок проекта — 3 месяца</p>
+      <h4>Описание</h4>
+      <p>
+        Полный цикл антикризисного управления. На период проекта я принимаю на себя оперативное руководство и
+        координацию ключевых процессов. В стоимость входит привлечение и управление узкопрофильными специалистами
+        (юристы, финансисты, PR-эксперты), необходимых для стабилизации ситуации. Решения принимаются быстро и
+        авторитарно
+      </p>
+      <h4>Правовое поле</h4>
+      <p>Регулируется комплексным договором оказания услуг</p>
+    </Accordion>
 
-  <!-- Content Widget **************** -->
-
-  <!-- <Content
-    isReversed
-    items={[
-      {
-        title: 'High-Quality Designs',
-        description:
-          'Our templates feature top-tier designs that ensure a professional and polished appearance for your projects.',
-        icon: 'tabler:wand',
-      },
-      {
-        title: 'Customization Tools',
-        description:
-          'Tailor each template to your unique needs with user-friendly customization tools that let you personalize colors, fonts, and content.',
-        icon: 'tabler:settings',
-      },
-      {
-        title: 'Pre-Designed Elements',
-        description:
-          'Save time and effort with our ready-to-use elements, including graphics, icons, and layouts that enhance the visual appeal of your creations.',
-        icon: 'tabler:presentation',
-      },
-      {
-        title: 'Preview and Mockup Views',
-        description:
-          'Visualize the final outcome before making any changes using our preview and mockup views, ensuring your projects meet your expectations.',
-        icon: 'tabler:carousel-horizontal',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-      alt: 'Features Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Main Features</h3>
-    </Fragment>
-  </Content> -->
-
-  <!-- Content Widget **************** -->
-
-  <!-- <Content
-    isAfterContent
-    items={[
-      {
-        title: 'Time Savings',
-        description:
-          'Streamline your workflow, enabling you to create stunning materials efficiently and allocate more time to your core tasks.',
-        icon: 'tabler:clock',
-      },
-      {
-        title: 'Professional Appearance',
-        description:
-          'Elevate your projects with the polished and sophisticated look that our templates provide, making a lasting impression on your audience.',
-        icon: 'tabler:school',
-      },
-      {
-        title: 'Cost-Efficiency',
-        description:
-          'Benefit from cost savings by avoiding the need for custom design work, as our templates offer professional-grade designs at a fraction of the cost.',
-        icon: 'tabler:coin',
-      },
-      {
-        title: 'Instant Download',
-        description:
-          'Enjoy immediate access to your chosen templates upon purchase, enabling you to begin working on your projects without delay.',
-        icon: 'tabler:file-download',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      alt: 'Benefits Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Benefits</h3>
-    </Fragment>
-  </Content> -->
-
-  <!-- Testimonials Widget *********** -->
-
-  <!-- <Testimonials
-    title="Words from real customers"
-    testimonials={[
-      {
-        testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,
-        name: 'Emily Kennedy',
-        job: 'Front-end developer',
-        image: {
-          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
-          alt: 'Emily Kennedy Image',
-        },
-      },
-      {
-        testimonial: `It beautifully showcases my work, with its clean and elegant design that lets my photographs shine. Customization was a breeze, even for a non-tech person like me. The result is a professional and immersive portfolio that's garnered numerous compliments.`,
-        name: 'Sarah Hansen',
-        job: 'Photographer',
-        image: {
-          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-          alt: 'Sarah Hansen Image',
-        },
-      },
-      {
-        testimonial: `I discovered these templates and I'm impressed by their variety and quality. They've helped me establish a consistent brand image across my marketing and social platforms, elevating my business's overall appearance.`,
-        name: 'Mark Wilkinson',
-        job: 'Small business owner',
-        image: {
-          src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
-          alt: 'Mark Wilkinson Image',
-        },
-      },
-    ]}
-    callToAction={{
-      target: '_blank',
-      text: 'More testimonials...',
-      href: 'https://github.com/arthelokyo/astrowind',
-      icon: 'tabler:chevron-right',
-    }}
-  /> -->
-
-  <!-- CallToAction Widget *********** -->
-
-  <!-- <CallToac
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Start exploring',
-        href: '/',
-      },
-    ]}
-    title="Dive into our template collection"
-    subtitle="Whether you're in business, design, or education, our templates are here to elevate your projects."
-  /> -->
-</Layout>
+    <Accordion
+      isOpen={false}
+      title="4. ПЕРСОНАЛЬНОЕ МЕНТОРСТВО И СТРАТЕГИЧЕСКОЕ СОПРОВОЖДЕНИЕ"
+      excerpt="Стратегия без реализации — это философия. Данная услуга — это партнерство, где я становлюсь вашим внешним членом совета директоров, обеспечивая трансформацию идей в измеримый результат"
+    >
+      <h4>Формат</h4>
+      <p>Преимущественно онлайн, с опциональными выездными сессиями по согласованию</p>
+      <h4>Стоимость</h4>
+      <p>от 5 000 USD / месяц. Минимальный срок сотрудничества — 3 месяца</p>
+      <h4>Описание</h4>
+      <p>
+        Полный цикл сопровождения вашего бизнеса или личного бренда. В рамках услуги: регулярные стратегические сессии,
+        детализированные рекомендации, контроль исполнения принятых решений вашей командой, корректировка курса в режиме
+        реального времени. Это инвестиция в ускорение роста и минимизацию стратегических ошибок
+      </p>
+      <h4>Правовое поле</h4>
+      <p>Регулируется комплексным договором оказания услуг</p>
+    </Accordion>
+  </Content>
+</PageLayout>

@@ -1,0 +1,124 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  title: string;
+  excerpt?: string;
+  isOpen?: boolean;
+}
+
+const { title, excerpt = '', isOpen = false } = Astro.props;
+
+const generateIdFromTitle = (title: string) => {
+  return title
+    .toLowerCase()
+    .replaceAll(' ', '-')
+    .replaceAll('.', '')
+    .replaceAll('/', '')
+    .replaceAll(/[0-9]+/g, '-');
+};
+
+const id = `accordion-${generateIdFromTitle(title)}`;
+---
+
+<accordion-component
+  id={id}
+  data-id={id}
+  class=""
+  data-open={isOpen}
+>
+  <button
+    class="accordion-header w-full py-4 flex justify-between items-center text-left hover:bg-accent transition-colors duration-200 border-t border-t-disabled border-b border-b-disabled"
+    type="button"
+    aria-expanded={isOpen}
+    aria-controls={`${id}-content`}
+  >
+    <div class="flex-1 text-left">
+      <span class="font-medium text-gray-900 block">{title}</span>
+      {excerpt && <p class="text-sm text-gray-500 mt-1">{excerpt}</p>}
+    </div>
+    <Icon
+      name="utils/arrow-down"
+      class="accordion-arrow transform transition-transform duration-300 text-gray-500 flex-shrink-0 ml-4"
+      style={isOpen ? 'transform: rotate(180deg);' : ''}
+    />
+  </button>
+  <div
+    id={`${id}-content`}
+    class="accordion-content transition-all duration-300 ease-in-out"
+    aria-hidden={(!isOpen)}
+  >
+    <div class="pb-4 text-gray-600">
+      <slot />
+    </div>
+  </div>
+</accordion-component>
+
+<script>
+  class Accordion extends HTMLElement {
+    connectedCallback() {
+      const accordionId = this.dataset.id;
+      if (!accordionId) return;
+
+      const header = this.querySelector('.accordion-header');
+      const content = this.querySelector('.accordion-content');
+      const arrow = this.querySelector('.accordion-arrow');
+
+      if (!header || !content || !arrow) return;
+
+      // Set initial state
+      const isOpen = this.dataset.open === 'true';
+      this.toggleAccordion(isOpen);
+
+      header.addEventListener('click', () => {
+        const currentlyOpen = header.getAttribute('aria-expanded') === 'true';
+        this.toggleAccordion(!currentlyOpen);
+      });
+    }
+
+    toggleAccordion(open: boolean) {
+      const header: HTMLElement | null = this.querySelector('.accordion-header');
+      const content: HTMLElement | null = this.querySelector('.accordion-content');
+      const arrow: HTMLElement | null = this.querySelector('.accordion-arrow');
+
+      if (!header || !content || !arrow) return;
+
+      header.setAttribute('aria-expanded', open.toString());
+      content.setAttribute('aria-hidden', (!open).toString());
+
+      if (open) {
+        content.style.display = 'block';
+        // Small timeout to ensure display: block is applied before starting animation
+        setTimeout(() => {
+          content.style.opacity = '1';
+          content.style.transform = 'translateY(0)';
+        }, 10);
+      } else {
+        content.style.opacity = '0';
+        content.style.transform = 'translateY(-10px)';
+        // Wait for animation to complete before hiding
+        setTimeout(() => {
+          content.style.display = 'none';
+        }, 300);
+      }
+
+      arrow.style.transform = open ? 'rotate(180deg)' : 'rotate(0)';
+    }
+  }
+
+  customElements.define('accordion-component', Accordion);
+</script>
+
+<style>
+  .accordion-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .accordion-arrow {
+    transform-origin: center;
+    transition: transform 0.3s ease-in-out;
+  }
+</style>
