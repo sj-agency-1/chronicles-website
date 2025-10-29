@@ -24,27 +24,34 @@ const { class: className = '' } = Astro.props as Props;
     color: var(--aw-color-primary);
   }
 
-  .content h1 {
-    font-size: 26px;
-  }
-  .content h2 {
-    font-size: 22px;
-  }
-  .content h3 {
-    font-size: 18px;
-  }
-  .content h4 {
-    font-size: 16px;
-  }
-  .content h5 {
-    font-size: 14px;
-  }
-  .content h6 {
-    font-size: 13px;
-  }
+  .content h1 { font-size: 26px; }
+  .content h2 { font-size: 22px; }
+  .content h3 { font-size: 18px; }
+  .content h4 { font-size: 16px; }
+  .content h5 { font-size: 14px; }
+  .content h6 { font-size: 13px; }
 
   .content p {
     margin-bottom: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .content ul,
+  .content ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  .content ul {
+    list-style-type: disc;
+  }
+
+  .content ol {
+    list-style-type: decimal;
+  }
+
+  .content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
   }
 </style>

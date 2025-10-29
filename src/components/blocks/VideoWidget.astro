@@ -16,7 +16,7 @@ interface Props {
 const { class: className = '', videoPlayer, watchMethodsList } = Astro.props as Props;
 ---
 
-<div class={twMerge('flex flex-col md:flex-row gap-5 w-full items-stretch', className)}>
+<div class={twMerge('flex flex-col md:flex-row gap-5 w-full items-center', className)}>
   <div class="basis-full md:basis-1/2 flex-grow min-w-0">
     <VideoPlayer {...videoPlayer} />
   </div>
