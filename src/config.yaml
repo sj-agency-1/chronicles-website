@@ -1,6 +1,6 @@
 site:
   name: Хроники Бизнес-Следопыта
-  site: 'https://astrowind.vercel.app'
+  site: 'https://example.com' # TODO: Replace with your production URL
   base: '/'
   trailingSlash: false
 
