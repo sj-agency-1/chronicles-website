@@ -1,0 +1,304 @@
+---
+import { twMerge } from 'tailwind-merge';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props as Props;
+---
+
+<div class={twMerge('content-paginated', className)} data-content-paginated>
+  <div class="content-pages">
+    <slot />
+  </div>
+
+  <nav class="pagination-nav" aria-label="Page navigation">
+    <button
+      class="pagination-btn pagination-prev"
+      aria-label="Previous page"
+      disabled
+    >
+      ←
+    </button>
+    <div class="pagination-numbers"></div>
+    <button
+      class="pagination-btn pagination-next"
+      aria-label="Next page"
+    >
+      →
+    </button>
+  </nav>
+</div>
+
+<style is:global>
+  .content-paginated {
+    width: 100%;
+  }
+
+  .content-paginated .content-pages {
+    min-height: 100px;
+  }
+
+  .content-paginated .content-page {
+    display: none;
+  }
+
+  .content-paginated .content-page.active {
+    display: block;
+  }
+
+  /* Content styling inherited from Content.astro */
+  .content-paginated h1,
+  .content-paginated h2,
+  .content-paginated h3,
+  .content-paginated h4,
+  .content-paginated h5,
+  .content-paginated h6 {
+    font-weight: 600;
+    font-family: 'PP Right Grotesk', inherit;
+    color: var(--aw-color-primary);
+  }
+
+  .content-paginated h1 { font-size: 26px; }
+  .content-paginated h2 { font-size: 22px; }
+  .content-paginated h3 { font-size: 18px; }
+  .content-paginated h4 { font-size: 16px; }
+  .content-paginated h5 { font-size: 14px; }
+  .content-paginated h6 { font-size: 13px; }
+
+  .content-paginated p {
+    margin-bottom: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .content-paginated ul,
+  .content-paginated ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  .content-paginated ul {
+    list-style-type: disc;
+  }
+
+  .content-paginated ol {
+    list-style-type: decimal;
+  }
+
+  .content-paginated li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .content-paginated b {
+    color: var(--aw-color-primary);
+    font-weight: 800;
+  }
+
+  /* Pagination navigation */
+  .pagination-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding: 1rem 0;
+  }
+
+  .pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ddd;
+    background-color: white;
+    color: #333;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+  }
+
+  .pagination-btn:hover:not(:disabled) {
+    background-color: var(--aw-color-primary);
+    color: white;
+    border-color: var(--aw-color-primary);
+  }
+
+  .pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .pagination-numbers {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .pagination-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 0.75rem;
+    border: 1px solid #ddd;
+    background-color: white;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+  }
+
+  .pagination-number:hover {
+    background-color: #f5f5f5;
+    border-color: #999;
+  }
+
+  .pagination-number.active {
+    background-color: var(--aw-color-primary);
+    color: white;
+    border-color: var(--aw-color-primary);
+    cursor: default;
+  }
+</style>
+
+<script>
+  function initPagination() {
+    const containers = document.querySelectorAll('[data-content-paginated]');
+
+    containers.forEach((container) => {
+      const contentPages = container.querySelector('.content-pages');
+      if (!contentPages) return;
+
+      // Get all content as HTML
+      const allContent = contentPages.innerHTML;
+
+      // Split content by h2 tags
+      const pages: string[] = [];
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = allContent;
+
+      let currentPage = '';
+      const children = Array.from(tempDiv.children);
+
+      children.forEach((child) => {
+        if (child.tagName === 'H2') {
+          if (currentPage) {
+            pages.push(currentPage);
+          }
+          currentPage = child.outerHTML;
+        } else {
+          currentPage += child.outerHTML;
+        }
+      });
+
+      // Add the last page
+      if (currentPage) {
+        pages.push(currentPage);
+      }
+
+      // If no h2 tags found, treat all content as one page
+      if (pages.length === 0) {
+        pages.push(allContent);
+      }
+
+      // Clear and rebuild with page wrappers
+      contentPages.innerHTML = '';
+      pages.forEach((pageContent, index) => {
+        const pageDiv = document.createElement('div');
+        pageDiv.className = `content-page ${index === 0 ? 'active' : ''}`;
+        pageDiv.setAttribute('data-page', String(index + 1));
+        pageDiv.innerHTML = pageContent;
+        contentPages.appendChild(pageDiv);
+      });
+
+      // Build pagination controls
+      const paginationNumbers = container.querySelector('.pagination-numbers');
+      const prevBtn = container.querySelector('.pagination-prev');
+      const nextBtn = container.querySelector('.pagination-next');
+
+      if (!paginationNumbers || !prevBtn || !nextBtn) return;
+
+      let currentPageIndex = 0;
+
+      // Create page number buttons
+      paginationNumbers.innerHTML = '';
+      pages.forEach((_, index) => {
+        const pageBtn = document.createElement('button');
+        pageBtn.className = `pagination-number ${index === 0 ? 'active' : ''}`;
+        pageBtn.textContent = String(index + 1);
+        pageBtn.setAttribute('data-page', String(index));
+        pageBtn.addEventListener('click', () => goToPage(index));
+        paginationNumbers.appendChild(pageBtn);
+      });
+
+      function goToPage(pageIndex: number) {
+        if (pageIndex < 0 || pageIndex >= pages.length) return;
+
+        // Hide all pages
+        const allPages = contentPages.querySelectorAll('.content-page');
+        allPages.forEach((page) => page.classList.remove('active'));
+
+        // Show selected page
+        const selectedPage = contentPages.querySelector(`[data-page="${pageIndex + 1}"]`);
+        if (selectedPage) {
+          selectedPage.classList.add('active');
+        }
+
+        // Update page buttons
+        const allPageBtns = paginationNumbers.querySelectorAll('.pagination-number');
+        allPageBtns.forEach((btn, index) => {
+          if (index === pageIndex) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+
+        // Update prev/next buttons
+        (prevBtn as HTMLButtonElement).disabled = pageIndex === 0;
+        (nextBtn as HTMLButtonElement).disabled = pageIndex === pages.length - 1;
+
+        currentPageIndex = pageIndex;
+
+        // Scroll to top of content
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      // Previous button
+      prevBtn.addEventListener('click', () => {
+        if (currentPageIndex > 0) {
+          goToPage(currentPageIndex - 1);
+        }
+      });
+
+      // Next button
+      nextBtn.addEventListener('click', () => {
+        if (currentPageIndex < pages.length - 1) {
+          goToPage(currentPageIndex + 1);
+        }
+      });
+
+      // Hide pagination if only one page
+      const paginationNav = container.querySelector('.pagination-nav');
+      if (pages.length <= 1 && paginationNav) {
+        (paginationNav as HTMLElement).style.display = 'none';
+      }
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('astro:page-load', initPagination);
+
+  // Fallback for non-Astro environments
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPagination);
+  } else {
+    initPagination();
+  }
+</script>

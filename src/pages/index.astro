@@ -1,5 +1,5 @@
 ---
-import Content from '~/components/common/Content.astro';
+import ContentPaginated from '~/components/common/ContentPaginated.astro';
 import PageLayout from '~/layouts/PageLayout.astro';
 
 import Posts from '~/components/blocks/Posts.astro';
@@ -39,7 +39,7 @@ const projects = await findLatestProjects({count: 2});
     },
   ]}
 >
-  <Content>
+  <ContentPaginated>
     <h1>Хроники Бизнес-Следопыта. Пролог.</h1>
     <p>
       Большой бизнес имеет парадный фасад и своё настоящее закулисье. Там, где пахнет не дорогим парфюмом, а молоком,
@@ -65,7 +65,7 @@ const projects = await findLatestProjects({count: 2});
       валюта – это discretion, умение хранить тайны. Я – тот, кому доверяют ключи от backstage, и я дорожу этим
       доверием.
     </p>
-  </Content>
+  </ContentPaginated>
 
   <Posts
     title="Познавательно"
