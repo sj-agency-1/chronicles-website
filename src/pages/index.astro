@@ -10,9 +10,7 @@ import NeedConsultationCard from '~/components/structures/NeedConsultationCard.a
 const metadata = {
   title: 'Главная',
   ignoreTitleTemplate: true,
-};
-const tocItems = [{ targetId: 'welcome', chapterTitle: 'Глава 1', chapterDescription: 'Добро пожаловать' }];
-const breadCrumbLinks = [{ text: 'Главная', href: '/' }];
+};const breadCrumbLinks = [{ text: 'Главная', href: '/' }];
 
 // Load posts
 import { findLatestPosts } from '~/utils/blog';
@@ -24,7 +22,6 @@ const projects = await findLatestProjects({count: 2});
 ---
 
 <PageLayout
-  {tocItems}
   {breadCrumbLinks}
   {metadata}
   heroItems={[
