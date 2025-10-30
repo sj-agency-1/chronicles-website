@@ -15,6 +15,11 @@ socials:
   x: 'https://x.com/arthelokyo'
   instagram: 'https://www.instagram.com/arthelokyo/'
 
+contact:
+  emailAddress: 'contact@arthelokyo.com'
+  telegramUsername: 'arthelokyo'
+  whatsappNumber: '79161234567' # Use international format without '+' sign
+
 # Default SEO metadata
 metadata:
   title:

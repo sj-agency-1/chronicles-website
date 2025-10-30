@@ -5,6 +5,7 @@ import type { MetaData } from '~/types';
 export type Config = {
   site?: SiteConfig;
   socials?: SocialsConfig;
+  contact?: ContactConfig;
   metadata?: MetaDataConfig;
   i18n?: I18NConfig;
   apps?: {
@@ -33,12 +34,19 @@ export interface SocialsConfig {
   instagram?: string;
 }
 
+export interface ContactConfig {
+  email?: string;
+  telegram?: string;
+  whatsapp?: string;
+}
+
 export interface MetaDataConfig extends Omit<MetaData, 'title'> {
   title?: {
     default: string;
     template: string;
   };
 }
+
 export interface I18NConfig {
   language: string;
   textDirection: string;
@@ -161,6 +169,16 @@ const getSocials = (config: Config) => {
 
   return merge({}, _default, config?.socials ?? {}) as SocialsConfig;
 };
+
+const getContact = (config: Config) => {
+  const _default = {
+    email: '',
+    telegram: '',
+    whatsapp: '',
+  };
+
+  return merge({}, _default, config?.contact ?? {}) as ContactConfig;
+}
 
 const getMetadata = (config: Config) => {
   const siteConfig = getSite(config);
@@ -304,6 +322,7 @@ const getAnalytics = (config: Config) => {
 export default (config: Config) => ({
   SITE: getSite(config),
   SOCIALS: getSocials(config),
+  CONTACT: getContact(config),
   I18N: getI18N(config),
   METADATA: getMetadata(config),
   APP_BLOG: getAppBlog(config),

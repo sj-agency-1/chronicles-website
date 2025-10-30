@@ -1,12 +1,12 @@
 ---
 import Image from './Image.astro';
 
-interface Props {
+export interface ContactProps {
   type: 'telegram' | 'whatsapp' | 'email';
   size?: 'small' | 'regular' | 'large';
 }
 
-const { type, size = "regular" } = Astro.props as Props;
+const { type, size = "regular" } = Astro.props as ContactProps;
 
 const sizeMapping = {
   small: 40,

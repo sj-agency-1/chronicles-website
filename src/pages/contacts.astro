@@ -1,5 +1,6 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
+import ContactList from '~/components/structures/ContactList.astro';
 
 const metadata = {
   title: 'Контакты',
@@ -20,5 +21,5 @@ const breadCrumbLinks = [
     },
   ]}
 >
-    123
+    <ContactList />
 </PageLayout>

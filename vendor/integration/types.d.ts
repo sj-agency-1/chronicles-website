@@ -1,8 +1,9 @@
 declare module 'astrowind:config' {
-  import type { SiteConfig, SocialsConfig, I18NConfig, MetaDataConfig, AppBlogConfig, AppProjectConfig, UIConfig, AnalyticsConfig } from './config';
+  import type { SiteConfig, SocialsConfig, ContactConfig, I18NConfig, MetaDataConfig, AppBlogConfig, AppProjectConfig, UIConfig, AnalyticsConfig } from './config';
 
   export const SITE: SiteConfig;
   export const SOCIALS: SocialsConfig;
+  export const CONTACT: ContactConfig;
   export const I18N: I18NConfig;
   export const METADATA: MetaDataConfig;
   export const APP_BLOG: AppBlogConfig;

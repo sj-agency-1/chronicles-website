@@ -1,0 +1,45 @@
+---
+import { CONTACT } from 'astrowind:config';
+import IconContact from '../common/IconContact.astro';
+import { type ContactProps } from '../common/IconContact.astro';
+
+interface Props {
+  contactType: ContactProps['type'];
+}
+
+const { contactType } = Astro.props as Props;
+
+const getContactLink = (contactType: ContactProps['type']) => {
+  switch (contactType) {
+    case 'telegram':
+      return `https://t.me/${CONTACT.telegramUsername}`;
+    case 'whatsapp':
+      return `https://wa.me/${CONTACT.whatsappNumber}`;
+    case 'email':
+      return `mailto:${CONTACT.emailAddress}`;
+    default:
+      return '#';
+  }
+}
+
+const getContactTitle = (contactType: ContactProps['type']) => {
+  switch (contactType) {
+    case 'telegram':
+      return `@${CONTACT.telegramUsername}`;
+    case 'whatsapp':
+      return `+${CONTACT.whatsappNumber.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5')}`;
+    case 'email':
+      return `${CONTACT.emailAddress}`;
+    default:
+      return 'Contact';
+  }
+}
+
+---
+
+<a href={getContactLink(contactType)} rel="noopener noreferrer">
+    <div class="flex flex-col justify-between gap-4 items-center group relative">
+    <IconContact type={contactType} size="large" />
+    <div class="font-heading font-bold text-black">{getContactTitle(contactType)}</div>
+  </div>
+</a>

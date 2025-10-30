@@ -1,0 +1,23 @@
+---
+import { twMerge } from 'tailwind-merge';
+import ContactItem from './ContactItem.astro';
+import { type ContactProps } from '../common/IconContact.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props as Props;
+
+const contactTypes: ContactProps['type'][] = ['telegram', 'whatsapp', 'email'];
+---
+
+<ul class={twMerge("flex flex-col md:flex-row justify-between", className)}>
+  {
+    contactTypes.map((contactType) => (
+      <li>
+        <ContactItem contactType={contactType} />
+      </li>
+    ))
+  }
+</ul>
