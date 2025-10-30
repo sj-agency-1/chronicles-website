@@ -1,0 +1,34 @@
+---
+import Image from '../common/Image.astro';
+import Modal from '../common/Modal.astro';
+
+export interface GalleryItemProps {
+  imageUrl: string;
+  alt?: string;
+}
+
+const { imageUrl, alt = '' } = Astro.props as GalleryItemProps;
+
+const modalId = `gallery-modal-${crypto.randomUUID()}`;
+const modalTitle = alt ? `Image preview: ${alt}` : 'Image preview';
+const openLabel = alt ? `Open image preview: ${alt}` : 'Open image preview';
+---
+
+<div class="relative w-full">
+  <button
+    type="button"
+    class="block w-full border-none p-0 cursor-pointer rounded-xl overflow-hidden bg-transparent transition-transform duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-4"
+    data-modal-open={modalId}
+    aria-label={openLabel}
+  >
+    <Image
+      src={imageUrl}
+      alt={alt}
+      class="block w-full h-full object-cover transition-transform duration-200 group-hover:scale-105 focus-visible:scale-105"
+    />
+  </button>
+
+  <Modal id={modalId} title={modalTitle}>
+    <Image src={imageUrl} alt={alt} class="block w-full h-auto rounded-xl object-contain" />
+  </Modal>
+</div>

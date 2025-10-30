@@ -1,0 +1,176 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+	id?: string;
+	title?: string;
+}
+
+const { id, title } = Astro.props as Props;
+const modalId = id ?? `modal-${crypto.randomUUID()}`;
+const headingId = title ? `${modalId}-title` : undefined;
+---
+
+<dialog
+	id={modalId}
+	aria-labelledby={headingId}
+	class="border-none p-0 w-[min(90vw,32rem)] m-auto bg-transparent text-inherit backdrop:bg-[rgba(7,11,19,0.78)] backdrop:backdrop-blur-[4px]"
+>
+	<div class="flex flex-col gap-6 bg-page text-slate-50 rounded-2xl p-8 sm:p-6 shadow-[0_20px_45px_rgba(15,23,42,0.45)] sm:rounded-xl">
+		<header class="flex items-center justify-between gap-4">
+			{title && <span id={headingId} class="text-2xl sm:text-xl leading-tight font-semibold text-primary">{title}</span>}
+			<button
+				type="button"
+				class="inline-flex items-center justify-center border-none w-10 h-10 rounded-full bg-slate-400/16 text-slate-50 cursor-pointer transition-colors duration-150 hover:bg-slate-400/28 focus-visible:bg-slate-400/28 focus-visible:outline-none"
+				data-modal-close
+				aria-label="Close dialog"
+			>
+				<Icon name="utils/close" class="h-6 w-6 text-primary" />
+			</button>
+		</header>
+
+		<div class="flex flex-col gap-5 text-base leading-relaxed">
+			<slot />
+		</div>
+	</div>
+</dialog>
+
+<script is:inline data-modal-id={modalId}>
+void (function () {
+	const script = document.currentScript;
+	if (!script) {
+		return;
+	}
+
+	const modalId = script.dataset.modalId;
+	if (!modalId) {
+		return;
+	}
+
+	const modalElement = document.getElementById(modalId);
+	if (!(modalElement instanceof HTMLDialogElement)) {
+		return;
+	}
+
+	const root = document.documentElement;
+	const counterKey = '__chroniclesModalCount';
+	const globalScope = window;
+	let returnFocusTo;
+
+	const getCount = () => {
+		return typeof globalScope[counterKey] === 'number' ? globalScope[counterKey] : 0;
+	};
+
+	const setCount = (value) => {
+		globalScope[counterKey] = value;
+	};
+
+	const increment = () => {
+		const next = getCount() + 1;
+		setCount(next);
+		if (next === 1) {
+			root.classList.add('modal-open');
+		}
+	};
+
+	const decrement = () => {
+		const current = getCount();
+		const next = current - 1;
+		setCount(next > 0 ? next : 0);
+		if (getCount() === 0) {
+			root.classList.remove('modal-open');
+		}
+	};
+
+	const openDialog = (trigger) => {
+		if (modalElement.open) {
+			return;
+		}
+
+		if (typeof modalElement.showModal === 'function') {
+			modalElement.showModal();
+		} else {
+			modalElement.setAttribute('open', '');
+		}
+
+		if (trigger instanceof HTMLElement) {
+			returnFocusTo = trigger;
+		} else if (document.activeElement instanceof HTMLElement) {
+			returnFocusTo = document.activeElement;
+		} else {
+			returnFocusTo = undefined;
+		}
+
+		increment();
+	};
+
+	const closeDialog = () => {
+		if (!modalElement.open && !modalElement.hasAttribute('open')) {
+			return;
+		}
+
+		if (typeof modalElement.close === 'function') {
+			modalElement.close();
+		} else {
+			modalElement.removeAttribute('open');
+			decrement();
+			if (returnFocusTo && typeof returnFocusTo.focus === 'function') {
+				returnFocusTo.focus({ preventScroll: true });
+			}
+			returnFocusTo = undefined;
+		}
+	};
+
+	document
+		.querySelectorAll(`[data-modal-open="${modalId}"]`)
+		.forEach((trigger) => {
+			trigger.addEventListener('click', (event) => {
+				event.preventDefault();
+				openDialog(event.currentTarget);
+			});
+		});
+
+	modalElement
+		.querySelectorAll('[data-modal-close]')
+		.forEach((closeTrigger) => {
+			closeTrigger.addEventListener('click', (event) => {
+				event.preventDefault();
+				closeDialog();
+			});
+		});
+
+	document
+		.querySelectorAll(`[data-modal-close="${modalId}"]`)
+		.forEach((closeTrigger) => {
+			closeTrigger.addEventListener('click', (event) => {
+				event.preventDefault();
+				closeDialog();
+			});
+		});
+
+	modalElement.addEventListener('cancel', (event) => {
+		event.preventDefault();
+		closeDialog();
+	});
+
+	modalElement.addEventListener('close', () => {
+		decrement();
+		if (returnFocusTo && typeof returnFocusTo.focus === 'function') {
+			returnFocusTo.focus({ preventScroll: true });
+		}
+		returnFocusTo = undefined;
+	});
+
+	modalElement.addEventListener('click', (event) => {
+		if (event.target === modalElement) {
+			closeDialog();
+		}
+	});
+})();
+</script>
+
+<style>
+	:global(html.modal-open) {
+		overflow: hidden;
+	}
+</style>

@@ -1,6 +1,7 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
-import ContactList from '~/components/structures/ContactList.astro';
+import GalleryGrid from '~/components/structures/GalleryGrid.astro';
+import type { GalleryItemProps } from '~/components/structures/GalleryItem.astro';
 
 const metadata = {
   title: 'Галерея',
@@ -8,7 +9,23 @@ const metadata = {
 };
 const breadCrumbLinks = [
   { text: 'Главная', href: '/' },
-  { text: 'Галерея', href: '/gallery' }];
+  { text: 'Галерея', href: '/gallery' },
+];
+
+const galleryItems: GalleryItemProps[] = [
+  { imageUrl: 'https://dummyjson.com/image/300x400?bgColor=grey&text=1', alt: 'Gallery image 1' },
+  { imageUrl: 'https://dummyjson.com/image/300x260?bgColor=grey&text=2', alt: 'Gallery image 2' },
+  { imageUrl: 'https://dummyjson.com/image/300x400?bgColor=grey&text=3', alt: 'Gallery image 3' },
+  { imageUrl: 'https://dummyjson.com/image/300x400?bgColor=grey&text=4', alt: 'Gallery image 4' },
+  { imageUrl: 'https://dummyjson.com/image/300x260?bgColor=grey&text=5', alt: 'Gallery image 5' },
+  { imageUrl: 'https://dummyjson.com/image/300x400?bgColor=grey&text=6', alt: 'Gallery image 6' },
+  { imageUrl: 'https://dummyjson.com/image/300x400?bgColor=grey&text=7', alt: 'Gallery image 7' },
+  { imageUrl: 'https://dummyjson.com/image/300x260?bgColor=grey&text=8', alt: 'Gallery image 8' },
+  { imageUrl: 'https://dummyjson.com/image/300x400?bgColor=grey&text=9', alt: 'Gallery image 9' },
+  { imageUrl: 'https://dummyjson.com/image/300x400?bgColor=grey&text=10', alt: 'Gallery image 10' },
+  { imageUrl: 'https://dummyjson.com/image/300x260?bgColor=grey&text=11', alt: 'Gallery image 11' },
+  { imageUrl: 'https://dummyjson.com/image/300x400?bgColor=grey&text=12', alt: 'Gallery image 12' },
+];
 ---
 
 <PageLayout
@@ -16,10 +33,12 @@ const breadCrumbLinks = [
   {metadata}
   heroItems={[
     {
-      title: 'Галерея',
+      title: 'Фотогалерея',
       bgImage: '~/assets/images/pages/gallery.webp',
     },
   ]}
 >
-    <ContactList />
+  <section class="py-16">
+    <GalleryGrid items={galleryItems} />
+  </section>
 </PageLayout>
