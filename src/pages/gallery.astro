@@ -1,0 +1,25 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+import ContactList from '~/components/structures/ContactList.astro';
+
+const metadata = {
+  title: 'Галерея',
+  ignoreTitleTemplate: true,
+};
+const breadCrumbLinks = [
+  { text: 'Главная', href: '/' },
+  { text: 'Галерея', href: '/gallery' }];
+---
+
+<PageLayout
+  {breadCrumbLinks}
+  {metadata}
+  heroItems={[
+    {
+      title: 'Галерея',
+      bgImage: '~/assets/images/pages/gallery.webp',
+    },
+  ]}
+>
+    <ContactList />
+</PageLayout>
