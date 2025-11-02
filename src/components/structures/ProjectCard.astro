@@ -1,6 +1,5 @@
 ---
 import Image from '~/components/common/Image.astro';
-import Button from '../common/Button.astro';
 
 export interface ProjectCardProps {
   id: string;
@@ -22,8 +21,9 @@ const {
 <a
   href={href}
   rel="noopener noreferrer"
-  class="group flex flex-col gap-4 w-full h-full rounded-lg"
+  class="group flex flex-col gap-4 w-full h-full rounded-lg overflow-hidden transition-shadow duration-200 hover:shadow-lg"
   id={`project-card-${id}`}
+  aria-labelledby={`project-title-${id}`}
 >
   <div class="w-full aspect-video">
     <Image
@@ -32,17 +32,17 @@ const {
       class="w-full h-full object-cover"
     />
   </div>
+
   <div class="flex flex-col gap-3 p-4 flex-grow">
-    <h3 class="font-heading font-bold text-black text-lg">{title}</h3>
-    <p class="text-default">{excerpt}</p>
-    <Button
-      class="text-left"
-      text="Подробнее"
-      variant="underlined"
-      type="button"
-      icon="utils/arrow-right"
-      iconPosition="right"
-      iconClasses="w-2 h-2 text-primary"
-    />
+    <h3 id={`project-title-${id}`} class="font-heading font-bold text-black text-base md:text-lg lg:text-xl">{title}</h3>
+    <p class="text-default text-sm md:text-base">{excerpt}</p>
+
+  <!-- Render a non-interactive styled link text instead of a nested button to avoid invalid interactive nesting -->
+    <span class="mt-2 inline-flex items-center gap-2 text-primary text-sm font-medium hover:underline">
+      <span>Подробнее</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L13.586 11H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      </svg>
+    </span>
   </div>
 </a>

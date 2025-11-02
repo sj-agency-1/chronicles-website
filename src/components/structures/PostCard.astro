@@ -19,22 +19,28 @@ const {
   title,
   direction = 'right',
 } = Astro.props as PostCardProps;
+
+const isRight = direction === 'right';
+const containerClass = `flex flex-col ${isRight ? 'md:flex-row' : 'md:flex-row-reverse'} justify-between items-center gap-4 md:gap-6`;
+const imageWrapperClass = 'w-full md:w-2/5';
+const contentClass = 'w-full md:w-3/5 flex flex-col gap-3';
 ---
 
 <a
   href={href}
   rel="noopener noreferrer"
-  class={`flex ${direction === 'right' ? 'flex-row' : 'flex-row-reverse'} justify-between items-center gap-4`}
+  class={containerClass}
   id={`post-card-${id}`}
 >
-  <div class="max-w-md">
+  <div class={imageWrapperClass}>
     <Image src={imageSrc} alt={title} />
   </div>
-  <div class="flex flex-col gap-3">
-    <p>{label}</p>
-    <h3 class="font-heading font-bold text-black uppercase text-lg">{title}</h3>
+
+  <div class={contentClass}>
+    <p class="text-sm text-muted-foreground">{label}</p>
+    <h3 class="font-heading font-bold text-black uppercase text-lg md:text-xl">{title}</h3>
     <Button
-      class="text-left"
+      class="text-left mt-1"
       text="Подробнее"
       variant="underlined"
       type="button"

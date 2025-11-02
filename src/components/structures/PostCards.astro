@@ -11,7 +11,7 @@ interface Props {
 const { class: className = '', data = [] } = Astro.props as Props;
 ---
 
-<ul class={twMerge('flex flex-col gap-4', className)}>
+<ul class={twMerge('grid grid-cols-1 gap-4', className)}>
   {
     data.map((item) => (
       <PostCard

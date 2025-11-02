@@ -21,7 +21,9 @@ const {
 
 // Convert layout config to Tailwind classes
 const getGridClass = () => {
-  if (!layout) return 'flex flex-col gap-4';
+  // Default responsive grid when no explicit layout provided:
+  // mobile: 1 col, sm: 2 cols, md: 3 cols
+  if (!layout) return 'grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3';
 
   const colsMap: Record<number, string> = {
     1: 'grid-cols-1',
@@ -40,7 +42,9 @@ const getGridClass = () => {
     6: 'grid-rows-6'
   };
 
-  return `grid gap-4 ${colsMap[layout.columns] || 'grid-cols-1'} ${rowsMap[layout.rows] || ''}`;
+  // Use a responsive approach: base 1 col, sm 2 cols, md use the requested layout.columns
+  const mdCols = colsMap[layout.columns] || 'grid-cols-1';
+  return `grid gap-4 grid-cols-1 sm:grid-cols-2 md:${mdCols} ${rowsMap[layout.rows] || ''}`;
 };
 
 const getSpanClass = (span?: { col?: number; row?: number }) => {
@@ -81,7 +85,7 @@ const gridClass = getGridClass();
       const spanClass = getSpanClass(span);
 
       return (
-        <li class={spanClass}>
+        <li class={twMerge('w-full', spanClass)}>
           <ProjectCard
             id={item.id}
             href={item.href}

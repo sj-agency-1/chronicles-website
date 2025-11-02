@@ -19,8 +19,8 @@ const { class: className = '', data = [], title, layout } = Astro.props as Props
 ---
 
 <div>
-  <div class="flex items-center justify-between mb-6">
-    <span class="text-xl font-bold text-primary">{title}</span>
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-2 sm:gap-0">
+    <span class="text-xl md:text-2xl font-bold text-primary">{title}</span>
     <Button
       href={PROJECT_BASE}
       type="link"
