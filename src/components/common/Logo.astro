@@ -20,11 +20,11 @@ const textVariantsClasses = {
 ---
 
 <a href="/">
-  <div class={`logo-container logo-container-${variant} flex items-center gap-4`}>
-    <div>
+  <div class={`logo-container logo-container-${variant} flex items-center gap-1 sm:gap-4`}>
+    <div class="logo-icon">
       <Icon name="logo" class={twMerge("w-10 h-10", logoVariantsClasses[variant])} />
     </div>
-    <div>
+    <div class="logo-text">
       <p class={twMerge("logo-title font-heading", textVariantsClasses[variant])}>ХРОНИКИ</p>
       <p class={twMerge("logo-subtitle font-heading", textVariantsClasses[variant])}>БИЗНЕС-АНАЛИТИКА</p>
     </div>
@@ -39,5 +39,22 @@ const textVariantsClasses = {
   .logo-subtitle {
     font-size: 11px;
     font-weight: 900;
+  }
+
+  /* Mobile: nudge icon and text slightly down and gently scale the icon for better visual balance */
+  .logo-icon,
+  .logo-text,
+  .logo-title,
+  .logo-subtitle {
+    transition: transform 180ms ease;
+  }
+
+  @media (max-width: 340px) {
+    .logo-text {
+      transform: scale(0.8);
+    }
+    .logo-icon {
+      transform: scale(0.8);
+    }
   }
 </style>
