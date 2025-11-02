@@ -4,15 +4,16 @@ import Accordion from '~/components/structures/Accordion.astro';
 import PageLayout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Главная',
+  title: 'Мои Услуги',
   ignoreTitleTemplate: true,
 };
-const tocItems = [{ targetId: 'welcome', chapterTitle: 'Глава 1', chapterDescription: 'Добро пожаловать' }];
-const breadCrumbLinks = [{ text: 'Главная', href: '/' }];
+const breadCrumbLinks = [
+  { text: 'Главная', href: '/' },
+  { text: 'Мои Услуги', href: '/services' },
+];
 ---
 
 <PageLayout
-  {tocItems}
   {breadCrumbLinks}
   {metadata}
   heroItems={[
