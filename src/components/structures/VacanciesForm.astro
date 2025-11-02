@@ -19,7 +19,7 @@ if (import.meta.env.PROD) {
 }
 ---
 
-<form id="vacancies-form" method="post" action={vacancySubmitUrl} class="grid grid-cols-2 gap-4">
+<form id="vacancies-form" method="post" action={vacancySubmitUrl} class="grid grid-cols-1 md:grid-cols-2 gap-4">
   <Input name="vacancies-form__name" label="Ваше ФИО" placeholder="Введите ваше ФИО" required />
   <Input name="vacancies-form__whatsapp" label="Номер WhatsApp" placeholder="+7XXXXXXXXXX" type="tel" pattern="^\+\d+$" required />
   <Input name="vacancies-form__email" label="Email" placeholder="Введите ваш Email" type="email" required />
@@ -37,12 +37,12 @@ if (import.meta.env.PROD) {
     accept=".pdf,.docx"
     maxSize={5 * 1024 * 1024}
   />
-  <div class="col-span-2">
+  <div class="col-span-1 md:col-span-2">
     <div id="vacancies-form__form-status" class="mb-4 hidden rounded p-4"></div>
   </div>
   <Button
     id="vacancies-form__submit-button"
-    class="max-w-fit"
+    class="col-span-1 md:col-span-2 max-w-fit"
     text="Отправить"
     variant="primary"
     size="small"
