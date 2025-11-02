@@ -16,6 +16,7 @@ const { class: className = '' } = Astro.props as Props;
   <nav class="pagination-nav" aria-label="Page navigation">
     <button
       class="pagination-btn pagination-prev"
+      type="button"
       aria-label="Previous page"
       disabled
     >
@@ -24,6 +25,7 @@ const { class: className = '' } = Astro.props as Props;
     <div class="pagination-numbers"></div>
     <button
       class="pagination-btn pagination-next"
+      type="button"
       aria-label="Next page"
     >
       →
@@ -190,13 +192,21 @@ const { class: className = '' } = Astro.props as Props;
 
       let currentPage = '';
       const children = Array.from(tempDiv.children);
+      // Skip splitting on the first H2 so it stays on the same page as preceding content (e.g. the H1)
+      let firstH2Skipped = false;
 
       children.forEach((child) => {
         if (child.tagName === 'H2') {
-          if (currentPage) {
-            pages.push(currentPage);
+          if (!firstH2Skipped) {
+            // Append the first H2 to the current page instead of starting a new one
+            currentPage += child.outerHTML;
+            firstH2Skipped = true;
+          } else {
+            if (currentPage) {
+              pages.push(currentPage);
+            }
+            currentPage = child.outerHTML;
           }
-          currentPage = child.outerHTML;
         } else {
           currentPage += child.outerHTML;
         }
@@ -235,6 +245,8 @@ const { class: className = '' } = Astro.props as Props;
       paginationNumbers.innerHTML = '';
       pages.forEach((_, index) => {
         const pageBtn = document.createElement('button');
+        // Ensure button doesn't act as a submit in case it's inside a form
+        pageBtn.type = 'button';
         pageBtn.className = `pagination-number ${index === 0 ? 'active' : ''}`;
         pageBtn.textContent = String(index + 1);
         pageBtn.setAttribute('data-page', String(index));
@@ -246,17 +258,17 @@ const { class: className = '' } = Astro.props as Props;
         if (pageIndex < 0 || pageIndex >= pages.length) return;
 
         // Hide all pages
-        const allPages = contentPages.querySelectorAll('.content-page');
+  const allPages = contentPages!.querySelectorAll('.content-page');
         allPages.forEach((page) => page.classList.remove('active'));
 
         // Show selected page
-        const selectedPage = contentPages.querySelector(`[data-page="${pageIndex + 1}"]`);
+  const selectedPage = contentPages!.querySelector(`[data-page="${pageIndex + 1}"]`);
         if (selectedPage) {
           selectedPage.classList.add('active');
         }
 
         // Update page buttons
-        const allPageBtns = paginationNumbers.querySelectorAll('.pagination-number');
+  const allPageBtns = paginationNumbers!.querySelectorAll('.pagination-number');
         allPageBtns.forEach((btn, index) => {
           if (index === pageIndex) {
             btn.classList.add('active');
@@ -271,8 +283,16 @@ const { class: className = '' } = Astro.props as Props;
 
         currentPageIndex = pageIndex;
 
-        // Scroll to top of content
-        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Smoothly scroll to the top of this pagination component
+        try {
+          const offset = 70; // Adjust this value as needed for fixed headers
+          const rect = container.getBoundingClientRect();
+          const top = rect.top + (window.pageYOffset || document.documentElement.scrollTop || 0) - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        } catch {
+          // Fallback for very old browsers: scroll to top of document
+          window.scrollTo(0, 0);
+        }
       }
 
       // Previous button
