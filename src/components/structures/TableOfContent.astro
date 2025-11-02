@@ -8,16 +8,18 @@ export interface TocItem {
 interface Props {
   items: Array<TocItem>;
   mode: 'default' | 'auto';
+  /** Optional vertical offset (in pixels) applied after centering. Positive moves element further down. */
+  offset?: number;
 }
 
-const { items = [], mode = 'default' } = Astro.props;
-console.log('TableOfContent - mode:', mode);
+const { items = [], mode = 'default', offset = 0 } = Astro.props;
 ---
 
 <table-of-content
   class="table-of-content block relative"
   data-mode={mode}
   data-items={JSON.stringify(items)}
+  data-offset={String(offset)}
 >
   <ul id="toc-list" class="flex flex-col gap-4">
     {mode === 'default' && items.map((item, index) => (
@@ -55,6 +57,8 @@ console.log('TableOfContent - mode:', mode);
     targetElements;
     ticking;
     scrollHandler;
+    // pixels to offset after centering (can be negative)
+    scrollOffset: number;
 
     // Bound event handlers for proper cleanup
     boundHandleScroll;
@@ -83,6 +87,8 @@ console.log('TableOfContent - mode:', mode);
     initializeTOC() {
       const mode = this.dataset.mode || 'default';
       const itemsData = this.dataset.items;
+      // parse offset, default to 0
+      this.scrollOffset = this.dataset.offset ? parseFloat(this.dataset.offset) || 0 : 0;
       const predefinedItems = itemsData ? JSON.parse(itemsData) : [];
 
       if (mode === 'auto') {
@@ -117,6 +123,12 @@ console.log('TableOfContent - mode:', mode);
           chapterDescription = headingText.substring(colonIndex + 1).trim();
         } else {
           chapterDescription = headingText;
+        }
+
+        console.log('Heading Text:', headingText);
+        // If heading text starts with "Эпилог", show only "Эпилог" in the TOC
+        if (headingText.startsWith('Эпилог')) {
+          chapterTitle = 'Эпилог';
         }
 
         // Generate targetId or use existing ID
@@ -201,7 +213,15 @@ console.log('TableOfContent - mode:', mode);
       event.preventDefault();
       const targetElement = this.targetElements[index];
       if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
+        // Compute scroll top so the element is centered in the viewport
+        const offset = 300;
+        const rect = targetElement.getBoundingClientRect();
+        const elementTop = rect.top + window.scrollY;
+        const elementHeight = rect.height;
+        const viewportCenter = window.innerHeight / 2;
+        const desiredTop = elementTop - viewportCenter + (elementHeight / 2) + (this.scrollOffset || 0) + offset;
+
+        window.scrollTo({ top: Math.max(0, desiredTop), behavior: 'smooth' });
       }
     }
 
@@ -223,31 +243,27 @@ console.log('TableOfContent - mode:', mode);
     }
 
     findActiveSection() {
+      // Use viewport center to determine which section is active
       const scrollPosition = window.scrollY;
-      const buffer = 100;
+      const viewportCenterPos = scrollPosition + window.innerHeight / 2;
 
       for (let i = 0; i < this.targetElements.length; i++) {
         const element = this.targetElements[i];
         if (!element) continue;
 
         const rect = element.getBoundingClientRect();
-        const offset = rect.top + scrollPosition;
+        const top = rect.top + scrollPosition;
+        const bottom = top + rect.height;
 
-        // Handle last element
+        // Handle last element when scrolled to bottom
+        const buffer = 100;
         if (i === this.targetElements.length - 1 &&
             window.innerHeight + scrollPosition >= document.documentElement.scrollHeight - buffer) {
           this.setActiveTocItem(i);
           return;
         }
 
-        // Check if this section is in view
-        const nextElement = this.targetElements[i + 1];
-        const nextOffset = nextElement ?
-          nextElement.getBoundingClientRect().top + scrollPosition - buffer :
-          Infinity;
-
-        if (scrollPosition >= offset - buffer &&
-            (i === this.targetElements.length - 1 || scrollPosition < nextOffset)) {
+        if (viewportCenterPos >= top && viewportCenterPos < bottom) {
           this.setActiveTocItem(i);
           return;
         }
