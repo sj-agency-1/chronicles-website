@@ -1,8 +1,8 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import PageLayout from '~/layouts/PageLayout.astro';
-import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
-import Posts from '~/components/blocks/Posts.astro';
+import { blogListRobots, getStaticPathsBlogList } from '~/utils/project';
+import Projects from '~/components/blocks/Projects.astro';
 
 export const prerender = true;
 export const getStaticPaths = (async ({ paginate }) => {
@@ -13,7 +13,7 @@ const { page } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
 
 const metadata = {
-  title: 'Познавательно',
+  title: 'Проекты',
   ignoreTitleTemplate: true,
   robots: {
     index: blogListRobots?.index && currentPage === 1,
@@ -25,12 +25,8 @@ const metadata = {
 };
 const breadCrumbLinks = [
   { text: 'Главная', href: '/' },
-  { text: 'Познавательно', href: '/blog' },
+  { text: 'Проекты', href: '/project' },
 ];
-
-// Load posts
-import { findLatestPosts } from '~/utils/blog';
-const posts = await findLatestPosts({ count: 10 });
 ---
 
 <PageLayout
@@ -38,21 +34,24 @@ const posts = await findLatestPosts({ count: 10 });
   {metadata}
   heroItems={[
     {
-      title: 'Познавательно',
+      title: 'Проекты',
       bgImage: '~/assets/images/pages/informative.webp',
     },
   ]}
 >
-  <Posts
-    title="Познавательно"
-    data={posts.map((post, index) => {
+  <Projects
+    title="Проекты"
+    layout={{
+      columns: 3,
+      rows: 2,
+    }}
+    data={page.data.map((project) => {
       return {
-        id: post.id,
-        imageSrc: post.image,
-        href: post.permalink,
-        label: 'Анонс',
-        title: post.excerpt ?? post.title,
-        direction: index % 2 ? 'left' : ('right' as 'left' | 'right'),
+        id: project.id,
+        imageSrc: project.image,
+        href: project.permalink,
+        title: project.title,
+        excerpt: project.excerpt ?? '',
       };
     })}
   />

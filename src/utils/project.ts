@@ -177,7 +177,7 @@ export const findLatestProjects = async ({ count }: { count?: number }): Promise
 export const getStaticPathsBlogList = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogListRouteEnabled) return [];
   return paginate(await fetchProjects(), {
-    params: { blog: PROJECT_BASE || undefined },
+    params: { project: PROJECT_BASE || undefined },
     pageSize: blogProjectsPerPage,
   });
 };
@@ -187,7 +187,7 @@ export const getStaticPathsBlogProject = async () => {
   if (!isBlogEnabled || !isBlogProjectRouteEnabled) return [];
   return (await fetchProjects()).flatMap((project) => ({
     params: {
-      blog: project.permalink,
+      project: project.permalink,
     },
     props: { project: project },
   }));

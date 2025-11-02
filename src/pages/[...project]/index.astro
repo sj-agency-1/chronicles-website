@@ -1,0 +1,66 @@
+---
+import merge from 'lodash.merge';
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+import type { ImageMetadata } from 'astro';
+import Content from '~/components/common/Content.astro';
+import SupportButton from '~/components/structures/SupportButton.astro';
+import PageLayout from '~/layouts/PageLayout.astro';
+
+import { getCanonical, getPermalink, PROJECT_BASE } from '~/utils/permalinks';
+import { getStaticPathsBlogProject, blogProjectRobots } from '~/utils/project';
+import { findImage } from '~/utils/images';
+import type { MetaData } from '~/types';
+
+export const prerender = true;
+export const getStaticPaths = (async () => {
+  return await getStaticPathsBlogProject();
+}) satisfies GetStaticPaths;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { project } = Astro.props as Props;
+
+const url = getCanonical(getPermalink(project.permalink, 'project'));
+const image = (await findImage(project.image)) as ImageMetadata | string | undefined;
+
+const metadata = merge(
+  {
+    title: project.title,
+    description: project.excerpt,
+    robots: {
+      index: blogProjectRobots?.index,
+      follow: blogProjectRobots?.follow,
+    },
+    openGraph: {
+      type: 'article',
+      ...(image
+        ? { images: [{ url: image, width: (image as ImageMetadata)?.width, height: (image as ImageMetadata)?.height }] }
+        : {}),
+    },
+  },
+  { ...(project?.metadata ? { ...project.metadata, canonical: project.metadata?.canonical || url } : {}) }
+) as MetaData;
+
+const breadCrumbLinks = [
+  { text: 'Главная', href: '/' },
+  { text: 'Проекты', href: `/${PROJECT_BASE}` },
+  { text: project.title, href: `/${project.permalink}` },
+];
+---
+
+<PageLayout
+  tocItemsMode='auto'
+  {breadCrumbLinks}
+  {metadata}
+  heroItems={[
+    {
+      title: 'Громкий заголовок',
+      description:
+        'Какой то дополнительный текст в несколько строк Какой то дополнительный текст в несколько строк Какой то дополнительный текст в несколько строк.',
+      bgImage: '~/assets/images/hero-1.webp',
+    },
+  ]}
+>
+  <Content>
+    {project.Content ? <project.Content /> : <Fragment set:html={project.content || ''} />}
+  </Content>
+  <SupportButton />
+</PageLayout>
