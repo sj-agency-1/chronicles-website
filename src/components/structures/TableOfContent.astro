@@ -21,7 +21,7 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
   data-items={JSON.stringify(items)}
   data-offset={String(offset)}
 >
-  <ul id="toc-list" class="flex flex-col gap-4">
+  <ul id="toc-list" class="flex flex-col gap-5">
     {mode === 'default' && items.map((item, index) => (
       <li
         class="toc-item flex items-center justify-between cursor-pointer transition-all duration-300 ease-in-out hover:opacity-70"
