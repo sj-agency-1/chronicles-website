@@ -1,0 +1,153 @@
+backend:
+  name: github
+  repo: sj-agency-1/chronicles-website
+  branch: main
+
+media_folder: './src/assets/images'
+public_folder: '~/assets/images'
+
+collections:
+  - name: 'post'
+    label: 'Posts'
+    folder: 'src/content/posts'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Excerpt', name: 'excerpt', widget: 'text', required: false }
+      - { label: 'Category', name: 'category', widget: 'string', required: false }
+      - label: 'Tags'
+        name: 'tags'
+        widget: 'list'
+        required: false
+        allow_add: true
+        allow_delete: true
+        collapsed: false
+        field: { label: 'Tag', name: 'tag', widget: 'string' }
+      - { label: 'Image', name: 'image', widget: 'image', required: false }
+      - { label: 'Publish Date', name: 'publishDate', widget: 'datetime', required: false }
+      - { label: 'Update Date', name: 'updateDate', widget: 'datetime', required: false }
+      - { label: 'Draft', name: 'draft', widget: 'boolean', required: false, default: false }
+      - label: 'Hero'
+        name: 'hero'
+        widget: 'object'
+        collapsed: true
+        required: false
+        fields:
+          - { label: 'Title', name: 'title', widget: 'string', required: false }
+          - { label: 'Description', name: 'description', widget: 'text', required: false }
+          - { label: 'Image', name: 'image', widget: 'image', required: false }
+      - label: 'Metadata'
+        name: 'metadata'
+        widget: 'object'
+        collapsed: true
+        required: false
+        fields:
+          - { label: 'Title', name: 'title', widget: 'string', required: false }
+          - { label: 'Ignore Title Template', name: 'ignoreTitleTemplate', widget: 'boolean', required: false }
+          - { label: 'Canonical URL', name: 'canonical', widget: 'string', required: false }
+          - label: 'Robots'
+            name: 'robots'
+            widget: 'object'
+            collapsed: true
+            required: false
+            fields:
+              - { label: 'Index', name: 'index', widget: 'boolean', required: false }
+              - { label: 'Follow', name: 'follow', widget: 'boolean', required: false }
+          - { label: 'Description', name: 'description', widget: 'text', required: false }
+          - label: 'Open Graph'
+            name: 'openGraph'
+            widget: 'object'
+            collapsed: true
+            required: false
+            fields:
+              - { label: 'URL', name: 'url', widget: 'string', required: false }
+              - { label: 'Site Name', name: 'siteName', widget: 'string', required: false }
+              - label: 'Images'
+                name: 'images'
+                widget: 'list'
+                required: false
+                fields:
+                  - { label: 'URL', name: 'url', widget: 'string' }
+                  - { label: 'Width', name: 'width', widget: 'number', required: false }
+                  - { label: 'Height', name: 'height', widget: 'number', required: false }
+              - { label: 'Locale', name: 'locale', widget: 'string', required: false }
+              - { label: 'Type', name: 'type', widget: 'string', required: false }
+          - label: 'Twitter'
+            name: 'twitter'
+            widget: 'object'
+            collapsed: true
+            required: false
+            fields:
+              - { label: 'Handle', name: 'handle', widget: 'string', required: false }
+              - { label: 'Site', name: 'site', widget: 'string', required: false }
+              - { label: 'Card Type', name: 'cardType', widget: 'string', required: false }
+      - { label: 'Content', name: 'body', widget: 'markdown' }
+
+  - name: 'project'
+    label: 'Projects'
+    folder: 'src/content/projects'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Excerpt', name: 'excerpt', widget: 'text', required: false }
+      - { label: 'Category', name: 'category', widget: 'string', required: false }
+      - label: 'Tags'
+        name: 'tags'
+        widget: 'list'
+        required: false
+        allow_add: true
+        allow_delete: true
+        collapsed: false
+        field: { label: 'Tag', name: 'tag', widget: 'string' }
+      - { label: 'Image', name: 'image', widget: 'image', required: false }
+      - { label: 'Publish Date', name: 'publishDate', widget: 'datetime', required: false }
+      - { label: 'Update Date', name: 'updateDate', widget: 'datetime', required: false }
+      - { label: 'Draft', name: 'draft', widget: 'boolean', required: false, default: false }
+      - label: 'Metadata'
+        name: 'metadata'
+        widget: 'object'
+        collapsed: true
+        required: false
+        fields:
+          - { label: 'Title', name: 'title', widget: 'string', required: false }
+          - { label: 'Ignore Title Template', name: 'ignoreTitleTemplate', widget: 'boolean', required: false }
+          - { label: 'Canonical URL', name: 'canonical', widget: 'string', required: false }
+          - label: 'Robots'
+            name: 'robots'
+            widget: 'object'
+            collapsed: true
+            required: false
+            fields:
+              - { label: 'Index', name: 'index', widget: 'boolean', required: false }
+              - { label: 'Follow', name: 'follow', widget: 'boolean', required: false }
+          - { label: 'Description', name: 'description', widget: 'text', required: false }
+          - label: 'Open Graph'
+            name: 'openGraph'
+            widget: 'object'
+            collapsed: true
+            required: false
+            fields:
+              - { label: 'URL', name: 'url', widget: 'string', required: false }
+              - { label: 'Site Name', name: 'siteName', widget: 'string', required: false }
+              - label: 'Images'
+                name: 'images'
+                widget: 'list'
+                required: false
+                fields:
+                  - { label: 'URL', name: 'url', widget: 'string' }
+                  - { label: 'Width', name: 'width', widget: 'number', required: false }
+                  - { label: 'Height', name: 'height', widget: 'number', required: false }
+              - { label: 'Locale', name: 'locale', widget: 'string', required: false }
+              - { label: 'Type', name: 'type', widget: 'string', required: false }
+          - label: 'Twitter'
+            name: 'twitter'
+            widget: 'object'
+            collapsed: true
+            required: false
+            fields:
+              - { label: 'Handle', name: 'handle', widget: 'string', required: false }
+              - { label: 'Site', name: 'site', widget: 'string', required: false }
+              - { label: 'Card Type', name: 'cardType', widget: 'string', required: false }
+      - { label: 'Content', name: 'body', widget: 'markdown' }
