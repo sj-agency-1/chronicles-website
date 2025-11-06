@@ -5,7 +5,15 @@ interface Props extends HTMLAttributes<'input'> {
   label?: string | undefined;
 }
 
-const { label, placeholder, name = label || placeholder, id = name, type = 'text', value, ...rest } = Astro.props as Props;
+const {
+  label,
+  placeholder,
+  name = label || placeholder,
+  id = name,
+  type = 'text',
+  value,
+  ...rest
+} = Astro.props as Props;
 ---
 
 <div class="flex flex-col gap-1 w-full">

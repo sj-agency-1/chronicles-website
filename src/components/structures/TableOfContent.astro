@@ -22,47 +22,49 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
   data-offset={String(offset)}
 >
   <ul id="toc-list" class="flex flex-col gap-5">
-    {mode === 'default' && items.map((item, index) => (
-      <li
-        class="toc-item flex items-center justify-between cursor-pointer transition-all duration-300 ease-in-out hover:opacity-70"
-        data-target={item.targetId}
-        data-index={index}
-        role="button"
-        tabindex="0"
-        aria-controls={item.targetId}
-      >
-        <div class="flex-1">
-          {item.chapterTitle && <div class="text-sm text-gray-600">{item.chapterTitle}</div>}
-          <div class="font-heading text-black font-bold text-base">{item.chapterDescription}</div>
-        </div>
-        <div class="dot w-4 h-4 bg-black opacity-0 transition-opacity duration-300 ease-in-out" />
-      </li>
-    ))}
+    {
+      mode === 'default' &&
+        items.map((item, index) => (
+          <li
+            class="toc-item flex items-center justify-between cursor-pointer transition-all duration-300 ease-in-out hover:opacity-70"
+            data-target={item.targetId}
+            data-index={index}
+            role="button"
+            tabindex="0"
+            aria-controls={item.targetId}
+          >
+            <div class="flex-1">
+              {item.chapterTitle && <div class="text-sm text-gray-600">{item.chapterTitle}</div>}
+              <div class="font-heading text-black font-bold text-base">{item.chapterDescription}</div>
+            </div>
+            <div class="dot w-4 h-4 bg-black opacity-0 transition-opacity duration-300 ease-in-out" />
+          </li>
+        ))
+    }
   </ul>
 </table-of-content>
 
 <script>
   interface TocItem {
     targetId: string;
-    chapterTitle: string;
+    chapterTitle?: string;
     chapterDescription: string;
-    element: HTMLHeadingElement;
+    element: HTMLHeadingElement | null;
   }
-
 
   class TableOfContent extends HTMLElement {
     // Properties
     tocItems: Array<TocItem>;
-    tocListItems;
-    targetElements;
-    ticking;
-    scrollHandler;
+    tocListItems: NodeListOf<Element> | null;
+    targetElements: (HTMLElement | null)[];
+    ticking: boolean;
+    scrollHandler: (() => void) | null;
     // pixels to offset after centering (can be negative)
     scrollOffset: number;
 
     // Bound event handlers for proper cleanup
-    boundHandleScroll;
-    boundHandleTocItemClick;
+    boundHandleScroll: () => void;
+    boundHandleTocItemClick: (event: Event, index: number) => void;
 
     constructor() {
       super();
@@ -95,10 +97,12 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
         this.tocItems = this.generateTOCFromHeadings();
         this.renderTOCItems();
       } else {
-        this.tocItems = predefinedItems.map(item => ({
-          ...item,
-          element: document.getElementById(item.targetId)
-        }));
+        this.tocItems = predefinedItems.map(
+          (item: { targetId: string; chapterTitle?: string; chapterDescription: string }) => ({
+            ...item,
+            element: document.getElementById(item.targetId),
+          })
+        );
       }
 
       this.setupTOCInteractions();
@@ -115,8 +119,8 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
         // Split on first colon to separate chapter title from description
         const colonIndex = headingText.indexOf(':');
 
-        let chapterTitle;
-        let chapterDescription;
+        let chapterTitle: string | undefined;
+        let chapterDescription: string;
 
         if (colonIndex !== -1) {
           chapterTitle = headingText.substring(0, colonIndex).trim();
@@ -162,7 +166,8 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
 
       this.tocItems.forEach((item, index) => {
         const li = document.createElement('li');
-        li.className = 'toc-item flex items-center justify-between cursor-pointer transition-all duration-300 ease-in-out hover:opacity-70';
+        li.className =
+          'toc-item flex items-center justify-between cursor-pointer transition-all duration-300 ease-in-out hover:opacity-70';
         li.setAttribute('data-target', item.targetId);
         li.setAttribute('data-index', index.toString());
         li.setAttribute('role', 'button');
@@ -183,16 +188,14 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
 
     setupTOCInteractions() {
       this.tocListItems = this.querySelectorAll('.toc-item');
-      this.targetElements = this.tocItems.map(item =>
-        document.getElementById(item.targetId)
-      ).filter(Boolean);
+      this.targetElements = this.tocItems.map((item) => document.getElementById(item.targetId)).filter(Boolean);
 
       // Add scroll event listener
       window.addEventListener('scroll', this.boundHandleScroll, { passive: true });
 
       // Add click handlers to TOC items
-      this.tocListItems.forEach((item, index) => {
-        item.addEventListener('click', (e) => this.boundHandleTocItemClick(e, index));
+      this.tocListItems.forEach((item: Element, index: number) => {
+        item.addEventListener('click', (e: Event) => this.boundHandleTocItemClick(e, index));
       });
 
       // Initialize first active section
@@ -209,7 +212,7 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
       }
     }
 
-    handleTocItemClick(event, index) {
+    handleTocItemClick(event: Event, index: number) {
       event.preventDefault();
       const targetElement = this.targetElements[index];
       if (targetElement) {
@@ -219,16 +222,16 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
         const elementTop = rect.top + window.scrollY;
         const elementHeight = rect.height;
         const viewportCenter = window.innerHeight / 2;
-        const desiredTop = elementTop - viewportCenter + (elementHeight / 2) + (this.scrollOffset || 0) + offset;
+        const desiredTop = elementTop - viewportCenter + elementHeight / 2 + (this.scrollOffset || 0) + offset;
 
         window.scrollTo({ top: Math.max(0, desiredTop), behavior: 'smooth' });
       }
     }
 
-    setActiveTocItem(index) {
+    setActiveTocItem(index: number) {
       if (!this.tocListItems) return;
 
-      this.tocListItems.forEach((item, i) => {
+      this.tocListItems.forEach((item: Element, i: number) => {
         const indicator = item.querySelector('.dot');
         if (!indicator) return;
 
@@ -257,8 +260,10 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
 
         // Handle last element when scrolled to bottom
         const buffer = 100;
-        if (i === this.targetElements.length - 1 &&
-            window.innerHeight + scrollPosition >= document.documentElement.scrollHeight - buffer) {
+        if (
+          i === this.targetElements.length - 1 &&
+          window.innerHeight + scrollPosition >= document.documentElement.scrollHeight - buffer
+        ) {
           this.setActiveTocItem(i);
           return;
         }
@@ -276,8 +281,8 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
 
       // Remove click handlers from TOC items
       if (this.tocListItems) {
-        this.tocListItems.forEach((item, index) => {
-          item.removeEventListener('click', (e) => this.boundHandleTocItemClick(e, index));
+        this.tocListItems.forEach((item: Element, index: number) => {
+          item.removeEventListener('click', (e: Event) => this.boundHandleTocItemClick(e, index));
         });
       }
     }

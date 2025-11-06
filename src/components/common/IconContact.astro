@@ -6,7 +6,7 @@ export interface ContactProps {
   size?: 'small' | 'regular' | 'large';
 }
 
-const { type, size = "regular" } = Astro.props as ContactProps;
+const { type, size = 'regular' } = Astro.props as ContactProps;
 
 const sizeMapping = {
   small: 40,

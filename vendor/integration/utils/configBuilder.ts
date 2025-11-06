@@ -188,20 +188,20 @@ const getContact = (config: Config) => {
   };
 
   return merge({}, _default, config?.contact ?? {}) as ContactConfig;
-}
+};
 
 const getDonation = (config: Config) => {
   const _default = {
     usdtTrc20Address: '',
     usdtErc20Address: '',
     usdcSolAddress: '',
-    
+
     cryptoPaymentLink: '',
     bankCardPaymentLink: '',
   };
 
   return merge({}, _default, config?.donation ?? {}) as DonationConfig;
-}
+};
 
 const getMetadata = (config: Config) => {
   const siteConfig = getSite(config);

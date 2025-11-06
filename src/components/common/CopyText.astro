@@ -9,23 +9,14 @@ interface Props {
   showIcon?: boolean;
 }
 
-const {
-  text,
-  class: className = '',
-  iconClass = '',
-  showIcon = true,
-  ...rest
-} = Astro.props as Props;
+const { text, class: className = '', iconClass = '', showIcon = true, ...rest } = Astro.props as Props;
 
 const containerClasses = twMerge(
   'inline-flex items-center gap-2 group cursor-pointer hover:bg-gray-100 rounded px-2 py-1 transition-colors',
   className
 );
 
-const iconClasses = twMerge(
-  'w-4 h-4 transition-colors text-gray-500 group-hover:text-primary',
-  iconClass
-);
+const iconClasses = twMerge('w-4 h-4 transition-colors text-gray-500 group-hover:text-primary', iconClass);
 ---
 
 <button
@@ -37,12 +28,14 @@ const iconClasses = twMerge(
   {...rest}
 >
   <span class="copy-text-content select-all">{text}</span>
-  {showIcon && (
-    <span class="copy-icon-wrapper">
-      <Icon name="tabler:copy" class={iconClasses} />
-      <Icon name="tabler:check" class={twMerge(iconClasses, 'hidden text-green-500')} />
-    </span>
-  )}
+  {
+    showIcon && (
+      <span class="copy-icon-wrapper">
+        <Icon name="tabler:copy" class={iconClasses} />
+        <Icon name="tabler:check" class={twMerge(iconClasses, 'hidden text-green-500')} />
+      </span>
+    )
+  }
 </button>
 
 <!-- Toast Notification -->

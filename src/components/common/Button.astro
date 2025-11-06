@@ -38,12 +38,13 @@ const variants = {
   secondary: 'btn-secondary inline-flex items-center px-4',
   accent: 'btn-accent inline-flex items-center px-4',
   link: 'cursor-pointer hover:text-primary inline-flex items-center',
-  headerNav: 'btn-primary bg-transparent text-primary hover:bg-primary hover:text-white border-none inline-flex items-center px-4',
+  headerNav:
+    'btn-primary bg-transparent text-primary hover:bg-primary hover:text-white border-none inline-flex items-center px-4',
   underlined: 'text-primary underline underline-offset-4 decoration-1 inline-flex items-center',
-  outlined: 'btn-outlined text-primary border border-primary hover:bg-primary hover:text-white px-4 inline-flex items-center',
+  outlined:
+    'btn-outlined text-primary border border-primary hover:bg-primary hover:text-white px-4 inline-flex items-center',
   none: '',
 };
-
 
 const sizes = {
   small: 'py-2',
@@ -54,7 +55,12 @@ const sizes = {
 
 {
   type === 'button' ? (
-    <button {...(id ? {id} : {})} type={buttonType} class={twMerge(variants[variant] || '', className, twMerge(sizes[size]))} {...rest}>
+    <button
+      {...(id ? { id } : {})}
+      type={buttonType}
+      class={twMerge(variants[variant] || '', className, twMerge(sizes[size]))}
+      {...rest}
+    >
       {icon && iconPosition === 'left' && (
         <Icon name={icon} class={twMerge('w-5 h-5 mr-2.5 pointer-events-none inline-block', iconClasses)} />
       )}

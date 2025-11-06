@@ -32,7 +32,9 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
           />
           {
             // Check the link is not last link
-            link !== links[links.length - 1] ? <div class="bg-[--aw-color-disabled] h-full" style="width: 1px;" /> : null
+            link !== links[links.length - 1] ? (
+              <div class="bg-[--aw-color-disabled] h-full" style="width: 1px;" />
+            ) : null
           }
         </li>
       ))

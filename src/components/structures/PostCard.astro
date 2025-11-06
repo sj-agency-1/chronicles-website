@@ -26,12 +26,7 @@ const imageWrapperClass = 'w-full md:w-2/5';
 const contentClass = 'w-full md:w-3/5 flex flex-col gap-3';
 ---
 
-<a
-  href={href}
-  rel="noopener noreferrer"
-  class={containerClass}
-  id={`post-card-${id}`}
->
+<a href={href} rel="noopener noreferrer" class={containerClass} id={`post-card-${id}`}>
   <div class={imageWrapperClass}>
     <Image src={imageSrc} alt={title} />
   </div>

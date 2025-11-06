@@ -5,11 +5,10 @@ import { Socials } from '../common/IconSocial.astro';
 
 <ul class="flex flex-wrap justify-center md:justify-start items-center gap-2">
   {
-    Object.values(Socials)
-      .map((social) => (
-        <li>
-          <IconSocial type={social} />
-        </li>
-      ))
+    Object.values(Socials).map((social) => (
+      <li>
+        <IconSocial type={social} />
+      </li>
+    ))
   }
 </ul>

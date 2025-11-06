@@ -14,26 +14,26 @@ const texts = {
   vk: 'Смотри в ВК Видео',
   youtube: 'Смотри в YouTube',
   rutube: 'Смотри в RuTube',
-}
+};
 ---
 
 <a href={link} target="_blank" rel="noopener noreferrer">
   <div class="flex justify-between gap-4 items-center group relative">
     <div class="flex justify-between gap-4 items-center group relative">
-      <IconWatchMethod type={watchMethod} size="regular"  />
+      <IconWatchMethod type={watchMethod} size="regular" />
       <div class="font-heading font-bold text-black">{texts[watchMethod]}</div>
     </div>
-      <div>
-        <Button
-          text=""
-          variant="primary"
-          size="small"
-          type="button"
-          icon="utils/arrow-right"
-          iconPosition="right"
-          iconClasses="w-2 h-2 text-white m-0"
-          class="p-2"
-        />
-      </div>
+    <div>
+      <Button
+        text=""
+        variant="primary"
+        size="small"
+        type="button"
+        icon="utils/arrow-right"
+        iconPosition="right"
+        iconClasses="w-2 h-2 text-white m-0"
+        class="p-2"
+      />
+    </div>
   </div>
 </a>

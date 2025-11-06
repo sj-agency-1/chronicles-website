@@ -78,11 +78,7 @@ import { Icon } from 'astro-icon/components';
   </div>
 </header>
 <!-- Overlay -->
-<div
-  id="page-overlay"
-  class="xl:hidden fixed inset-0 bg-black/40 bg-opacity-50 backdrop-blur-sm hidden"
->
-</div>
+<div id="page-overlay" class="xl:hidden fixed inset-0 bg-black/40 bg-opacity-50 backdrop-blur-sm hidden"></div>
 
 <style is:global>
   body {
@@ -122,9 +118,7 @@ import { Icon } from 'astro-icon/components';
   // Initialize when DOM is loaded
   document.addEventListener('DOMContentLoaded', () => {
     mobileMenu = document.getElementById('header-mobile-menu');
-    mobileMenuNavigation = mobileMenu
-      ? mobileMenu.querySelector('.header-mobile-nav')
-      : null;
+    mobileMenuNavigation = mobileMenu ? mobileMenu.querySelector('.header-mobile-nav') : null;
     overlay = document.getElementById('page-overlay');
     hamburgerButton = document.getElementById('header-hamburger');
     closeIcon = document.getElementById('header-close-icon');

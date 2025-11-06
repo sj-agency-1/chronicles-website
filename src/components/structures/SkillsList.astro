@@ -9,11 +9,7 @@ interface Props {
   size?: 'small' | 'regular' | 'large';
 }
 
-const {
-  class: className = '',
-  showButton,
-  size
-} = Astro.props as Props;
+const { class: className = '', showButton, size } = Astro.props as Props;
 ---
 
 <ul class={twMerge(className)}>

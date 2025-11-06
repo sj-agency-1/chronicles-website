@@ -28,7 +28,9 @@ const bgStyle = imageUrl
 <div class={twMerge(className)}>
   {
     href ? (
-      <a href={href} target="_blank"><div style={bgStyle} /></a>
+      <a href={href} target="_blank">
+        <div style={bgStyle} />
+      </a>
     ) : (
       <a href="#">
         <div class="bg-accent px-2 py-4 h-40">

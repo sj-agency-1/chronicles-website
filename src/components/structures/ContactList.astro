@@ -12,7 +12,7 @@ const { class: className = '' } = Astro.props as Props;
 const contactTypes: ContactProps['type'][] = ['telegram', 'whatsapp', 'email'];
 ---
 
-<ul class={twMerge("flex flex-col md:flex-row justify-between", className)}>
+<ul class={twMerge('flex flex-col md:flex-row justify-between', className)}>
   {
     contactTypes.map((contactType) => (
       <li>

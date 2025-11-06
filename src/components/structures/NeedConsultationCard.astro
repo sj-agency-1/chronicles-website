@@ -1,21 +1,24 @@
 ---
-import { twMerge } from "tailwind-merge";
-import Button from "../common/Button.astro";
-import Modal from "../common/Modal.astro";
-import ConsultationForm from "./ConsultationForm.astro";
+import { twMerge } from 'tailwind-merge';
+import Button from '../common/Button.astro';
+import Modal from '../common/Modal.astro';
+import ConsultationForm from './ConsultationForm.astro';
 
 interface Props {
   class?: string;
 }
 
-const {
-  class: className = '',
-} = Astro.props as Props;
+const { class: className = '' } = Astro.props as Props;
 
 const modalId = `consultation-modal-${crypto.randomUUID()}`;
 ---
 
-<div class={twMerge("w-full max-w-80 flex flex-col items-center border border-[--aw-color-disabled] bg-transparent py-5 gap-4", className)}>
+<div
+  class={twMerge(
+    'w-full max-w-80 flex flex-col items-center border border-[--aw-color-disabled] bg-transparent py-5 gap-4',
+    className
+  )}
+>
   <div class="text-black uppercase font-bold">Нужна консультация?</div>
   <Button
     text="Записаться"
@@ -31,7 +34,8 @@ const modalId = `consultation-modal-${crypto.randomUUID()}`;
 
 <Modal id={modalId} title="Запись на консультацию">
   <p class="leading-relaxed">
-    Заполните форму ниже, чтобы записаться на консультацию. Я изучу вашу заявку и свяжусь с вами в течение 48 часов для согласования удобного времени и формата встречи.
+    Заполните форму ниже, чтобы записаться на консультацию. Я изучу вашу заявку и свяжусь с вами в течение 48 часов для
+    согласования удобного времени и формата встречи.
   </p>
   <ConsultationForm />
 </Modal>

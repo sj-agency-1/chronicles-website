@@ -13,15 +13,22 @@ const vacancies = [
   'Онлайн ассистент (консультант)',
 ];
 
-let vacancySubmitUrl = "https://n8n.georgeparkdev.com/webhook-test/submit-vacancy-request";
+let vacancySubmitUrl = 'https://n8n.georgeparkdev.com/webhook-test/submit-vacancy-request';
 if (import.meta.env.PROD) {
-  vacancySubmitUrl = "https://n8n.georgeparkdev.com/webhook/submit-vacancy-request";
+  vacancySubmitUrl = 'https://n8n.georgeparkdev.com/webhook/submit-vacancy-request';
 }
 ---
 
 <form id="vacancies-form" method="post" action={vacancySubmitUrl} class="grid grid-cols-1 md:grid-cols-2 gap-4">
   <Input name="vacancies-form__name" label="Ваше ФИО" placeholder="Введите ваше ФИО" required />
-  <Input name="vacancies-form__whatsapp" label="Номер WhatsApp" placeholder="+7XXXXXXXXXX" type="tel" pattern="^\+\d+$" required />
+  <Input
+    name="vacancies-form__whatsapp"
+    label="Номер WhatsApp"
+    placeholder="+7XXXXXXXXXX"
+    type="tel"
+    pattern="^\+\d+$"
+    required
+  />
   <Input name="vacancies-form__email" label="Email" placeholder="Введите ваш Email" type="email" required />
   <Select
     name="vacancies-form__vacancy"
@@ -74,7 +81,7 @@ if (import.meta.env.PROD) {
     let isValid = true;
 
     // Check each required field
-    requiredFields.forEach(field => {
+    requiredFields.forEach((field) => {
       if (!field.value.trim()) {
         isValid = false;
         field.classList.add('border-red-500');

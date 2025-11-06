@@ -23,16 +23,20 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       links.map((link) => (
         <li class="flex items-center">
           <Button
-            class={link.href === currentPath ? "text-black font-semibold" : ""}
+            class={link.href === currentPath ? 'text-black font-semibold' : ''}
             text={link.text}
-            variant='none'
+            variant="none"
             size="small"
             type="link"
             href={link.href !== currentPath ? link.href : undefined}
           />
           {
             // Check the link is not last link
-            link !== links[links.length - 1] ? <span class="text-default mx-1 font-mono table" style="width: 1px;">&#47;</span> : null
+            link !== links[links.length - 1] ? (
+              <span class="text-default mx-1 font-mono table" style="width: 1px;">
+                &#47;
+              </span>
+            ) : null
           }
         </li>
       ))

@@ -248,25 +248,32 @@ export async function getRelatedProjects(originalProject: Project, maxResults: n
   const allProjects = await fetchProjects();
   const originalTagsSet = new Set(originalProject.tags ? originalProject.tags.map((tag) => tag.slug) : []);
 
-  const projectsWithScores = allProjects.reduce((acc: { project: Project; score: number }[], iteratedProject: Project) => {
-    if (iteratedProject.slug === originalProject.slug) return acc;
+  const projectsWithScores = allProjects.reduce(
+    (acc: { project: Project; score: number }[], iteratedProject: Project) => {
+      if (iteratedProject.slug === originalProject.slug) return acc;
 
-    let score = 0;
-    if (iteratedProject.category && originalProject.category && iteratedProject.category.slug === originalProject.category.slug) {
-      score += 5;
-    }
+      let score = 0;
+      if (
+        iteratedProject.category &&
+        originalProject.category &&
+        iteratedProject.category.slug === originalProject.category.slug
+      ) {
+        score += 5;
+      }
 
-    if (iteratedProject.tags) {
-      iteratedProject.tags.forEach((tag) => {
-        if (originalTagsSet.has(tag.slug)) {
-          score += 1;
-        }
-      });
-    }
+      if (iteratedProject.tags) {
+        iteratedProject.tags.forEach((tag) => {
+          if (originalTagsSet.has(tag.slug)) {
+            score += 1;
+          }
+        });
+      }
 
-    acc.push({ project: iteratedProject, score });
-    return acc;
-  }, []);
+      acc.push({ project: iteratedProject, score });
+      return acc;
+    },
+    []
+  );
 
   projectsWithScores.sort((a, b) => b.score - a.score);
 

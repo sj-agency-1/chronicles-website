@@ -11,22 +11,22 @@ const { variant = 'light' } = Astro.props;
 const logoVariantsClasses = {
   light: 'stroke-primary',
   dark: 'stroke-white',
-}
+};
 
 const textVariantsClasses = {
   light: 'text-primary',
   dark: 'text-white',
-}
+};
 ---
 
 <a href="/">
   <div class={`logo-container logo-container-${variant} flex items-center gap-1 sm:gap-4`}>
     <div class="logo-icon">
-      <Icon name="logo" class={twMerge("w-10 h-10", logoVariantsClasses[variant])} />
+      <Icon name="logo" class={twMerge('w-10 h-10', logoVariantsClasses[variant])} />
     </div>
     <div class="logo-text">
-      <p class={twMerge("logo-title font-heading", textVariantsClasses[variant])}>ХРОНИКИ</p>
-      <p class={twMerge("logo-subtitle font-heading", textVariantsClasses[variant])}>БИЗНЕС-АНАЛИТИКА</p>
+      <p class={twMerge('logo-title font-heading', textVariantsClasses[variant])}>ХРОНИКИ</p>
+      <p class={twMerge('logo-subtitle font-heading', textVariantsClasses[variant])}>БИЗНЕС-АНАЛИТИКА</p>
     </div>
   </div>
 </a>

@@ -19,7 +19,7 @@ const hasMultipleItems = items.length > 1;
 // Image loading with error handling
 const loadImages = async (items: HeroItem[]) => {
   const imagePromises = items
-    .map(item => item.bgImage)
+    .map((item) => item.bgImage)
     .filter((src): src is string => typeof src === 'string')
     .map(async (src) => {
       try {
@@ -45,74 +45,73 @@ const getImageUrl = (image: string | ImageMetadata | null): string => {
 <hero-component
   class="hero-carousel block relative w-full h-96 overflow-hidden"
   id={id}
-  data-carousel-items={JSON.stringify(items)}>
-
+  data-carousel-items={JSON.stringify(items)}
+>
   <!-- Carousel Slides -->
   <div class="slides-container relative w-full h-full">
-    {items.map((item, index) => {
-      const image = images[index];
-      const imageUrl = getImageUrl(image!);
-      const bgStyle = imageUrl
-        ? `background-image: url('${imageUrl}'); background-size: cover; background-position: center;`
-        : '';
+    {
+      items.map((item, index) => {
+        const image = images[index];
+        const imageUrl = getImageUrl(image!);
+        const bgStyle = imageUrl
+          ? `background-image: url('${imageUrl}'); background-size: cover; background-position: center;`
+          : '';
 
-      return (
-        <div
-          class={`slide absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${
-            index === 0 ? 'opacity-100' : 'opacity-0'
-          }`}
-          data-slide
-          data-slide-index={index}
-          style={bgStyle}
-        >
-          <!-- Dark Overlay -->
-          <div class="slide-overlay absolute inset-0 bg-black opacity-60"></div>
-
-          <!-- Content -->
-          <div class="slide-content relative z-10 container mx-auto h-full flex items-center px-10">
-            <div class="flex flex-col md:flex-row w-full gap-1 justify-start items-start">
-              <div class="title-container w-full">
-                <span class="text-secondary uppercase font-heading font-bold text-3xl md:text-4xl lg:text-8xl">
-                  {item.title}
-                </span>
-              </div>
-              {item.description && (
-                <div class="description-container w-full">
-                  <p class="text-white text-xs md:text-base lg:text-lg">
-                    {item.description}
-                  </p>
+        return (
+          <div
+            class={`slide absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${
+              index === 0 ? 'opacity-100' : 'opacity-0'
+            }`}
+            data-slide
+            data-slide-index={index}
+            style={bgStyle}
+          >
+            <div class="slide-overlay absolute inset-0 bg-black opacity-60" />
+            <div class="slide-content relative z-10 container mx-auto h-full flex items-center px-10">
+              <div class="flex flex-col md:flex-row w-full gap-1 justify-start items-start">
+                <div class="title-container w-full">
+                  <span class="text-secondary uppercase font-heading font-bold text-3xl md:text-4xl lg:text-8xl">
+                    {item.title}
+                  </span>
                 </div>
-              )}
+                {item.description && (
+                  <div class="description-container w-full">
+                    <p class="text-white text-xs md:text-base lg:text-lg">{item.description}</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      );
-    })}
+        );
+      })
+    }
   </div>
 
   <!-- Navigation -->
-  {hasMultipleItems && (
-    <div class="carousel-nav absolute bottom-10 right-10 flex space-x-2 z-20">
-      <button
-        type="button"
-        class="carousel-nav-btn carousel-prev w-10 h-8 bg-transparent border border-white flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 transition-colors"
-        aria-label="Previous slide"
-      >
-        <svg class="nav-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      <button
-        type="button"
-        class="carousel-nav-btn carousel-next w-10 h-8 bg-transparent border border-white flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 transition-colors"
-        aria-label="Next slide"
-      >
-        <svg class="nav-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-    </div>
-  )}
+  {
+    hasMultipleItems && (
+      <div class="carousel-nav absolute bottom-10 right-10 flex space-x-2 z-20">
+        <button
+          type="button"
+          class="carousel-nav-btn carousel-prev w-10 h-8 bg-transparent border border-white flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 transition-colors"
+          aria-label="Previous slide"
+        >
+          <svg class="nav-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="carousel-nav-btn carousel-next w-10 h-8 bg-transparent border border-white flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 transition-colors"
+          aria-label="Next slide"
+        >
+          <svg class="nav-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    )
+  }
 </hero-component>
 
 <script>

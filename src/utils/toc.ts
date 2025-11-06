@@ -1,4 +1,4 @@
-import { type TocItem } from "~/components/structures/TableOfContent.astro"
+import { type TocItem } from '~/components/structures/TableOfContent.astro';
 
 export const generateTableOfContentsFromContent = (content: string): Array<TocItem> => {
   const tocItems: TocItem[] = [];
@@ -36,10 +36,10 @@ export const generateTableOfContentsFromContent = (content: string): Array<TocIt
       tocItems.push({
         targetId,
         chapterTitle,
-        chapterDescription
+        chapterDescription,
       });
     }
   }
 
   return tocItems;
-}
+};

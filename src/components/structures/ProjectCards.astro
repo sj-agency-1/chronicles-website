@@ -13,11 +13,7 @@ interface Props {
   };
 }
 
-const {
-  class: className = '',
-  data = [],
-  layout
-} = Astro.props as Props;
+const { class: className = '', data = [], layout } = Astro.props as Props;
 
 // Convert layout config to Tailwind classes
 const getGridClass = () => {
@@ -31,7 +27,7 @@ const getGridClass = () => {
     3: 'grid-cols-3',
     4: 'grid-cols-4',
     6: 'grid-cols-6',
-    12: 'grid-cols-12'
+    12: 'grid-cols-12',
   };
 
   const rowsMap: Record<number, string> = {
@@ -39,7 +35,7 @@ const getGridClass = () => {
     2: 'grid-rows-2',
     3: 'grid-rows-3',
     4: 'grid-rows-4',
-    6: 'grid-rows-6'
+    6: 'grid-rows-6',
   };
 
   // Use a responsive approach: base 1 col, sm 2 cols, md use the requested layout.columns
@@ -56,7 +52,7 @@ const getSpanClass = (span?: { col?: number; row?: number }) => {
     3: 'col-span-3',
     4: 'col-span-4',
     6: 'col-span-6',
-    12: 'col-span-12'
+    12: 'col-span-12',
   };
 
   const rowSpanMap: Record<number, string> = {
@@ -64,13 +60,12 @@ const getSpanClass = (span?: { col?: number; row?: number }) => {
     2: 'row-span-2',
     3: 'row-span-3',
     4: 'row-span-4',
-    6: 'row-span-6'
+    6: 'row-span-6',
   };
 
-  const classes = [
-    span.col ? colSpanMap[span.col] || '' : '',
-    span.row ? rowSpanMap[span.row] || '' : ''
-  ].filter(Boolean);
+  const classes = [span.col ? colSpanMap[span.col] || '' : '', span.row ? rowSpanMap[span.row] || '' : ''].filter(
+    Boolean
+  );
 
   return classes.join(' ');
 };

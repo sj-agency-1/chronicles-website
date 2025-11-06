@@ -14,22 +14,9 @@ const { class: className = '' } = Astro.props as Props;
   </div>
 
   <nav class="pagination-nav" aria-label="Page navigation">
-    <button
-      class="pagination-btn pagination-prev"
-      type="button"
-      aria-label="Previous page"
-      disabled
-    >
-      ←
-    </button>
+    <button class="pagination-btn pagination-prev" type="button" aria-label="Previous page" disabled> ← </button>
     <div class="pagination-numbers"></div>
-    <button
-      class="pagination-btn pagination-next"
-      type="button"
-      aria-label="Next page"
-    >
-      →
-    </button>
+    <button class="pagination-btn pagination-next" type="button" aria-label="Next page"> → </button>
   </nav>
 </div>
 
@@ -67,12 +54,24 @@ const { class: className = '' } = Astro.props as Props;
     margin-bottom: 1.25rem;
   }
 
-  .content-paginated h1 { font-size: 26px; }
-  .content-paginated h2 { font-size: 22px; }
-  .content-paginated h3 { font-size: 18px; }
-  .content-paginated h4 { font-size: 18px; }
-  .content-paginated h5 { font-size: 17px; }
-  .content-paginated h6 { font-size: 16px; }
+  .content-paginated h1 {
+    font-size: 26px;
+  }
+  .content-paginated h2 {
+    font-size: 22px;
+  }
+  .content-paginated h3 {
+    font-size: 18px;
+  }
+  .content-paginated h4 {
+    font-size: 18px;
+  }
+  .content-paginated h5 {
+    font-size: 17px;
+  }
+  .content-paginated h6 {
+    font-size: 16px;
+  }
 
   .content-paginated p {
     margin-bottom: 1.25rem;
@@ -258,17 +257,17 @@ const { class: className = '' } = Astro.props as Props;
         if (pageIndex < 0 || pageIndex >= pages.length) return;
 
         // Hide all pages
-  const allPages = contentPages!.querySelectorAll('.content-page');
+        const allPages = contentPages!.querySelectorAll('.content-page');
         allPages.forEach((page) => page.classList.remove('active'));
 
         // Show selected page
-  const selectedPage = contentPages!.querySelector(`[data-page="${pageIndex + 1}"]`);
+        const selectedPage = contentPages!.querySelector(`[data-page="${pageIndex + 1}"]`);
         if (selectedPage) {
           selectedPage.classList.add('active');
         }
 
         // Update page buttons
-  const allPageBtns = paginationNumbers!.querySelectorAll('.pagination-number');
+        const allPageBtns = paginationNumbers!.querySelectorAll('.pagination-number');
         allPageBtns.forEach((btn, index) => {
           if (index === pageIndex) {
             btn.classList.add('active');

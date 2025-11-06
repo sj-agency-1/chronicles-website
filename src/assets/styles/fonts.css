@@ -1,134 +1,146 @@
 /* PP Right Grotesk */
 
 @font-face {
-	font-family: "PP Right Grotesk";
-	src: url("/fonts/PPRightGroteskText-SpatialLight.woff2") format("woff2"),
-			 url("/fonts/PPRightGroteskText-SpatialLight.woff") format("woff"),
-			 url("/fonts/PPRightGroteskText-SpatialLight.ttf") format("truetype");
-	font-weight: 300;
-	font-style: normal;
-	font-display: swap;
+  font-family: 'PP Right Grotesk';
+  src:
+    url('/fonts/PPRightGroteskText-SpatialLight.woff2') format('woff2'),
+    url('/fonts/PPRightGroteskText-SpatialLight.woff') format('woff'),
+    url('/fonts/PPRightGroteskText-SpatialLight.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: "PP Right Grotesk";
-	src: url("/fonts/PPRightGroteskText-SpatialLightItalic.woff2") format("woff2"),
-			 url("/fonts/PPRightGroteskText-SpatialLightItalic.woff") format("woff"),
-			 url("/fonts/PPRightGroteskText-SpatialLightItalic.ttf") format("truetype");
-	font-weight: 300;
-	font-style: italic;
-	font-display: swap;
+  font-family: 'PP Right Grotesk';
+  src:
+    url('/fonts/PPRightGroteskText-SpatialLightItalic.woff2') format('woff2'),
+    url('/fonts/PPRightGroteskText-SpatialLightItalic.woff') format('woff'),
+    url('/fonts/PPRightGroteskText-SpatialLightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: "PP Right Grotesk";
-	src: url("/fonts/PPRightGroteskText-Regular.woff2") format("woff2"),
-			 url("/fonts/PPRightGroteskText-Regular.woff") format("woff"),
-			 url("/fonts/PPRightGroteskText-Regular.ttf") format("truetype");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
+  font-family: 'PP Right Grotesk';
+  src:
+    url('/fonts/PPRightGroteskText-Regular.woff2') format('woff2'),
+    url('/fonts/PPRightGroteskText-Regular.woff') format('woff'),
+    url('/fonts/PPRightGroteskText-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: "PP Right Grotesk";
-	src: url("/fonts/PPRightGroteskText-RegularItalic.woff2") format("woff2"),
-			 url("/fonts/PPRightGroteskText-RegularItalic.woff") format("woff"),
-			 url("/fonts/PPRightGroteskText-RegularItalic.ttf") format("truetype");
-	font-weight: 400;
-	font-style: italic;
-	font-display: swap;
+  font-family: 'PP Right Grotesk';
+  src:
+    url('/fonts/PPRightGroteskText-RegularItalic.woff2') format('woff2'),
+    url('/fonts/PPRightGroteskText-RegularItalic.woff') format('woff'),
+    url('/fonts/PPRightGroteskText-RegularItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: "PP Right Grotesk";
-	src: url("/fonts/PPRightGroteskText-CompactMedium.woff2") format("woff2"),
-			 url("/fonts/PPRightGroteskText-CompactMedium.woff") format("woff"),
-			 url("/fonts/PPRightGroteskText-CompactMedium.ttf") format("truetype");
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
+  font-family: 'PP Right Grotesk';
+  src:
+    url('/fonts/PPRightGroteskText-CompactMedium.woff2') format('woff2'),
+    url('/fonts/PPRightGroteskText-CompactMedium.woff') format('woff'),
+    url('/fonts/PPRightGroteskText-CompactMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: "PP Right Grotesk";
-	src: url("/fonts/PPRightGroteskText-CompactMediumItalic.woff2") format("woff2"),
-			 url("/fonts/PPRightGroteskText-CompactMediumItalic.woff") format("woff"),
-			 url("/fonts/PPRightGroteskText-CompactMediumItalic.ttf") format("truetype");
-	font-weight: 500;
-	font-style: italic;
-	font-display: swap;
+  font-family: 'PP Right Grotesk';
+  src:
+    url('/fonts/PPRightGroteskText-CompactMediumItalic.woff2') format('woff2'),
+    url('/fonts/PPRightGroteskText-CompactMediumItalic.woff') format('woff'),
+    url('/fonts/PPRightGroteskText-CompactMediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: "PP Right Grotesk";
-	src: url("/fonts/PPRightGroteskText-WideBold.woff2") format("woff2"),
-			 url("/fonts/PPRightGroteskText-WideBold.woff") format("woff"),
-			 url("/fonts/PPRightGroteskText-WideBold.ttf") format("truetype");
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
+  font-family: 'PP Right Grotesk';
+  src:
+    url('/fonts/PPRightGroteskText-WideBold.woff2') format('woff2'),
+    url('/fonts/PPRightGroteskText-WideBold.woff') format('woff'),
+    url('/fonts/PPRightGroteskText-WideBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: "PP Right Grotesk";
-	src: url("/fonts/PPRightGroteskText-WideBoldItalic.woff2") format("woff2"),
-			 url("/fonts/PPRightGroteskText-WideBoldItalic.woff") format("woff"),
-			 url("/fonts/PPRightGroteskText-WideBoldItalic.ttf") format("truetype");
-	font-weight: 700;
-	font-style: italic;
-	font-display: swap;
+  font-family: 'PP Right Grotesk';
+  src:
+    url('/fonts/PPRightGroteskText-WideBoldItalic.woff2') format('woff2'),
+    url('/fonts/PPRightGroteskText-WideBoldItalic.woff') format('woff'),
+    url('/fonts/PPRightGroteskText-WideBoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
 }
-
 
 /* Proxima Nova */
 
 @font-face {
-	font-family: "Proxima Nova";
-	src: url("/fonts/ProximaNovaLight.woff2") format("woff2"),
-			 url("/fonts/ProximaNovaLight.woff") format("woff"),
-			 url("/fonts/ProximaNovaLight.TTF") format("truetype");
-	font-weight: 300;
-	font-style: normal;
-	font-display: swap;
+  font-family: 'Proxima Nova';
+  src:
+    url('/fonts/ProximaNovaLight.woff2') format('woff2'),
+    url('/fonts/ProximaNovaLight.woff') format('woff'),
+    url('/fonts/ProximaNovaLight.TTF') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: "Proxima Nova";
-	src: url("/fonts/ProximaNovaRegular.woff2") format("woff2"),
-			 url("/fonts/ProximaNovaRegular.woff") format("woff"),
-			 url("/fonts/ProximaNovaRegular.TTF") format("truetype");
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
+  font-family: 'Proxima Nova';
+  src:
+    url('/fonts/ProximaNovaRegular.woff2') format('woff2'),
+    url('/fonts/ProximaNovaRegular.woff') format('woff'),
+    url('/fonts/ProximaNovaRegular.TTF') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: "Proxima Nova";
-	src: url("/fonts/ProximaNovaSemibold.woff2") format("woff2"),
-			 url("/fonts/ProximaNovaSemibold.woff") format("woff"),
-			 url("/fonts/ProximaNovaSemibold.TTF") format("truetype");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
+  font-family: 'Proxima Nova';
+  src:
+    url('/fonts/ProximaNovaSemibold.woff2') format('woff2'),
+    url('/fonts/ProximaNovaSemibold.woff') format('woff'),
+    url('/fonts/ProximaNovaSemibold.TTF') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: "Proxima Nova";
-	src: url("/fonts/ProximaNovaExtraBold.woff2") format("woff2"),
-			 url("/fonts/ProximaNovaExtraBold.woff") format("woff"),
-			 url("/fonts/ProximaNovaExtraBold.TTF") format("truetype");
-	font-weight: 800;
-	font-style: normal;
-	font-display: swap;
+  font-family: 'Proxima Nova';
+  src:
+    url('/fonts/ProximaNovaExtraBold.woff2') format('woff2'),
+    url('/fonts/ProximaNovaExtraBold.woff') format('woff'),
+    url('/fonts/ProximaNovaExtraBold.TTF') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-	font-family: "Proxima Nova";
-	src: url("/fonts/ProximaNovaBlack.woff2") format("woff2"),
-			 url("/fonts/ProximaNovaBlack.woff") format("woff"),
-			 url("/fonts/ProximaNovaBlack.TTF") format("truetype");
-	font-weight: 900;
-	font-style: normal;
-	font-display: swap;
+  font-family: 'Proxima Nova';
+  src:
+    url('/fonts/ProximaNovaBlack.woff2') format('woff2'),
+    url('/fonts/ProximaNovaBlack.woff') format('woff'),
+    url('/fonts/ProximaNovaBlack.TTF') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }

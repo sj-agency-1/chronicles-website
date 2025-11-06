@@ -10,8 +10,15 @@ interface Props extends HTMLAttributes<'select'> {
   value?: string | undefined;
 }
 
-const { label, placeholder, name = label || placeholder, id = name, options = [], value, ...rest } = Astro.props as Props;
-
+const {
+  label,
+  placeholder,
+  name = label || placeholder,
+  id = name,
+  options = [],
+  value,
+  ...rest
+} = Astro.props as Props;
 ---
 
 <div class="flex flex-col gap-1 w-full">
@@ -26,20 +33,20 @@ const { label, placeholder, name = label || placeholder, id = name, options = []
       class="p-3 border border-[#--aw-color-disabled] bg-[var(--aw-color-bg-page)] text-default placeholder-default selection:text-default focus:outline-none focus:ring-2 focus:ring-[#--aw-color-disabled] appearance-none w-full"
       {...rest}
     >
-      {placeholder && (
-        <option value="" disabled selected hidden style="background-color: var(--aw-color-bg-page);">
-          {placeholder}
-        </option>
-      )}
-      {options.map((opt) => (
-        <option
-          value={opt}
-          selected={value === opt}
-          style="background-color: var(--aw-color-bg-page);"
-        >
-          {opt}
-        </option>
-      ))}
+      {
+        placeholder && (
+          <option value="" disabled selected hidden style="background-color: var(--aw-color-bg-page);">
+            {placeholder}
+          </option>
+        )
+      }
+      {
+        options.map((opt) => (
+          <option value={opt} selected={value === opt} style="background-color: var(--aw-color-bg-page);">
+            {opt}
+          </option>
+        ))
+      }
     </select>
     {/* Custom arrow icon overlay */}
     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">

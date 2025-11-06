@@ -13,12 +13,7 @@ const { id, title, provider = 'none' } = Astro.props as VideoPlayerProps;
 ---
 
 <div class="w-full">
-  {
-    provider === 'YouTube' && id && (
-      <YouTube id={id} title={title} />
-
-    )
-  }
+  {provider === 'YouTube' && id && <YouTube id={id} title={title} />}
   {
     provider === 'none' && (
       <div class="w-full h-60 flex items-center justify-center bg-accent">

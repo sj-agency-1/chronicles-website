@@ -1,6 +1,6 @@
 ---
-import GalleryItem from "./GalleryItem.astro"
-import type { GalleryItemProps } from "./GalleryItem.astro"
+import GalleryItem from './GalleryItem.astro';
+import type { GalleryItemProps } from './GalleryItem.astro';
 
 interface GalleryGridProps {
   items: GalleryItemProps[];
@@ -10,11 +10,13 @@ const { items } = Astro.props as GalleryGridProps;
 ---
 
 <div class="gallery-grid">
-  {items.map((item) => (
-    <div class="gallery-grid__item">
-      <GalleryItem {...item} />
-    </div>
-  ))}
+  {
+    items.map((item) => (
+      <div class="gallery-grid__item">
+        <GalleryItem {...item} />
+      </div>
+    ))
+  }
 </div>
 
 <style>

@@ -18,23 +18,22 @@ export interface Skill extends Post {
 export const getSkillTitle = (skill: SkillType): string => {
   switch (skill) {
     case SkillType.CrisisManagement:
-      return "Кризис-менеджмент";
+      return 'Кризис-менеджмент';
     case SkillType.BusinessAnalysis:
-      return "Бизнес-аналитика";
+      return 'Бизнес-аналитика';
     case SkillType.BusinessDevelopment:
-      return "Развитие бизнеса";
+      return 'Развитие бизнеса';
     case SkillType.SalesManagement:
-      return "Управление продажами";
+      return 'Управление продажами';
     case SkillType.MarketingAndAdv:
-      return "Маркетинг и реклама";
+      return 'Маркетинг и реклама';
     case SkillType.InternetMarketing:
-      return "Интернет-маркетинг";
+      return 'Интернет-маркетинг';
     case SkillType.BusinessCommunicationAndMediation:
-      return "Бизнес-переговоры. Медиация";
+      return 'Бизнес-переговоры. Медиация';
     case SkillType.FindInvestments:
-      return "Привлечение инвестиций";
+      return 'Привлечение инвестиций';
   }
-  return "Unknown";
-}
+};
 
 export const getSkillLink = (skill: SkillType): string => `/skills/${skill}`;

@@ -65,9 +65,18 @@ const {
   </div>
 </div>
 
-<script define:vars={{ id, maxSize: props.maxSize, accept }}>
+<script is:inline define:vars={{ id, accept }}>
   const dropzone = document.getElementById(`${id}-dropzone`);
   const input = document.getElementById(id);
+  // read max size from data attribute (in bytes)
+  const maxSize = (() => {
+    try {
+      const attr = input.getAttribute('data-max-size');
+      return attr ? Number(attr) : 5 * 1024 * 1024;
+    } catch {
+      return 5 * 1024 * 1024;
+    }
+  })();
   const fileInfo = document.getElementById(`${id}-file-info`);
   const errorDiv = document.getElementById(`${id}-error`);
   const removeBtn = document.getElementById(`${id}-remove`);
