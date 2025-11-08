@@ -22,8 +22,6 @@ interface Props {
 }
 
 const { tocItems, tocItemsMode = 'default', heroItems, breadCrumbLinks, metadata } = Astro.props as Props;
-
-console.log(tocItems);
 ---
 
 <BaseLayout {...Astro.props} {metadata}>

@@ -129,7 +129,7 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
           chapterDescription = headingText;
         }
 
-        console.log('Heading Text:', headingText);
+        // console.log('Heading Text:', headingText);
         // If heading text starts with "Эпилог", show only "Эпилог" in the TOC
         if (headingText.startsWith('Эпилог')) {
           chapterTitle = 'Эпилог';

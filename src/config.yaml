@@ -28,7 +28,7 @@ donation:
   cryptoPaymentLink: 'https://pay.example.com/crypto'
   bankCardPaymentLink: 'https://pay.example.com/bank-card'
 
-formUrls:
+formsUrls:
   consultationFormTestUrl: 'https://n8n.georgeparkdev.com/webhook-test/submit-consultation-request'
   consultationFormUrl: 'https://n8n.georgeparkdev.com/webhook/submit-consultation-request'
   vacancyFormTestUrl: 'https://n8n.georgeparkdev.com/webhook-test/submit-vacancy-request'
