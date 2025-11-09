@@ -7,13 +7,12 @@ site:
   googleSiteVerificationId:
 
 socials:
-  tiktok: 'https://www.tiktok.com/@arthelokyo'
-  youtube: 'https://www.youtube.com/@arthelokyo'
-  vk: 'https://vk.com/arthelokyo'
-  ok: 'https://ok.ru/profile/151932261944'
-  facebook: 'https://www.facebook.com/arthelokyo'
-  x: 'https://x.com/arthelokyo'
-  instagram: 'https://www.instagram.com/arthelokyo/'
+  tiktok: 'https://tiktok.com/@business.pathfinder'
+  youtube: 'https://youtube.com/@sjpark_businesspathfinder?si=sxv7iHlT0Pj9_bZW'
+  linkedin: 'https://www.linkedin.com/in/sj-park-business-pathfinder?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'
+  facebook: 'https://www.facebook.com/share/1AXtFCqfVA/'
+  x: 'https://x.com/SJ_ParkBp?t=AKHpdwx0-ABMVERpyGAtKg&s=09'
+  instagram: 'https://www.instagram.com/business.pathfinder.official?igsh=MXM2bnhsb2FuajBjeQ=='
 
 contact:
   emailAddress: 'info@business-pathfinder-chronicles.com'
@@ -46,7 +45,7 @@ metadata:
   openGraph:
     site_name: Хроники Бизнес-Следопыта
     images:
-      - url: '~/assets/images/default.png'
+      - url: '~/assets/images/default.webp'
         width: 1200
         height: 628
     type: website
