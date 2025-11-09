@@ -29,6 +29,7 @@ export interface SiteConfig {
 export interface SocialsConfig {
   tiktok?: string;
   youtube?: string;
+  linkedin?: string;
   vk?: string;
   ok?: string;
   facebook?: string;
@@ -178,6 +179,7 @@ const getSocials = (config: Config) => {
   const _default = {
     tiktok: '',
     youtube: '',
+    linkedin: '',
     vk: '',
     ok: '',
     facebook: '',
