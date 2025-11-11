@@ -1,0 +1,24 @@
+---
+import GalleryGrid from '~/components/structures/GalleryGrid.astro';
+import type { GalleryItemProps } from '~/components/structures/GalleryItem.astro';
+import { GalleryData } from '~/utils/gallery';
+
+// Transform GalleryPaths data into the format expected by GalleryGrid
+const categories = Object.entries(GalleryData).map(([title, data]) => ({
+  title: data.title,
+  items: data.items.map((img) => ({
+    imageUrl: img.src,
+    alt: `${title} gallery image`,
+  })) as GalleryItemProps[],
+}));
+---
+
+<div class="space-y-16">
+  {
+    categories.map((category) => (
+      <section class="gallery-category">
+        <GalleryGrid title={category.title} items={category.items} />
+      </section>
+    ))
+  }
+</div>

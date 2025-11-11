@@ -1,7 +1,6 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
-import GalleryGrid from '~/components/structures/GalleryGrid.astro';
-import type { GalleryItemProps } from '~/components/structures/GalleryItem.astro';
+import Gallery from '~/components/blocks/Gallery.astro';
 import Modal from '~/components/common/Modal.astro';
 import Button from '~/components/common/Button.astro';
 
@@ -12,15 +11,6 @@ const metadata = {
 const breadCrumbLinks = [
   { text: 'Главная', href: '/' },
   { text: 'Галерея', href: '/gallery' },
-];
-
-const galleryItems: GalleryItemProps[] = [
-  { imageUrl: 'https://dummyjson.com/image/300x400?bgColor=grey&text=.', alt: 'Gallery image 1' },
-  { imageUrl: 'https://dummyjson.com/image/300x260?bgColor=grey&text=.', alt: 'Gallery image 2' },
-  { imageUrl: 'https://dummyjson.com/image/300x260?bgColor=grey&text=.', alt: 'Gallery image 2' },
-  { imageUrl: 'https://dummyjson.com/image/300x400?bgColor=grey&text=.', alt: 'Gallery image 1' },
-  { imageUrl: 'https://dummyjson.com/image/300x400?bgColor=grey&text=.', alt: 'Gallery image 1' },
-  { imageUrl: 'https://dummyjson.com/image/300x260?bgColor=grey&text=.', alt: 'Gallery image 2' },
 ];
 ---
 
@@ -35,7 +25,7 @@ const galleryItems: GalleryItemProps[] = [
   ]}
 >
   <section class="py-16">
-    <GalleryGrid items={galleryItems} />
+    <Gallery />
   </section>
 
   <Modal id="access-modal" title="Нет доступа">

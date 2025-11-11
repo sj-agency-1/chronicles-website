@@ -1,47 +1,22 @@
 ---
-import GalleryItem from './GalleryItem.astro';
-import type { GalleryItemProps } from './GalleryItem.astro';
+import GalleryItem, { type GalleryItemProps } from './GalleryItem.astro';
 
-interface GalleryGridProps {
+export interface GalleryGridProps {
+  title?: string;
   items: GalleryItemProps[];
 }
 
-const { items } = Astro.props as GalleryGridProps;
+const { title, items } = Astro.props as GalleryGridProps;
 ---
 
-<div class="gallery-grid">
+{title && <h2 class="text-3xl font-bold mb-6">{title}</h2>}
+
+<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0 m-0">
   {
     items.map((item) => (
-      <div class="gallery-grid__item">
-        <GalleryItem {...item} />
-      </div>
+      <li class="w-full">
+        <GalleryItem imageUrl={item.imageUrl} alt={item.alt} />
+      </li>
     ))
   }
-</div>
-
-<style>
-  .gallery-grid {
-    column-count: 1;
-    column-gap: 1rem; /* gap-4 */
-    width: 100%;
-  }
-
-  @media (min-width: 640px) {
-    .gallery-grid {
-      column-count: 2;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .gallery-grid {
-      column-count: 3;
-    }
-  }
-
-  .gallery-grid__item {
-    break-inside: avoid;
-    margin-bottom: 1rem; /* gap-4 */
-    display: inline-block;
-    width: 100%;
-  }
-</style>
+</ul>
