@@ -437,41 +437,27 @@ const GalleryPaths = {
       src: '~/assets/images/gallery/TeaStics/IMG-20210906-WA0001.webp',
     },
   ],
-}
+};
 
 export const GalleryData = [
   {
     title: 'Китай',
-    items: [
-      ...GalleryPaths.PharmaChina,
-      ...GalleryPaths.SticsChina,
-    ]
+    items: [...GalleryPaths.PharmaChina, ...GalleryPaths.SticsChina],
   },
   {
     title: 'Европейский союз',
-    items: [
-      ...GalleryPaths.EU,
-    ]
+    items: [...GalleryPaths.EU],
   },
   {
     title: 'Имбирно-ягодный чай "Живые витамины"',
-    items: [
-      ...GalleryPaths.TeaPromo,
-      ...GalleryPaths.TeaStics,
-    ]
+    items: [...GalleryPaths.TeaPromo, ...GalleryPaths.TeaStics],
   },
   {
     title: 'США и Канада',
-    items: [
-      ...GalleryPaths.SticsUSA,
-    ]
+    items: [...GalleryPaths.SticsUSA],
   },
   {
     title: 'Дринкофф',
-    items: [
-      ...GalleryPaths.Production,
-      ...GalleryPaths.DrinkOff,
-      ...GalleryPaths.HoneyStics,
-    ]
+    items: [...GalleryPaths.Production, ...GalleryPaths.DrinkOff, ...GalleryPaths.HoneyStics],
   },
-]
+];
