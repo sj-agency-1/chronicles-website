@@ -1,6 +1,6 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
-import Gallery from '~/components/blocks/Gallery.astro';
+import GalleryBlock from '~/components/blocks/GalleryBlock.astro';
 import Modal from '~/components/common/Modal.astro';
 import Button from '~/components/common/Button.astro';
 
@@ -25,7 +25,7 @@ const breadCrumbLinks = [
   ]}
 >
   <section class="py-16">
-    <Gallery />
+    <GalleryBlock />
   </section>
 
   <Modal id="access-modal" title="Нет доступа">
