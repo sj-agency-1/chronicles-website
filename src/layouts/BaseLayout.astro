@@ -9,6 +9,7 @@ import CustomStyles from './common/CustomStyles.astro';
 import Metadata from './common/Metadata.astro';
 import SiteVerification from './common/SiteVerification.astro';
 import Analytics from './common/Analytics.astro';
+import JsonLd from './common/JsonLd.astro';
 import Scripts from './common/Scripts.astro';
 
 export interface Props {
@@ -28,6 +29,7 @@ const { language, textDirection } = I18N;
     <Metadata {...metadata} />
     <SiteVerification />
     <Analytics />
+    <JsonLd />
   </head>
   <body class="text-default bg-page">
     <slot />

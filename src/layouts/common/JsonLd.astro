@@ -1,0 +1,137 @@
+---
+import { SITE, METADATA } from 'astrowind:config';
+import { getCanonical } from '~/utils/permalinks';
+import { fetchPosts } from '~/utils/blog';
+import { fetchProjects } from '~/utils/project';
+import { SkillType, getSkillTitle, getSkillLink } from '~/utils/skills';
+
+// Fetch all data
+const posts = await fetchPosts();
+const projects = await fetchProjects();
+
+// Site base URL
+const siteUrl = SITE.site;
+
+// Skills data with descriptions
+const skillsData = [
+  {
+    type: SkillType.BusinessAnalysis,
+    title: getSkillTitle(SkillType.BusinessAnalysis),
+    url: getCanonical(getSkillLink(SkillType.BusinessAnalysis)),
+    description:
+      'Аудит продаж, KPI, Кризис-менеджмент. Превращаю хаос в систему и нахожу системные сбои ценой в миллионы.',
+  },
+  {
+    type: SkillType.BusinessCommunicationAndMediation,
+    title: getSkillTitle(SkillType.BusinessCommunicationAndMediation),
+    url: getCanonical(getSkillLink(SkillType.BusinessCommunicationAndMediation)),
+    description:
+      'Разрешение корпоративных конфликтов, сложные переговоры. Помогаю избежать «юридических мин» и фехтования в судах.',
+  },
+  {
+    type: SkillType.CrisisManagement,
+    title: getSkillTitle(SkillType.CrisisManagement),
+    url: getCanonical(getSkillLink(SkillType.CrisisManagement)),
+    description:
+      'Поиск EBITDA, санация и финансовое оздоровление бизнеса. Не консультации, а принятие ответственности и реализация ПФО.',
+  },
+  {
+    type: SkillType.MarketingAndAdv,
+    title: getSkillTitle(SkillType.MarketingAndAdv),
+    url: getCanonical(getSkillLink(SkillType.MarketingAndAdv)),
+    description:
+      'Стратегический маркетинг, резонанс и инсайт. Почему «сарафанное радио» — это миф, а релевантность — главное.',
+  },
+  {
+    type: SkillType.InternetMarketing,
+    title: getSkillTitle(SkillType.InternetMarketing),
+    url: getCanonical(getSkillLink(SkillType.InternetMarketing)),
+    description:
+      'Сквозная аналитика (ROMI/ROAS), JTBD и техническое SEO. Цифровой полководец, считающий прибыль, а не CTR.',
+  },
+  {
+    type: SkillType.SalesManagement,
+    title: getSkillTitle(SkillType.SalesManagement),
+    url: getCanonical(getSkillLink(SkillType.SalesManagement)),
+    description:
+      'Построение системы продаж и Value Proposition. Логика, здравый смысл и адаптивность, а не устаревшие скрипты.',
+  },
+  {
+    type: SkillType.BusinessDevelopment,
+    title: getSkillTitle(SkillType.BusinessDevelopment),
+    url: getCanonical(getSkillLink(SkillType.BusinessDevelopment)),
+    description: 'Поиск новых точек роста, диверсификация и запуск продуктов с нуля. Умение предвосхищать перемены.',
+  },
+  {
+    type: SkillType.FindInvestments,
+    title: getSkillTitle(SkillType.FindInvestments),
+    url: getCanonical(getSkillLink(SkillType.FindInvestments)),
+    description:
+      'M&A сделки, упаковка бизнеса, Due Diligence. Защита от юридических «мин» в процессе продажи/покупки компаний.',
+  },
+];
+
+// Build JSON-LD structure
+const jsonLdGraph = [
+  // WebSite
+  {
+    '@type': 'WebSite',
+    url: siteUrl,
+    name: SITE.name,
+    description: METADATA.description,
+  },
+  // Organization
+  {
+    '@type': 'Organization',
+    name: SITE.name,
+    url: siteUrl,
+    logo: {
+      '@type': 'ImageObject',
+      url: new URL('/favicon.svg', siteUrl).toString(),
+    },
+  },
+  // Skills ItemList
+  {
+    '@type': 'ItemList',
+    name: 'Навыки и Услуги',
+    itemListElement: skillsData.map((skill, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: skill.title,
+      url: skill.url,
+      description: skill.description,
+    })),
+  },
+  // Blog Posts ItemList
+  {
+    '@type': 'ItemList',
+    name: 'Статьи Блога',
+    itemListElement: posts.slice(0, 10).map((post, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: getCanonical(post.permalink),
+      name: post.title,
+      description: post.excerpt || post.title,
+    })),
+  },
+  // Projects ItemList
+  {
+    '@type': 'ItemList',
+    name: 'Проекты',
+    itemListElement: projects.slice(0, 10).map((project, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      url: getCanonical(project.permalink),
+      name: project.title,
+      description: project.excerpt || project.title,
+    })),
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': jsonLdGraph,
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
