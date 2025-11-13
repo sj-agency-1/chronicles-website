@@ -1,6 +1,7 @@
 ---
 import { GoogleAnalytics } from '@astrolib/analytics';
 import { ANALYTICS } from 'astrowind:config';
+import YandexMetrica from './scripts/YandexMetrica.astro';
 ---
 
 {
@@ -11,3 +12,4 @@ import { ANALYTICS } from 'astrowind:config';
     />
   ) : null
 }
+{ANALYTICS?.vendors?.yandexMetrica?.id ? <YandexMetrica id={String(ANALYTICS.vendors.yandexMetrica.id)} /> : null}

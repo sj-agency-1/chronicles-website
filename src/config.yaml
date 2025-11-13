@@ -125,6 +125,8 @@ analytics:
   vendors:
     googleAnalytics:
       id: null # or "G-XXXXXXXXXX"
+    yandexMetrica:
+      id: 90123456'
 
 ui:
   theme: 'light' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"

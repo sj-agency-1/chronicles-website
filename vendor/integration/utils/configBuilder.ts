@@ -153,6 +153,9 @@ export interface AnalyticsConfig {
       id?: string;
       partytown?: boolean;
     };
+    yandexMetrica?: {
+      id?: string;
+    };
   };
 }
 
