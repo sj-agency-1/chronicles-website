@@ -3,7 +3,8 @@ site:
   site: 'https://business-pathfinder-chronicles.com'
   base: '/'
   trailingSlash: false
-
+  mirrors:
+    en: 'https://business-pathfinder.com'
   googleSiteVerificationId:
 
 socials:

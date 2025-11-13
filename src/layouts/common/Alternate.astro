@@ -1,0 +1,20 @@
+---
+import { SITE } from 'astrowind:config';
+import { trimSlash } from '~/utils/permalinks';
+
+// Get the current page path (without domain)
+const currentPath = trimSlash(new URL(Astro.url).pathname);
+
+// Build the main site URL
+const mainSiteUrl = SITE.site ? `${trimSlash(SITE.site)}/${currentPath}` : undefined;
+
+// Build mirror URLs from config
+const mirrors: Record<string, string> = SITE.mirrors || {};
+---
+
+{mainSiteUrl && <link rel="alternate" href={mainSiteUrl} hreflang="en" />}
+{
+  Object.entries(mirrors).map(([lang, mirrorUrl]) => (
+    <link rel="alternate" href={`${trimSlash(mirrorUrl)}/${currentPath}`} hreflang={lang} />
+  ))
+}

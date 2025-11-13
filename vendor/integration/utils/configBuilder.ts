@@ -23,6 +23,7 @@ export interface SiteConfig {
   site?: string;
   base?: string;
   trailingSlash?: boolean;
+  mirrors?: Record<string, string>;
   googleSiteVerificationId?: string;
 }
 

@@ -4,6 +4,7 @@ import { I18N } from 'astrowind:config';
 import type { MetaData as MetaDataType } from '~/types';
 
 import CommonMeta from './common/CommonMeta.astro';
+import Alternate from './common/Alternate.astro';
 import Favicons from './common/Favicons.astro';
 import CustomStyles from './common/CustomStyles.astro';
 import Metadata from './common/Metadata.astro';
@@ -24,6 +25,7 @@ const { language, textDirection } = I18N;
 <html lang={language} dir={textDirection}>
   <head>
     <CommonMeta />
+    <Alternate />
     <Favicons />
     <CustomStyles />
     <Metadata {...metadata} />
