@@ -25,8 +25,8 @@ donation:
   usdtErc20Address: '0xC7AD3cbFFD37ece5b2f27088F52879eE066Fc5aA'
   usdcSolAddress: '4JjXtZFLkAQj3YTRAUabhPLJuHbnSem4X71HADrbLtqh'
 
-  cryptoPaymentLink: 'https://pay.example.com/crypto'
-  bankCardPaymentLink: 'https://pay.example.com/bank-card'
+  cryptoPaymentLink: 'https://nowpayments.io/donation/business_pathfinder'
+  bankCardPaymentLink: 'https://nowpayments.io/donation/business_pathfinder'
 
 formsUrls:
   consultationFormTestUrl: 'https://n8n.georgeparkdev.com/webhook-test/submit-consultation-request'
