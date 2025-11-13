@@ -111,6 +111,7 @@ export interface MetaData {
   robots?: MetaDataRobots;
 
   description?: string;
+  keywords?: string;
 
   openGraph?: MetaDataOpenGraph;
   twitter?: MetaDataTwitter;
