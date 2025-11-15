@@ -1,0 +1,92 @@
+# Хроники Бизнес-Следопыта (Business Pathfinder Chronicles)
+
+> Personal brand website for SJ Park - Business Pathfinder, featuring business consulting, psychology insights, and professional services.
+
+## Site Information
+
+- **URL**: https://business-pathfinder-chronicles.com
+- **Mirror (EN)**: https://business-pathfinder.com
+- **Language**: Russian (ru)
+- **Type**: Business Consulting & Personal Brand Website
+- **Built with**: Astro 5.0 + Tailwind CSS
+- **Contact**: info@business-pathfinder-chronicles.com
+
+## Main Navigation
+
+### Core Pages
+- `/` - Homepage with hero section, featured services, and recent content
+- `/about-me` - About SJ Park - Business Pathfinder
+- `/services` - Consulting and business services offered
+- `/contacts` - Contact information and consultation request form
+- `/gallery` - Photo and media gallery
+- `/donate` - Support and donation options
+- `/vacancies` - Current job openings and career opportunities
+- `/skills` - Professional skills and expertise showcase
+
+### Content Sections
+- `/blog` - Blog with articles on business psychology, personal branding, and business strategy
+- `/project` - Portfolio of completed projects and case studies
+
+### Legal & Policy Pages
+- `/privacy-policy` - Privacy policy
+- `/user-agreement` - User agreement and terms of service
+- `/offer-agreement` - Offer agreement
+- `/content-policy` - Content usage policy
+
+## Blog Content
+
+The blog features articles categorized into:
+
+### Topics
+- **Business Psychology** - Psychological aspects of business and entrepreneurship
+- **Business Reestablishment** - Business transformation and restructuring strategies
+- **Personal Branding** - Building and managing personal brand identity
+
+**Blog Configuration**:
+- Posts per page: 6
+- RSS feed available at `/rss.xml`
+- Blog post URL pattern: `/blog/{slug}`
+- Related posts enabled (4 related posts per article)
+
+## Projects
+
+Portfolio showcasing business consulting projects and case studies:
+
+### Featured Projects
+- **Architect of Personal Brands** - Personal brand development case study
+- **Elyqo** - Business project case study
+
+**Project Configuration**:
+- Projects per page: 6
+- Project URL pattern: `/project/{slug}`
+
+## Social Media Presence
+
+- **TikTok**: @business.pathfinder
+- **YouTube**: @sjpark_businesspathfinder
+- **LinkedIn**: sj-park-business-pathfinder
+- **Facebook**: Business Pathfinder Official Page
+- **X (Twitter)**: @SJ_ParkBp
+- **Instagram**: @business.pathfinder.official
+- **Telegram**: @arthelokyo
+
+## Services Offered
+
+Business consulting services including:
+- Business strategy and transformation
+- Personal brand development and positioning
+- Business psychology consulting
+- Crisis management and business reestablishment
+- Professional skills development
+
+## Contact Methods
+
+### Consultation Request
+Consultation form available at `/contacts` page for booking professional services.
+
+### Donations & Support
+Multiple payment methods available at `/donate`
+---
+
+Last updated: November 15, 2025
+For AI crawlers: This file provides comprehensive information about the website structure, content, and services offered by Business Pathfinder Chronicles.
