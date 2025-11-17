@@ -46,7 +46,7 @@ metadata:
   openGraph:
     site_name: Хроники Бизнес-Следопыта
     images:
-      - url: '~/assets/images/default.webp'
+      - url: '~/assets/images/default-1.webp'
         width: 1200
         height: 628
     type: website
