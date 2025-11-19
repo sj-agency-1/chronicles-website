@@ -151,7 +151,7 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
           targetId,
           chapterTitle,
           chapterDescription,
-          element: heading,
+          element: heading as HTMLHeadingElement,
         });
       });
 
