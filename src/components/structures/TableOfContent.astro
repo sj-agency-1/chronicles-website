@@ -109,7 +109,7 @@ const { items = [], mode = 'default', offset = 0 } = Astro.props;
     }
 
     generateTOCFromHeadings() {
-      const HEADING_SELECTOR = 'h2';
+      const HEADING_SELECTOR = 'h2, h3';
       const headings = document.querySelectorAll(HEADING_SELECTOR);
       const tocItems: Array<TocItem> = [];
 
