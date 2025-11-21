@@ -1,66 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+    <!-- Homepage -->
     <url>
         <loc>https://business-pathfinder-chronicles.com/</loc>
-        <lastmod>2025-11-12</lastmod> <changefreq>weekly</changefreq>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
 
+    <!-- Main Pages -->
     <url>
-        <loc>https://business-pathfinder-chronicles.com/skills/business-analytics</loc>
-        <lastmod>2025-11-12</lastmod>
+        <loc>https://business-pathfinder-chronicles.com/about-me</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/services</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/skills</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/vacancies</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/donate</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Skills Pages -->
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/skills/strategic-analytics</loc>
+        <lastmod>2025-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://business-pathfinder-chronicles.com/skills/business-negotiations</loc>
-        <lastmod>2025-11-12</lastmod>
+        <loc>https://business-pathfinder-chronicles.com/skills/deal-negotiation-and-mediation</loc>
+        <lastmod>2025-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://business-pathfinder-chronicles.com/skills/crisis-management</loc>
-        <lastmod>2025-11-12</lastmod>
+        <loc>https://business-pathfinder-chronicles.com/skills/crisis-response</loc>
+        <lastmod>2025-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://business-pathfinder-chronicles.com/skills/marketing-advertising</loc>
-        <lastmod>2025-11-12</lastmod>
+        <loc>https://business-pathfinder-chronicles.com/skills/adv-and-marketing</loc>
+        <lastmod>2025-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://business-pathfinder-chronicles.com/skills/digital-marketing</loc>
-        <lastmod>2025-11-12</lastmod>
+        <loc>https://business-pathfinder-chronicles.com/skills/digital-performance</loc>
+        <lastmod>2025-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://business-pathfinder-chronicles.com/skills/sales-management</loc>
-        <lastmod>2025-11-12</lastmod>
+        <loc>https://business-pathfinder-chronicles.com/skills/sales-forces-optimization</loc>
+        <lastmod>2025-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://business-pathfinder-chronicles.com/skills/grow-business</loc>
-        <lastmod>2025-11-12</lastmod>
+        <loc>https://business-pathfinder-chronicles.com/skills/market-expansion</loc>
+        <lastmod>2025-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://business-pathfinder-chronicles.com/skills/merger-acquisitions</loc>
-        <lastmod>2025-11-12</lastmod>
+        <loc>https://business-pathfinder-chronicles.com/skills/funding-and-investor-relations</loc>
+        <lastmod>2025-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
+    </url>
+
+    <!-- Blog -->
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/blog</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/blog/business-psychology</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/blog/business-reestablishment</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/blog/personal-brand</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Legal Pages -->
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/content-policy</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/offer-agreement</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/user-agreement</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://business-pathfinder-chronicles.com/privacy-policy</loc>
+        <lastmod>2025-11-20</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
     </url>
 
 </urlset>
