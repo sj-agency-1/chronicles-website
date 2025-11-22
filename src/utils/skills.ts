@@ -1,14 +1,14 @@
 import type { Post } from '~/types';
 
 export enum SkillType {
-  CrisisManagement = 'crisis-management',
-  BusinessAnalysis = 'business-analytics',
-  BusinessDevelopment = 'grow-business',
-  SalesManagement = 'sales-forces',
-  MarketingAndAdv = 'marketing-advertising',
-  InternetMarketing = 'digital-marketing',
-  BusinessCommunicationAndMediation = 'business-negotiations-mediation',
-  FindInvestments = 'merger-acquisition',
+  CrisisManagement = 'crisis-response',
+  BusinessAnalysis = 'strategic-analytics',
+  BusinessDevelopment = 'market-expansion',
+  SalesManagement = 'sales-forces-optimization',
+  MarketingAndAdv = 'adv-and-marketing',
+  InternetMarketing = 'digital-performance',
+  BusinessCommunicationAndMediation = 'deal-negotiation-and-mediation',
+  FindInvestments = 'funding-and-investor-relations',
 }
 
 export interface Skill extends Post {
