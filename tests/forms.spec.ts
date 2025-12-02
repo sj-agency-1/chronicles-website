@@ -6,7 +6,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 test.describe('Form Submission Tests', () => {
-
   test('Consultation Form Submission', async ({ page }) => {
     // Navigate to the main page where NeedConsultationCard is present
     await page.goto('/');
