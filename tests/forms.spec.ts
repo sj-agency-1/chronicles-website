@@ -28,12 +28,15 @@ test.describe('Form Submission Tests', () => {
 
     // Fill out the form
     await form.locator('input[name="consultation-form__name"]').fill('Test User');
-    await form.locator('input[name="consultation-form__email"]').fill('test@example.com');
+    await form.locator('input[name="consultation-form__email"]').fill('slonikin211@gmail.com');
     await form.locator('select[name="consultation-form__service"]').selectOption({ index: 1 }); // Select first available option
     await form.locator('textarea[name="consultation-form__details"]').fill('This is a test inquiry from Playwright.');
 
     // Submit the form
     await form.locator('#consultation-form__submit-button').click();
+
+    // Wait for submission to process and response to appear
+    await page.waitForTimeout(10000);
 
     // Check for success message
     const statusMessage = form.locator('#consultation-form__form-status');
@@ -51,7 +54,7 @@ test.describe('Form Submission Tests', () => {
     // Fill out the form
     await form.locator('input[name="vacancies-form__name"]').fill('Test Candidate');
     await form.locator('input[name="vacancies-form__whatsapp"]').fill('+79990000000');
-    await form.locator('input[name="vacancies-form__email"]').fill('candidate@example.com');
+    await form.locator('input[name="vacancies-form__email"]').fill('slonikin211@gmail.com');
 
     // Select a vacancy
     await form.locator('select[name="vacancies-form__vacancy"]').selectOption({ index: 1 });
@@ -65,6 +68,9 @@ test.describe('Form Submission Tests', () => {
 
     // Submit the form
     await form.locator('#vacancies-form__submit-button').click();
+
+    // Wait for submission to process and response to appear
+    await page.waitForTimeout(10000);
 
     // Check for success message
     const statusMessage = form.locator('#vacancies-form__form-status');
