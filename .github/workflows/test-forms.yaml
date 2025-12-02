@@ -3,9 +3,6 @@ name: Daily Form Tests
 on:
   schedule:
     - cron: '0 0 * * *' # Runs every day at 12 AM UTC
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       baseUrl:
