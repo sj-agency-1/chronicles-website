@@ -3,7 +3,7 @@ import { DONATION } from 'astrowind:config';
 import Content from '~/components/common/Content.astro';
 import PageLayout from '~/layouts/PageLayout.astro';
 import Button from '~/components/common/Button.astro';
-import CopyText from '~/components/common/CopyText.astro';
+// import CopyText from '~/components/common/CopyText.astro';
 
 const metadata = {
   title: 'Донат — Поддержка проекта',
@@ -55,7 +55,7 @@ const bankLink = DONATION['bankCardPaymentLink'] || 'https://www.example.com/ban
     <h2>Как сделать пожертвование</h2>
     <p>Приоритетным способом поддержки является оплата криптовалютой.</p>
 
-    <h3>1. Криптовалюта (приоритетный способ)</h3>
+    <!-- <h3>1. Криптовалюта (приоритетный способ)</h3>
     <table class="table-auto border-collapse border border-gray-400 mt-4 mb-6">
       <thead>
         <tr class="bg-gray-100">
@@ -95,7 +95,7 @@ const bankLink = DONATION['bankCardPaymentLink'] || 'https://www.example.com/ban
       <li>Откройте свой криптокошелек или биржу.</li>
       <li>Убедитесь, что выбрана правильная сеть.</li>
       <li>Укажите сумму и подтвердите транзакцию.</li>
-    </ol>
+    </ol> -->
 
     <h3>2. Традиционные методы (PayPal / СБП / другое)</h3>
     <p>Если вы предпочитаете использовать традиционные методы, воспользуйтесь ссылкой ниже.</p>
@@ -109,6 +109,6 @@ const bankLink = DONATION['bankCardPaymentLink'] || 'https://www.example.com/ban
       уникальным опытом с тысячами читателей.
     </p>
 
-    <p class="mt-6 font-semibold">С уважением,<br />Сергей Вячеславович П.<br />Автор и Администратор проекта</p>
+    <p class="mt-6 font-semibold">С уважением,<br />SJ Park<br />Автор и Администратор проекта</p>
   </Content>
 </PageLayout>
