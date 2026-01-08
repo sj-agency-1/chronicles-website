@@ -100,8 +100,22 @@ const bankLink = DONATION['bankCardPaymentLink'] || 'https://www.example.com/ban
     <h3>2. Традиционные методы (PayPal / СБП / другое)</h3>
     <p>Если вы предпочитаете использовать традиционные методы, воспользуйтесь ссылкой ниже.</p>
     <div class="flex flex-col sm:flex-row gap-4 mt-4">
-      <Button class="donate-page-button" href={bankLink} text="Оплатить банковской картой" target="_blank" variant="primary" type="link" />
-      <Button class="donate-page-button" href={cryptoLink} text="Оплатить криптовалютой" target="_blank" variant="primary" type="link" />
+      <Button
+        class="donate-page-button"
+        href={bankLink}
+        text="Оплатить банковской картой"
+        target="_blank"
+        variant="primary"
+        type="link"
+      />
+      <Button
+        class="donate-page-button"
+        href={cryptoLink}
+        text="Оплатить криптовалютой"
+        target="_blank"
+        variant="primary"
+        type="link"
+      />
     </div>
 
     <p class="mt-8">
