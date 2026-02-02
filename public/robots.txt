@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
 
 Sitemap: https://business-pathfinder-chronicles.com/sitemap-index.xml
