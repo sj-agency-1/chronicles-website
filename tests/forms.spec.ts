@@ -53,7 +53,7 @@ test.describe('Form Submission Tests', () => {
 
     // Fill out the form
     await form.locator('input[name="vacancies-form__name"]').fill('Test Candidate');
-    await form.locator('input[name="vacancies-form__whatsapp"]').fill('+79990000000');
+    await form.locator('input[name="vacancies-form__whatsapp"]').fill('+79995553535');
     await form.locator('input[name="vacancies-form__email"]').fill('slonikin211@gmail.com');
 
     // Select a vacancy
