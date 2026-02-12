@@ -36,7 +36,7 @@ const getContactTitle = (contactType: ContactProps['type']) => {
 };
 ---
 
-<a href={getContactLink(contactType)} rel="noopener noreferrer">
+<a href={getContactLink(contactType)} rel="noopener noreferrer" target="_blank">
   <div class="flex flex-col justify-between gap-4 items-center group relative">
     <IconContact type={contactType} size="large" />
     <div class="font-heading font-bold text-black">{getContactTitle(contactType)}</div>
