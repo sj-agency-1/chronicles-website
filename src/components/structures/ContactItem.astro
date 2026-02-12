@@ -25,7 +25,7 @@ const getContactLink = (contactType: ContactProps['type']) => {
 const getContactTitle = (contactType: ContactProps['type']) => {
   switch (contactType) {
     case 'telegram':
-      return `@${CONTACT.telegramUsername}`;
+      return `${CONTACT.telegramUsername}`;
     case 'whatsapp':
       return `+${CONTACT.whatsappNumber.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5')}`;
     case 'email':
